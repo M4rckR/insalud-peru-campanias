@@ -1,12 +1,5 @@
-import { HeroContact } from "./components/HeroContact";
-import { NavigationSection } from "./components/NavigationSection";
-
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <>
-      <NavigationSection />
-      <HeroContact />
-    </>
-  );
+    redirect('/vph-jm')
 }
