@@ -1,6 +1,7 @@
 import { HeroContact } from "../components/HeroContact";
 import { NavigationSection } from "../components/NavigationSection";
 import { TestimonialBubbles } from "../components/TestimonialBubbles";
+import { Treatment } from "../components/Treatment/Treatment";
 
 
 export default function VpHJm() {
@@ -9,6 +10,7 @@ export default function VpHJm() {
       <NavigationSection />
       <HeroContact />
       <TestimonialBubbles />
+      <Treatment />
     </>
   );
 }
