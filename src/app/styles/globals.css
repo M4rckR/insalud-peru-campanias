@@ -133,3 +133,31 @@
   }
 }
 
+/* Linear gradientes /vph-jm */
+
+.bg-in-blue-gradient {
+  background: linear-gradient(163deg, #00BEB4 -131.5%, #D1FFFF 69.67%);  
+}
+
+.bg-in-blue-gradient-section {
+  background: linear-gradient(180deg, #EDFBFB 0%, #DEFFFD 94.87%);  
+}
+
+
+
+
+/* Media queries */
+
+.bubble-mujer {
+  @media (max-width: 900px) {
+    display: none;
+  }
+}
+
+
+.bubble-hombre {
+  @media (max-width: 900px) {
+    left: 10%;
+    transform: translateX(-10%);
+  }
+}

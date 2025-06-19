@@ -3,14 +3,14 @@ import { ContactForm } from "./ContactForm"
 import { cdn } from "@/utils/cdn"
 export const HeroContact = () => {
   return (
-    <div className="bg-in-cyan">
+    <div className="bg-in-cyan pb-12 md:pb-32">
         <div className="container max-w-7xl mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-8">
                 <div className="md:col-span-7">
                     <div className="space-y-4 lg:space-y-8 mb-4 text-left">
-                        <h1 className=" text-4xl sm:text-5xl lg:text-4xl font-bold md:font-semibold font-in-nunito md:font-in-poppins text-in-cyan-base ">
+                        <h1 className=" text-4xl sm:text-5xl md:text-4xl font-bold md:font-semibold font-in-nunito md:font-in-poppins text-in-cyan-base ">
                             ¿Tienes verrugas genitales? 
-                            <span className="hidden md:block text-2xl lg:text-4xl font-semibold text-in-blue">Podrías tener VPH y no saberlo</span> 
+                            <span className="hidden md:block text-2xl pt-1 lg:text-4xl  font-semibold text-in-blue">Podrías tener VPH y no saberlo</span> 
                         </h1>
                         <Image 
                             src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png")} 
@@ -26,7 +26,7 @@ export const HeroContact = () => {
                 </div>
                 <div className="md:col-span-5 hidden md:block">
                     <Image 
-                        src="/images/home/hero-image.png" 
+                        src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png")} 
                         alt="Hero Image" 
                         width={500}     
                         height={500} 

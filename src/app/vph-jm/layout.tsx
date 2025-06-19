@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Poppins, Roboto } from "next/font/google";
-import "./styles/globals.css";
-import { Toaster } from "@/components/ui/sonner";
+import "../styles/globals.css";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -27,27 +26,27 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Insalud Peru",
+  title: "Insalud VPH Jesus Maria",
   description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
   keywords: "centro médico quito, hospital quito, servicios médicos ecuador, especialistas médicos, atención médica especializada, urologia, vph, verruga, vih, ondas de choque",
-  authors: [{ name: "Insalud Peru" }],
-  creator: "Insalud Peru",
-  publisher: "Insalud Peru",
+  authors: [{ name: "Insalud VPH Jesus Maria" }],
+  creator: "Insalud VPH Jesus Maria",
+  publisher: "Insalud VPH Jesus Maria",
   robots: "index, follow",
   openGraph: {
-    title: "Insalud Peru",
+    title: "Insalud VPH Jesus Maria",
     description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
     type: "website",
     locale: "es_EC",
-    siteName: "Insalud Peru",
+    siteName: "Insalud VPH Jesus Maria",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Insalud Peru",
+    title: "Insalud VPH Jesus Maria",
     description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
   },
   alternates: {
-    canonical: "https://insalud.pe",
+    canonical: "https://app.insalud.pe/vph-jm",
   },
 };
 
@@ -63,7 +62,6 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         {children}
-        <Toaster position="bottom-right" />
       </body>
     </html>
   );

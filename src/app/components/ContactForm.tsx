@@ -1,16 +1,35 @@
-"use client"
+"use client";
 import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { formLeadsSchema } from "@/schemas";
 import { FormLeads } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Calendar } from "lucide-react";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { cdn } from "@/utils/cdn";
+import { useState } from "react";
 
 export const ContactForm = () => {
-
+  const [isLoading, setIsLoading] = useState(false);
+  
   const form = useForm<FormLeads>({
     resolver: zodResolver(formLeadsSchema),
     defaultValues: {
@@ -20,23 +39,52 @@ export const ContactForm = () => {
     },
   });
 
-  function onSubmit(values: FormLeads) {
-    console.log(values);
+  async function onSubmit(values: FormLeads) {
+    setIsLoading(true);
+    try {
+      const response = await fetch('/api/mail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast.success("Nos contactaremos contigo pronto");
+        form.reset();
+      } else {
+        toast.error(data.mensaje || "Error al enviar el formulario");
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      toast.error("Error al enviar el formulario");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="space-y-2 bg-white md:bg-transparent p-6 md:p-0 rounded-lg">
-          <h2 className="text-center text-2xl font-semibold font-in-poppins text-in-cyan-base md:hidden mb-6">Agenda tu cita ahora y elimina las verrugas sin dañar tu piel.</h2>
-          <section className="grid grid-cols-1 lg:grid-cols-2 gap-2">
+        <div className="space-y-2 bg-white md:bg-transparent px-6 py-8 md:p-0 rounded-lg">
+          <h2 className="text-center text-2xl font-semibold font-in-poppins text-in-cyan-base md:hidden mb-6">
+            Agenda tu cita ahora y elimina las verrugas sin dañar tu piel.
+          </h2>
+          <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-2 mb-6 md:mb-2">
             <FormField
               control={form.control}
               name="nombres"
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input className="bg-white text-in-blue font-medium placeholder:text-in-blue placeholder:font-medium py-5" {...field} placeholder="Nombres y apellidos" />
+                    <Input
+                      className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-5 focus:border-in-orange"
+                      {...field}
+                      placeholder="Nombres y apellidos"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -48,46 +96,109 @@ export const ContactForm = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input className="bg-white text-in-blue font-medium placeholder:text-in-blue placeholder:font-medium py-5" {...field} placeholder="Celular*" />
+                    <Input
+                      className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-5 focus:border-in-orange"
+                      {...field}
+                      placeholder="Celular*"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
           </section>
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="turno"
-              render={({ field, fieldState }) => (
-                <FormItem>
-                  <FormControl>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <SelectTrigger className={`bg-white font-medium py-5 w-full ${fieldState.error ? 'border-red-500 border' : 'border-gray-300'} [&>span]:text-in-blue [&>span]:font-medium`}>
-                        <SelectValue placeholder="Elige el turno*" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem className="text-in-blue hover:!bg-in-cyan hover:!text-in-blue focus:!bg-in-cyan focus:!text-in-blue data-[highlighted]:!bg-in-cyan data-[highlighted]:!text-in-blue" value="mañana">Mañana</SelectItem>
-                        <SelectItem className="text-in-blue hover:!bg-in-cyan hover:!text-in-blue focus:!bg-in-cyan focus:!text-in-blue data-[highlighted]:!bg-in-cyan data-[highlighted]:!text-in-blue" value="tarde">Tarde</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="bg-in-orange text-white py-5 cursor-pointer">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-0 md:mb-2">
+            <div className="hidden md:block">
+              <FormField
+                control={form.control}
+                name="turno"
+                render={({ field, fieldState }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Select
+                        onValueChange={field.onChange}
+                        defaultValue={field.value}
+                      >
+                        <SelectTrigger
+                          className={`bg-white font-medium py-5 w-full ${
+                            fieldState.error
+                              ? "border-red-500 border"
+                              : "border-gray-300"
+                          } [&>span]:text-in-blue [&>span]:font-medium`}
+                        >
+                          <SelectValue placeholder="Elige el turno*" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem
+                            className="text-in-blue hover:!bg-in-cyan hover:!text-in-blue focus:!bg-in-cyan focus:!text-in-blue data-[highlighted]:!bg-in-cyan data-[highlighted]:!text-in-blue"
+                            value="mañana"
+                          >
+                            Mañana
+                          </SelectItem>
+                          <SelectItem
+                            className="text-in-blue hover:!bg-in-cyan hover:!text-in-blue focus:!bg-in-cyan focus:!text-in-blue data-[highlighted]:!bg-in-cyan data-[highlighted]:!text-in-blue"
+                            value="tarde"
+                          >
+                            Tarde
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <div className="block md:hidden pb-2">
+              <FormField
+                control={form.control}
+                name="turno"
+                render={({ field }) => (
+                  <FormItem className="text-in-blue">
+                    <Label className="text-in-blue font-normal pb-2" htmlFor="turno">Elige un turno para contactarte *</Label>
+                    <RadioGroup
+                      defaultValue={field.value}
+                      onValueChange={field.onChange}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem className="border-in-orange w-6 h-6 [&>span>svg]:size-5 [&>span>svg]:fill-in-orange [&>span>svg]:stroke-in-orange" value="mañana" id="mañana" />
+                        <Label className="text-in-blue font-normal" htmlFor="mañana">Mañana (9am a 1pm)</Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem className="border-in-orange w-6 h-6 [&>span>svg]:size-5 [&>span>svg]:fill-in-orange [&>span>svg]:stroke-in-orange" value="tarde" id="tarde" />
+                        <Label className="text-in-blue font-normal" htmlFor="tarde">Tarde (3pm a 7pm)</Label>
+                      </div>
+                    </RadioGroup>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="bg-in-orange text-white py-5 cursor-pointer disabled:opacity-50 mb-2 md:mb-0"
+            >
               <span className="text-white">
                 <div className="flex items-center gap-2">
                   <Calendar />
-                  <span>Agendar cita</span>
+                  <span className="hidden md:block">
+                    {isLoading ? "Enviando..." : "Agendar cita"}
+                  </span>
+                  <span className="block md:hidden">
+                    {isLoading ? "ENVIANDO..." : "¡AGENDA TU CITA AHORA!"}
+                  </span>
                 </div>
               </span>
             </Button>
           </section>
+            <p className="font-medium md:font-normal text-in-blue text-xs md:pl-1">Al llenar el formulario, Ud. acepta los 
+              <Link className="text-in-orange" href={cdn("/campanas/vph-jesus-maria/assets/pdf/terminos-y-condiciones.pdf")} target="_blank"> {' '}
+                Términos y Condiciones / Política de Privacidad
+              </Link>
+            </p>
         </div>
-
       </form>
     </Form>
-  )
-}
+  );
+};
