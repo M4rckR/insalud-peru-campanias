@@ -12,7 +12,7 @@ type CardTreatmentProps = {
 export const CardTreatment = ({ title, description, image, className }: CardTreatmentProps) => {
     return (
     <>
-        <div className={cn("md:w-1/2 w-full flex xl:max-w-[400px] items-center shadow md:shadow-in-cyan-base border border-in-cyan-base gap-4  pr-6 rounded-xl flex-col md:flex-row py-12 md:p-4", className)}>
+        <div className={cn("md:w-1/2 w-full flex xl:max-w-[400px] items-center shadow md:shadow-in-cyan-base border border-in-cyan-base gap-4 pr-0 md:pr-6 rounded-xl flex-col md:flex-row py-12 md:p-4 bg-in-cyan md:bg-transparent", className)}>
             <Image src={cdn(image)} 
             alt="Seguro y Efectivo"
             width={120}
