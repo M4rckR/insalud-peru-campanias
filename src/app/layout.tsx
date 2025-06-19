@@ -1,12 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Poppins, Roboto } from "next/font/google";
+
 import "./styles/globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 const nunito = Nunito({
   variable: "--font-nunito",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 const poppins = Poppins({
@@ -18,7 +19,7 @@ const poppins = Poppins({
 const roboto = Roboto({
   variable: "--font-roboto",
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
+  weight: ["400", "500", "700", "900"],
 });
 
 export const viewport: Viewport = {
