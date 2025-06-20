@@ -71,7 +71,7 @@ export const ContactForm = () => {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="space-y-2 bg-white md:bg-transparent px-6 py-8 md:p-0 rounded-lg">
           <h2 className="text-center text-2xl font-semibold font-in-poppins text-in-cyan-base md:hidden mb-6">
-            Agenda tu cita ahora y elimina las verrugas sin dañar tu piel.
+            Agenda tu cita ahora y elimina las verrugas sin dañar tu piel
           </h2>
           <section className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-2 mb-6 md:mb-2">
             <FormField
