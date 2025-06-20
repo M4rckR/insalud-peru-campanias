@@ -22,7 +22,7 @@ export const Treatment = () => {
                 <h2 className="font-semibold pt-8 md:pt-0 text-3xl md:text-4xl text-in-blue">
                     ¿Por qué tratarse con <span className="text-in-cyan-base block">Láser CO2?</span>
                 </h2>
-                <p className="text-in-blue font-semibold md:text-xl">Conoce los beneficios que te ofrece este tratamiento.</p>
+                <p className="text-in-blue font-semibold md:text-xl font-in-roboto">Conoce los beneficios que te ofrece este tratamiento.</p>
             </div>
             <div className="flex flex-col md:flex-row md:justify-between gap-6 xl:gap-0 items-start md:py-6 xl:px-10">
                 <CardTreatment

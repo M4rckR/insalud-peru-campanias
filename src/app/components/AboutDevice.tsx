@@ -67,7 +67,7 @@ export const AboutDevice = () => {
                                 +20000
                             </div>
                             <div className="text-in-blue sm:text-center lg:text-left">
-                                <p className="font-semibold leading-none">Atenciones
+                                <p className="font-semibold leading-none font-in-roboto">Atenciones
                                 <span className="block">satisfactorias</span></p>
                             </div>
                         </div>
@@ -79,7 +79,7 @@ export const AboutDevice = () => {
                                 +10
                             </div>
                             <div className="text-in-blue sm:text-center lg:text-left">
-                                <p className="font-semibold leading-none">Años de
+                                <p className="font-semibold leading-none font-in-roboto">Años de
                                 <span className="block">experiencia médica</span></p>
                             </div>
                         </div>
@@ -91,7 +91,7 @@ export const AboutDevice = () => {
                                 +5
                             </div>
                             <div className="text-in-blue sm:text-center lg:text-left">
-                                <p className="font-semibold leading-none">Sedes de atención
+                                <p className="font-semibold leading-none font-in-roboto">Sedes de atención
                                 <span className="block">en latinoamérica</span></p>
                             </div>
                         </div>

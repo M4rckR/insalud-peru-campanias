@@ -86,7 +86,7 @@ export const ContactForm = () => {
                       placeholder="Nombres y apellidos"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="font-in-nunito"/>
                 </FormItem>
               )}
             />
@@ -102,7 +102,7 @@ export const ContactForm = () => {
                       placeholder="Celular*"
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="font-in-nunito"/>
                 </FormItem>
               )}
             />
@@ -144,7 +144,7 @@ export const ContactForm = () => {
                         </SelectContent>
                       </Select>
                     </FormControl>
-                    <FormMessage />
+                    <FormMessage className="font-in-nunito"/>
                   </FormItem>
                 )}
               />
@@ -169,7 +169,7 @@ export const ContactForm = () => {
                         <Label className="text-in-blue font-normal" htmlFor="tarde">Tarde (3pm a 7pm)</Label>
                       </div>
                     </RadioGroup>
-                    <FormMessage />
+                    <FormMessage className="font-in-nunito"/>
                   </FormItem>
                 )}
               />
@@ -192,7 +192,7 @@ export const ContactForm = () => {
               </span>
             </Button>
           </section>
-            <p className="font-medium md:font-normal text-in-blue text-xs md:pl-1">Al llenar el formulario, Ud. acepta los 
+            <p className="font-medium font-in-nunito md:font-normal text-in-blue text-xs md:pl-1">Al llenar el formulario, Ud. acepta los 
               <Link className="text-in-orange" href={cdn("/campanas/vph-jesus-maria/assets/pdf/terminos-y-condiciones.pdf")} target="_blank"> {' '}
                 Términos y Condiciones / Política de Privacidad
               </Link>

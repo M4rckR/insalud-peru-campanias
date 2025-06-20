@@ -14,7 +14,7 @@ type footerProps = {
 
 export const Footer = ({ address, phone, email, socials }: footerProps) => {
   return (
-    <div className="relative">
+    <div className="relative font-in-poppins">
         <div className="absolute bottom-0 left-0 w-full h-[300px] z-[-1] bg-gradient-to-t  from-in-cyan to-white"></div>
         <footer className="container mx-auto px-4 max-w-7xl py-6">
             <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-8 lg:gap-24 text-in-blue md:mb-12 text-center md:text-left">

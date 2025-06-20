@@ -20,7 +20,7 @@ export const CardTreatment = ({ title, description, image, className }: CardTrea
             className="w-20 h-20"
             unoptimized
             />
-            <div className="text-center md:text-left">
+            <div className="text-center md:text-left font-in-roboto">
                 <h3 className="text-in-cyan-base font-bold text-2xl">{title}</h3>
                 <p className="text-in-blue">{description}</p>
             </div>

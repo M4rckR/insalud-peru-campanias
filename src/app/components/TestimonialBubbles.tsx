@@ -6,7 +6,7 @@ export const TestimonialBubbles = () => {
     <div className="pb-8 hidden md:block">
         <div className="bg-in-blue-gradient-section">
             <section className="container relative max-w-5xl mx-auto px-4">
-                <div className="flex flex-col text-in-blue pb-32">
+                <div className="flex flex-col text-in-blue pb-32 font-in-nunito">
                     <p className="self-start bg-in-blue-gradient py-4 px-6 rounded-md text-in-blue mb-8">
                         “1 de cada 2 personas sexualmente activas tendrá <strong>VPH</strong>  en algún momento.”
                     </p>
