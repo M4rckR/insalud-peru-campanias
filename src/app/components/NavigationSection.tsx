@@ -1,11 +1,51 @@
+"use client"
 import { cdn } from "@/utils/cdn";
 import Image from "next/image";
 import Link from "next/link";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { useRef } from "react";
+
+gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(ScrollTrigger) 
+
 
 export const NavigationSection = () => {
+
+  const navigationRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+
+    gsap.set(navigationRef.current, {
+      opacity: 0,
+      y: 100,
+    })
+
+    gsap.to(navigationRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 1,
+      ease: "power2.inOut",
+      delay: 0.0,
+    })
+
+    gsap.to(navigationRef.current, {
+      opacity: 1,
+      y: 0,
+      duration: 0.8,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: navigationRef.current,
+        start: "top 90%",
+        toggleActions: "play reverse play reverse"
+      }
+    });
+  });
+
   return (
     <div className="bg-in-cyan pb-10 md:pb-16 lg:pb-20">
-      <section className="container mx-auto max-w-7xl px-4">
+      <section ref={navigationRef} className="container mx-auto max-w-7xl px-4">
         <div className="flex items-center justify-between pt-8">
           <Image 
             src={cdn('/shared/logos/insalud-jesus-maria.svg')} 
