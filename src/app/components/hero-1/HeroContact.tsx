@@ -1,11 +1,11 @@
 "use client"
 import Image from "next/image"
-import { ContactForm } from "./ContactForm"
 import { cdn } from "@/utils/cdn"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import gsap from "gsap";
+import { ContactForm } from "./ContactForm";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
