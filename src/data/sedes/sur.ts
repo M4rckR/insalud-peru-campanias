@@ -3,7 +3,7 @@ export const surData = {
     city: "Sur", 
     country: "Perú",
     address: "Av. José C. Mariátegui Mz J • Lote 27, San Juan de Miraflores 15801",
-    phone: "+51 969 447 773",
+    phone: "+51 957 016 498",
     email: "contacto.citas@insalud.pe", 
     socials: {
       instagram: "https://www.instagram.com/insalud.sedequito?igsh=YThkMDh3eXQ5d3Q4",
@@ -18,10 +18,4 @@ export const surData = {
         message: "¡Hola! Vi su landing de tratamiento para eliminación de verrugas por VPH en su sede Sur. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
       }
     },
-    whatsapp: "51969447773",
-    whatsappMessages: {
-      vph: "¡Hola! Vi su landing de tratamiento para eliminación de verrugas por VPH en su sede Sur. ¿Podrían darme más información sobre el procedimiento y agendar una cita?",
-      ondasChoque: "¡Hola! Vi su landing de tratamiento para disfunción eréctil con Ondas de Choque en su sede Sur. ¿Podrían darme más información sobre el procedimiento y agendar una cita?",
-      prostatitis: "¡Hola! Vi su landing de tratamiento para prostatitis con Ondas de Choque en su sede Sur. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
-    }
   } 

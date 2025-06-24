@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { NavigationSection } from "@/app/components/NavigationSection";
-import { Footer } from "../components/Footer";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 
 export const viewport: Viewport = {
@@ -44,12 +43,7 @@ export default function JesusMariLayout({
       >
         <NavigationSection sede={jesusMariaData.name} />
         {children}
-        <Footer
-          address={jesusMariaData.address}
-          phone={jesusMariaData.phone}
-          email={jesusMariaData.email}
-          socials={jesusMariaData.socials}
-        />
+
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import { HeroContact } from "../../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
+import { Footer } from "@/app/components/Footer";
 
 export default function VphJesusMaria() {
   return (
@@ -90,6 +91,12 @@ export default function VphJesusMaria() {
         message={jesusMariaData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
+              <Footer
+          address={jesusMariaData.address}
+          phone={jesusMariaData.landings.vph.whatsapp}
+          email={jesusMariaData.email}
+          socials={jesusMariaData.socials}
+        />
     </>
   );
 } 

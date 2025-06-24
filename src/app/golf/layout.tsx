@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { NavigationSection } from "@/app/components/NavigationSection";
-import { Footer } from "../components/Footer";
 import { golfData } from "@/data/sedes/golf";
 
 export const viewport: Viewport = {
@@ -44,12 +43,7 @@ export default function GolfLayout({
       >
         <NavigationSection sede={golfData.name} />
         {children}
-        <Footer
-          address={golfData.address}
-          phone={golfData.phone}
-          email={golfData.email}
-          socials={golfData.socials}
-        />
+
       </body>
     </html>
   );

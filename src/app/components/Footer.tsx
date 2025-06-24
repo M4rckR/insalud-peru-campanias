@@ -36,7 +36,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                     </div>
                     <div className="md:space-y-2">
                         <p className="font-medium md:font-normal">Conversemos sobre tu caso</p>
-                        <p className="text-sm md:text-base md:font-medium">{phone} <br /> {email}</p>
+                        <p className="text-sm md:text-base md:font-medium">+51 {phone} <br /> {email}</p>
                     </div>
                 </section>
                 <section className="space-y-2 md:space-y-4 md:flex-1/3 mb-4 md:mb-0">

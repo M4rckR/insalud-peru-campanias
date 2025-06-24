@@ -7,6 +7,7 @@ import { HeroContact } from "../../components/hero-2/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionDisfuncion } from "@/data/questions/questionDisfuncion";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
+import { Footer } from "@/app/components/Footer";
 
 export default function DisfuncionJesusMaria() {
     return (
@@ -90,6 +91,12 @@ export default function DisfuncionJesusMaria() {
                 message={jesusMariaData.landings.ondasChoque.message}
                 tooltipText="¿Dudas sobre disfunción eréctil?"
             />
+                          <Footer
+          address={jesusMariaData.address}
+          phone={jesusMariaData.landings.ondasChoque.whatsapp}
+          email={jesusMariaData.email}
+          socials={jesusMariaData.socials}
+        />
         </>
     )
 } 

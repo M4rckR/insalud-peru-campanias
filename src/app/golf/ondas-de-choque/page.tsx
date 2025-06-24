@@ -1,5 +1,6 @@
 import { AboutDevice } from "@/app/components/AboutDevice";
 import { AppointmentCta } from "@/app/components/AppointmentCta";
+import { Footer } from "@/app/components/Footer";
 import { HeroContact } from "@/app/components/hero-2/HeroContact";
 import { Questions } from "@/app/components/Questions";
 import { TestimonialBubbles } from "@/app/components/TestimonialBubbles";
@@ -97,6 +98,13 @@ export default function OndasGolfPage() {
         message={golfData.landings.ondasChoque.message}
         tooltipText="¿Dudas sobre disfunción eréctil?"
       />
+
+      <Footer
+          address={golfData.address}
+          phone={golfData.landings.ondasChoque.whatsapp}
+          email={golfData.email}
+          socials={golfData.socials}
+        />
     </>
   );
 }

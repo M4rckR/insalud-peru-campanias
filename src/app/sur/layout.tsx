@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { NavigationSection } from "@/app/components/NavigationSection";
-import { Footer } from "../components/Footer";
 import { surData } from "@/data/sedes/sur";
 
 export const viewport: Viewport = {
@@ -44,12 +43,7 @@ export default function SurLayout({
       >
         <NavigationSection sede={surData.name} />
         {children}
-        <Footer
-          address={surData.address}
-          phone={surData.phone}
-          email={surData.email}
-          socials={surData.socials}
-        />
+
       </body>
     </html>
   );

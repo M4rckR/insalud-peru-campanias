@@ -7,6 +7,7 @@ import { HeroContact } from "../../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { golfData } from "@/data/sedes/golf";
+import { Footer } from "@/app/components/Footer";
 
 export default function VphGolf() {
   return (
@@ -87,6 +88,12 @@ export default function VphGolf() {
         message={golfData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
+      <Footer
+          address={golfData.address}
+          phone={golfData.landings.vph.whatsapp}
+          email={golfData.email}
+          socials={golfData.socials}
+        />
     </>
   );
 } 

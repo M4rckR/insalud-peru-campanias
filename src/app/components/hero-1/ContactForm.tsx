@@ -74,7 +74,7 @@ export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps)
       const data = await response.json();
 
       if (response.ok) {
-        toast.success(`Correo enviado a ${gestorData?.gestor || 'nuestro equipo'} - Nos contactaremos contigo pronto`);
+        toast.success(`Tus datos fueron enviados correctamente. Nos contactaremos contigo pronto 😊`);
         form.reset();
       } else {
         toast.error(data.mensaje || "Error al enviar el formulario");

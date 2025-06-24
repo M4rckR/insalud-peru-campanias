@@ -7,6 +7,7 @@ import { HeroContact } from "../../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { surData } from "@/data/sedes/sur";
+import { Footer } from "@/app/components/Footer";
 
 export default function VphSur() {
   return (
@@ -87,6 +88,12 @@ export default function VphSur() {
         message={surData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
+      <Footer
+          address={surData.address}
+          phone={surData.landings.vph.whatsapp}
+          email={surData.email}
+          socials={surData.socials}
+        />
     </>
   );
 } 

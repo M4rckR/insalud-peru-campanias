@@ -7,6 +7,7 @@ import { HeroContact } from "../../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
 import { golfData } from "@/data/sedes/golf";
+import { Footer } from "@/app/components/Footer";
 
 export default function ProstatitisGolf() {
   return (
@@ -64,15 +65,10 @@ export default function ProstatitisGolf() {
         />
       </section>
       <AboutDevice
-        titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
-        multipleImages={true}
-        srcDesktop={
-          "/campanas/vph-jesus-maria/assets/images/sections/main/equipo-vph.png"
-        }
-        srcMobile={
-          "/campanas/vph-jesus-maria/assets/images/sections/main/equipo-vph-mobile.png"
-        }
-        alt="Equipo médico láser CO2"
+           titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
+          multipleImages={false}
+          srcDesktop={"/campanas/disfuncion/assets/images/sections/main/disfuncion-device.png"}
+          alt="Dispositivo de disfunción eréctil"
       />
       <AppointmentCta 
         title="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque"
@@ -87,6 +83,12 @@ export default function ProstatitisGolf() {
         message={golfData.landings.prostatitis.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
+            <Footer
+          address={golfData.address}
+          phone={golfData.landings.prostatitis.whatsapp}
+          email={golfData.email}
+          socials={golfData.socials}
+        />
     </>
   );
 } 
