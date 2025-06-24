@@ -31,7 +31,7 @@ export const HeroContact = ({ gestorData, tratamiento, sede }: HeroContactProps)
                     <h1 className="font-in-nunito text-center md:text-left font-black md:font-in-poppins lg:text-center text-2xl md:text-3xl lg:text-3xl text-in-cyan-base md:font-semibold px-4 md:px-0">
                         ¿Sientes que ya no tienes las erecciones de antes?
                     </h1>
-                    <p className="font-in-poppins text-center md:text-left lg:text-center text-lg  lg:text-2xl xl:text-3xl font-semibold text-in-blue">No es tu culpa. Y sí tiene solución.</p>
+                    <p className="font-in-poppins text-center md:text-left lg:text-center text-lg lg:text-2xl xl:text-3xl font-semibold text-in-blue">No es tu culpa. Y sí tiene solución.</p>
                 </div>
                 <Image 
                     src={cdn("/campanas/disfuncion/assets/images/sections/header/disfuncion-malestar-gente.png")}

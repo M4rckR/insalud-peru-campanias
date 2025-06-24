@@ -42,7 +42,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                 <section className="space-y-2 md:space-y-4 md:flex-1/3 mb-4 md:mb-0">
                     <p className="text-sm md:text-base">Síguenos y entérate primero</p>
                     <div className="flex justify-center md:justify-start gap-4">
-                        <a href={socials.instagram} target="_blank">
+                        <a href={socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Seguir en Instagram">
                             <Image 
                                 src={cdn('/shared/iconos/instagram.svg')} 
                                 className="w-7 sm:w-6 cursor-pointer hover:scale-110 transition-all duration-150" 
@@ -51,7 +51,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                                 height={28}
                             />
                         </a>
-                        <a href={socials.tiktok} target="_blank">
+                        <a href={socials.tiktok} target="_blank" rel="noopener noreferrer" aria-label="Seguir en TikTok">
                             <Image 
                                 className="w-7 sm:w-6 cursor-pointer hover:scale-110 transition-all duration-150" 
                                 src={cdn('/shared/iconos/tiktok.svg')} 
@@ -60,7 +60,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                                 height={28}
                             />
                         </a>
-                        <a href={socials.facebook} target="_blank">
+                        <a href={socials.facebook} target="_blank" rel="noopener noreferrer" aria-label="Seguir en Facebook">
                             <Image 
                                 className="w-7 sm:w-6 cursor-pointer hover:scale-110 transition-all duration-150" 
                                 width={28}

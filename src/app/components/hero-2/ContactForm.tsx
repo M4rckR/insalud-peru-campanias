@@ -87,7 +87,7 @@ export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps)
 
   return (
     <div className="px-4">
-      <section className="relative container max-w-7xl mx-auto px-4 md:px-10 lg:px-14 bg-in-blue py-8  md:py-12 lg:py-16 rounded-3xl z-10 space-y-8">
+              <section className="relative container max-w-7xl mx-auto px-4 md:px-10 lg:px-14 bg-in-blue py-8 md:py-12 lg:py-16 rounded-3xl z-10 space-y-8">
         <div>
           <h2 className="text-center text-xl text-white font-semibold font-in-nunito">
             <span className="hidden lg:block">

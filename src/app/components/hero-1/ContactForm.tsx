@@ -89,8 +89,8 @@ export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps)
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-x-hidden">
-        <div className="space-y-2 bg-white md:bg-transparent px-6 py-8 md:p-0 rounded-lg overflow-x-hidden">
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="space-y-2 bg-white md:bg-transparent px-6 py-8 md:p-0 rounded-lg">
           <h2 className="text-center text-2xl font-semibold font-in-poppins text-in-cyan-base md:hidden mb-6">
             Agenda tu cita ahora y elimina las verrugas sin dañar tu piel
           </h2>

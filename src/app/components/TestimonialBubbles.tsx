@@ -28,13 +28,11 @@ export const TestimonialBubbles = ({ title, titleWithColors, messages }: Testimo
     });
   };
 
-  // Función para renderizar mensajes con HTML
+  // Función para renderizar mensajes de forma segura
   const renderMessage = (message: string) => {
-    return (
-      <span 
-        dangerouslySetInnerHTML={{ __html: message }}
-      />
-    );
+    // Para mayor seguridad, renderizamos directamente en lugar de usar dangerouslySetInnerHTML
+    // Si necesitas HTML en el futuro, considera usar una librería de sanitización
+    return <span>{message}</span>;
   };
 
   return (
