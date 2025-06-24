@@ -41,7 +41,9 @@ export default function JesusMariLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <NavigationSection sede={jesusMariaData.name} />
+        <NavigationSection sede={jesusMariaData.name} 
+          srcLogo={'/shared/logos/insalud-jesus-maria.svg'}
+        />
         {children}
 
       </body>

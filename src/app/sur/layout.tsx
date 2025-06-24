@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { NavigationSection } from "@/app/components/NavigationSection";
 import { surData } from "@/data/sedes/sur";
-
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -41,7 +40,10 @@ export default function SurLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <NavigationSection sede={surData.name} />
+        <NavigationSection 
+          sede={surData.name} 
+          srcLogo={'/shared/logos/insalud-sede-sur.svg'} 
+        />
         {children}
 
       </body>

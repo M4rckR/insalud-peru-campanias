@@ -37,7 +37,7 @@ export const NavigationSection = ({
     tiktok: "/", 
     facebook: "/"
   },
-  srcLogo = cdn('/shared/logos/logo-insalud.svg'),
+  srcLogo = '/shared/logos/logo-insalud.svg',
   sede = "Jesus Maria"
 }: NavigationSectionProps) => {
 
@@ -90,11 +90,11 @@ export const NavigationSection = ({
         <div className="flex items-center justify-between pt-8">
           <Link href="/" aria-label={`Ir a la página principal de Insalud ${sede}`}>
             <Image 
-              src={srcLogo} 
+              src={cdn(srcLogo)} 
               alt={`Insalud ${sede}`} 
               width={200} 
               height={36} 
-              className="w-40 sm:w-48"
+              className="w-48 sm:w-64"
             />
           </Link>
           <nav role="navigation" aria-label="Navegación principal">
