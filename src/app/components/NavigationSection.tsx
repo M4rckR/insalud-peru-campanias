@@ -23,6 +23,8 @@ type NavigationSectionProps = {
     tiktok?: string;
     facebook?: string;
   };
+  srcLogo?: string;
+  sede: string;
 }
 
 export const NavigationSection = ({ 
@@ -34,7 +36,9 @@ export const NavigationSection = ({
     instagram: "/",
     tiktok: "/", 
     facebook: "/"
-  }
+  },
+  srcLogo = cdn('/shared/logos/logo-insalud.svg'),
+  sede = "Jesus Maria"
 }: NavigationSectionProps) => {
 
   const navigationRef = useRef<HTMLDivElement>(null);
@@ -81,17 +85,19 @@ export const NavigationSection = ({
   };
 
   return (
-    <div className="bg-in-cyan pb-10 md:pb-16 lg:pb-20">
+    <header className="bg-in-cyan pb-10 md:pb-16 lg:pb-20">
       <section ref={navigationRef} className="container mx-auto max-w-7xl px-4">
         <div className="flex items-center justify-between pt-8">
-          <Image 
-            src={cdn('/shared/logos/insalud-jesus-maria.svg')} 
-            alt="Insalud Jesus Maria" 
-            width={200} 
-            height={36} 
-            className="sm:w-64"
-          />
-          <nav>
+          <Link href="/" aria-label={`Ir a la página principal de Insalud ${sede}`}>
+            <Image 
+              src={srcLogo} 
+              alt={`Insalud ${sede}`} 
+              width={200} 
+              height={36} 
+              className="w-40 sm:w-48"
+            />
+          </Link>
+          <nav role="navigation" aria-label="Navegación principal">
             <ul className="flex font-in-nunito items-center gap-6 text-in-blue font-medium text-lg">
               {links.map((link, index) => (
                 <li key={index} className="hidden md:block font-semibold">
@@ -104,50 +110,52 @@ export const NavigationSection = ({
                   </Link>
                 </li>
               ))}
-              <nav>
-                <ul className="flex items-center gap-4">
-                  {socialLinks.instagram && (
-                    <li>
-                      <Link href={socialLinks.instagram}>
-                        <Image 
-                          src={cdn('/shared/iconos/instagram.svg')} 
-                          alt="Instagram" 
-                          width={26} 
-                          height={26} 
-                        />
-                      </Link>
-                    </li>
-                  )}
-                  {socialLinks.tiktok && (
-                    <li>
-                      <Link href={socialLinks.tiktok}>
-                        <Image 
-                          src={cdn('/shared/iconos/tiktok.svg')} 
-                          alt="TikTok" 
-                          width={26} 
-                          height={26} 
-                        />
-                      </Link>
-                    </li>
-                  )}
-                  {socialLinks.facebook && (
-                    <li>
-                      <Link href={socialLinks.facebook}>
-                        <Image 
-                          src={cdn('/shared/iconos/fb.svg')} 
-                          alt="Facebook" 
-                          width={26} 
-                          height={26} 
-                        />
-                      </Link>
-                    </li>
-                  )}
-                </ul>
-              </nav>
+              <li>
+                <nav role="navigation" aria-label="Redes sociales">
+                  <ul className="flex items-center gap-4">
+                    {socialLinks.instagram && (
+                      <li>
+                        <Link href={socialLinks.instagram} aria-label="Visitar nuestra página de Instagram">
+                          <Image 
+                            src={cdn('/shared/iconos/instagram.svg')} 
+                            alt="Instagram" 
+                            width={26} 
+                            height={26} 
+                          />
+                        </Link>
+                      </li>
+                    )}
+                    {socialLinks.tiktok && (
+                      <li>
+                        <Link href={socialLinks.tiktok} aria-label="Visitar nuestra página de TikTok">
+                          <Image 
+                            src={cdn('/shared/iconos/tiktok.svg')} 
+                            alt="TikTok" 
+                            width={26} 
+                            height={26} 
+                          />
+                        </Link>
+                      </li>
+                    )}
+                    {socialLinks.facebook && (
+                      <li>
+                        <Link href={socialLinks.facebook} aria-label="Visitar nuestra página de Facebook">
+                          <Image 
+                            src={cdn('/shared/iconos/fb.svg')} 
+                            alt="Facebook" 
+                            width={26} 
+                            height={26} 
+                          />
+                        </Link>
+                      </li>
+                    )}
+                  </ul>
+                </nav>
+              </li>
             </ul>
           </nav>
         </div>
       </section>
-    </div>
+    </header>
   )
 }

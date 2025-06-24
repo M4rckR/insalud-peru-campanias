@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@/styles/globals.css";
 import { NavigationSection } from "@/app/components/NavigationSection";
 import { Footer } from "../components/Footer";
-
+import { golfData } from "@/data/sedes/golf";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -10,31 +10,28 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Insalud VPH Jesus Maria",
+  title: `Insalud ${golfData.name}`,
   description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
-  keywords: "centro médico quito, hospital quito, servicios médicos ecuador, especialistas médicos, atención médica especializada, urologia, vph, verruga, vih, ondas de choque",
-  authors: [{ name: "Insalud VPH Jesus Maria" }],
-  creator: "Insalud VPH Jesus Maria",
-  publisher: "Insalud VPH Jesus Maria",
+  keywords: "centro médico, hospital, servicios médicos, especialistas médicos, atención médica especializada, urologia, vph, verruga, disfunción eréctil, prostatitis, ondas de choque",
+  authors: [{ name: `Insalud ${golfData.name}` }],
+  creator: `Insalud ${golfData.name}`,
+  publisher: `Insalud ${golfData.name}`,
   robots: "index, follow",
   openGraph: {
-    title: "Insalud VPH Jesus Maria",
+    title: `Insalud ${golfData.name}`,
     description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
     type: "website",
-    locale: "es_EC",
-    siteName: "Insalud VPH Jesus Maria",
+    locale: "es_PE",
+    siteName: `Insalud ${golfData.name}`,
   },
   twitter: {
     card: "summary_large_image",
-    title: "Insalud VPH Jesus Maria",
+    title: `Insalud ${golfData.name}`,
     description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
-  },
-  alternates: {
-    canonical: "https://app.insalud.pe/vph-jm",
   },
 };
 
-export default function RootLayout({
+export default function GolfLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -48,16 +45,12 @@ export default function RootLayout({
         <NavigationSection />
         {children}
         <Footer
-            address="Av. José C. Mariátegui Mz J • Lote 27, San Juan de Miraflores 15801"
-            phone="957 016 498"
-            email="contacto.citas@insalud.pe"
-            socials={{
-                instagram: "https://www.instagram.com/insalud.sedequito?igsh=YThkMDh3eXQ5d3Q4",
-                tiktok: "https://www.tiktok.com/@insaludquito?_t=ZM-8vfZK2TtAhS&_r=1",
-                facebook: "https://www.facebook.com/share/15xS3Z6y8C/?mibextid=wwXIfr"
-            }}
-          />
+          address={golfData.address}
+          phone={golfData.phone}
+          email={golfData.email}
+          socials={golfData.socials}
+        />
       </body>
     </html>
   );
-}
+} 

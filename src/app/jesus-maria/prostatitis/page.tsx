@@ -1,13 +1,14 @@
-import { TestimonialBubbles } from "../components/TestimonialBubbles";
-import { Treatment } from "../components/Treatment/Treatment";
-import { AboutDevice } from "../components/AboutDevice";
-import { Questions } from "../components/Questions";
-import { AppointmentCta } from "../components/AppointmentCta";
-import { HeroContact } from "../components/hero-1/HeroContact";
+import { TestimonialBubbles } from "../../components/TestimonialBubbles";
+import { Treatment } from "../../components/Treatment/Treatment";
+import { AboutDevice } from "../../components/AboutDevice";
+import { Questions } from "../../components/Questions";
+import { AppointmentCta } from "../../components/AppointmentCta";
+import { HeroContact } from "../../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
+import { jesusMariaData } from "@/data/sedes/jesus-maria";
 
-export default function VpHJm() {
+export default function ProstatitisJesusMaria() {
   return (
     <>
       <HeroContact  
@@ -19,9 +20,9 @@ export default function VpHJm() {
       />
       <TestimonialBubbles
         messages={[
-          "“El dolor pélvico, las molestias al orinar o disfunción eréctil suelen ser señales ignoradas.”",
-          "“Los antibióticos no siempre funcionan y los síntomas pueden durar años.”",
-          "“Afecta hasta al 15% de los hombres en edad adulta.”",
+          "El dolor pélvico, las molestias al orinar o disfunción eréctil suelen ser señales ignoradas.",
+          "Los antibióticos no siempre funcionan y los síntomas pueden durar años.",
+          "Afecta hasta al 15% de los hombres en edad adulta.",
         ]}
       />
       <section id="beneficios">
@@ -77,19 +78,15 @@ export default function VpHJm() {
         title="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
         titleMobile="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque "
-        whatsappNumber="51987654321"
-        whatsappMessage="¡Hola! Me interesa el tratamiento para prostatitis con Ondas de Choque. ¿Podrían darme más información?"
+        whatsappNumber={jesusMariaData.landings.prostatitis.whatsapp}
+        whatsappMessage={jesusMariaData.landings.prostatitis.message}
       />
       <Questions questions={questionProstatitis} />
       <FloatingWhatsApp
-        phoneNumber="51987654321"
-        message="¡Hola! Me interesa el tratamiento para prostatitis con Ondas de Choque. ¿Podrían darme más información?"
-        position="bottom-right"
-        size="md"
-        showTooltip={true}
+        phoneNumber={jesusMariaData.landings.prostatitis.whatsapp}
+        message={jesusMariaData.landings.prostatitis.message}
         tooltipText="¡Conversemos por WhatsApp!"
-        backgroundColor="#25D366"
       />
     </>
   );
-}
+} 

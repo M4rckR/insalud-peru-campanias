@@ -107,16 +107,23 @@ export const ContactForm = () => {
                 render={({ field }) => (
                   <FormItem className="mb-2 md:mb-0 relative">
                     <FormControl>
-                      <Input
-                        className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-6"
-                        placeholder="Teléfono"
-                        maxLength={9}
-                        {...field}
-                        onChange={(e) => {
-                          const value = e.target.value.replace(/\D/g, '');
-                          field.onChange(value);
-                        }}
-                      />
+                      <div className="relative">
+                        <Input
+                          className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-6"
+                          placeholder="Celular (9 dígitos)"
+                          maxLength={9}
+                          {...field}
+                          onChange={(e) => {
+                            const value = e.target.value.replace(/\D/g, '');
+                            field.onChange(value);
+                          }}
+                        />
+                        {field.value && field.value.length > 0 && field.value.length < 9 && (
+                          <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-xs text-gray-400">
+                            {field.value.length}/9
+                          </div>
+                        )}
+                      </div>
                     </FormControl>
                     <FormMessage className="text-in-orange font-in-nunito text-sm md:absolute -bottom-6 left-0" />
                   </FormItem>
@@ -134,7 +141,7 @@ export const ContactForm = () => {
                           defaultValue={field.value}
                         >
                           <SelectTrigger
-                            className={`bg-white font-medium py-6 w-full ${
+                            className={`bg-white font-medium py-6 ${
                               fieldState.error
                                 ? "border-red-500 border"
                                 : "border-gray-300"
@@ -142,7 +149,7 @@ export const ContactForm = () => {
                           >
                             <SelectValue placeholder="Elige el turno" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent position="popper" sideOffset={4} className="w-[var(--radix-select-trigger-width)] min-w-0">
                             <SelectItem
                               className="text-in-blue hover:!bg-in-cyan hover:!text-in-blue focus:!bg-in-cyan focus:!text-in-blue data-[highlighted]:!bg-in-cyan data-[highlighted]:!text-in-blue"
                               value="mañana"

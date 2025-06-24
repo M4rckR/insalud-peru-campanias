@@ -5,62 +5,24 @@ import { MessageCircle, X } from "lucide-react";
 
 type FloatingWhatsAppProps = {
   phoneNumber: string; // Número sin el +, ej: "51987654321"
-  message?: string; // Mensaje predefinido
-  position?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
-  size?: "sm" | "md" | "lg";
-  showTooltip?: boolean;
-  tooltipText?: string;
-  backgroundColor?: string;
-  textColor?: string;
-  zIndex?: number;
+  message: string; // Mensaje predefinido
+  tooltipText?: string; // Solo esta personalización es útil
 };
 
 export const FloatingWhatsApp = ({
   phoneNumber,
-  message = "¡Hola! Me gustaría obtener más información.",
-  position = "bottom-right",
-  size = "md",
-  showTooltip = true,
+  message,
   tooltipText = "¡Conversemos por WhatsApp!",
-  backgroundColor = "#25D366",
-  textColor = "#ffffff",
-  zIndex = 50,
 }: FloatingWhatsAppProps) => {
   const [isTooltipVisible, setIsTooltipVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Valores fijos para simplicidad y consistencia
+  const backgroundColor = "#25D366";
+  const textColor = "#ffffff";
+
   // Construir URL de WhatsApp
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
-  // Clases de posición
-  const positionClasses = {
-    "bottom-right": "bottom-6 right-6",
-    "bottom-left": "bottom-6 left-6", 
-    "top-right": "top-6 right-6",
-    "top-left": "top-6 left-6",
-  };
-
-  // Clases de tamaño
-  const sizeClasses = {
-    sm: "w-12 h-12",
-    md: "w-16 h-16",
-    lg: "w-20 h-20",
-  };
-
-  // Clases de tamaño del ícono
-  const iconSizeClasses = {
-    sm: "w-6 h-6",
-    md: "w-8 h-8", 
-    lg: "w-10 h-10",
-  };
-
-  // Clases de posición del tooltip
-  const tooltipPositionClasses = {
-    "bottom-right": "bottom-full right-0 mb-2",
-    "bottom-left": "bottom-full left-0 mb-2",
-    "top-right": "top-full right-0 mt-2", 
-    "top-left": "top-full left-0 mt-2",
-  };
 
   const handleClick = () => {
     window.open(whatsappUrl, "_blank");
@@ -74,36 +36,21 @@ export const FloatingWhatsApp = ({
     <>
       {/* Botón principal */}
       <div
-        className={`fixed ${positionClasses[position]} group cursor-pointer`}
-        style={{ zIndex }}
+        className="fixed bottom-6 right-6 group cursor-pointer z-50"
         onMouseEnter={() => setIsTooltipVisible(true)}
         onMouseLeave={() => setIsTooltipVisible(false)}
       >
         {/* Tooltip */}
-        {showTooltip && isTooltipVisible && !isExpanded && (
-          <div
-            className={`absolute ${tooltipPositionClasses[position]} px-3 py-2 bg-gray-800 text-white text-sm rounded-lg shadow-lg whitespace-nowrap animate-in fade-in-0 zoom-in-95 duration-200`}
-          >
+        {isTooltipVisible && !isExpanded && (
+          <div className="absolute bottom-full right-0 mb-2 px-3 py-2 bg-gray-800 text-white text-sm rounded-lg shadow-lg whitespace-nowrap animate-in fade-in-0 zoom-in-95 duration-200">
             {tooltipText}
-            <div
-              className={`absolute w-2 h-2 bg-gray-800 rotate-45 ${
-                position.includes("bottom") 
-                  ? "top-full -mt-1" 
-                  : "bottom-full -mb-1"
-              } ${
-                position.includes("right") 
-                  ? "right-4" 
-                  : "left-4"
-              }`}
-            />
+            <div className="absolute top-full -mt-1 right-4 w-2 h-2 bg-gray-800 rotate-45" />
           </div>
         )}
 
         {/* Botón expandido */}
         {isExpanded && (
-          <div
-            className={`absolute ${tooltipPositionClasses[position]} bg-white rounded-xl shadow-2xl p-4 w-80 border border-gray-200`}
-          >
+          <div className="absolute bottom-full right-0 mb-2 bg-white rounded-xl shadow-2xl p-4 w-80 border border-gray-200">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 <div 
@@ -141,7 +88,7 @@ export const FloatingWhatsApp = ({
         {/* Botón principal */}
         <div
           className={`
-            ${sizeClasses[size]} 
+            w-16 h-16
             rounded-full 
             flex 
             items-center 
@@ -159,7 +106,7 @@ export const FloatingWhatsApp = ({
           onDoubleClick={toggleExpanded}
         >
           <MessageCircle 
-            className={`${iconSizeClasses[size]} animate-pulse`} 
+            className="w-8 h-8 animate-pulse" 
             style={{ color: textColor }} 
           />
         </div>
@@ -173,8 +120,7 @@ export const FloatingWhatsApp = ({
       {/* Overlay para cerrar cuando está expandido */}
       {isExpanded && (
         <div
-          className="fixed inset-0 bg-transparent"
-          style={{ zIndex: zIndex - 1 }}
+          className="fixed inset-0 bg-transparent z-40"
           onClick={() => setIsExpanded(false)}
         />
       )}

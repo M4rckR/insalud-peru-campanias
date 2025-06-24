@@ -48,11 +48,11 @@ export const AboutDevice = ({
       />
 
       <div className="-mt-1 bg-in-cyan relative">
-                  <div className="container max-w-6xl mx-auto px-4 md:pb-20">
+            <div className="container max-w-6xl mx-auto px-4 md:pb-20">
             <div className="flex flex-col lg:flex-row gap-8 items-center">
              <div className="lg:flex-1 z-10">
               {titleWithColors ? (
-                <h2 className="text-center pt-12 md:pt-16 lg:pt-0 lg:text-left text-3xl lg:text-4xl xl:text-5xl font-in-nunito font-black pb-2 md:pb-0 px-12 lg:px-0">
+                <h2 className="text-center pt-12 md:pt-16 lg:pt-0 lg:text-left text-3xl lg:text-4xl xl:text-5xl font-in-nunito font-black pb-2 md:pb-0 md:px-12 lg:px-0">
                   {renderTitleWithColors(titleWithColors)}
                 </h2>
               ) : title ? (

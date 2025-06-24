@@ -2,7 +2,12 @@ import { z } from "zod";
 
 export const formLeadsSchema = z.object({
     nombres: z.string().min(1, { message: "El nombre es requerido" }),
-    telefono: z.string().min(1, { message: "El teléfono es requerido" }).regex(/^\d+$/, { message: "El teléfono debe ser un número" }),
+    telefono: z.string()
+        .min(1, { message: "El teléfono es requerido" })
+        .regex(/^\d+$/, { message: "Solo se permiten números" })
+        .min(9, { message: "Debe tener 9 dígitos" })
+        .max(9, { message: "Debe tener 9 dígitos" })
+        .regex(/^9\d{8}$/, { message: "Debe iniciar con 9 (celular peruano)" }),
     turno: z.string().min(1, { message: "El turno es requerido" }),
 })
 

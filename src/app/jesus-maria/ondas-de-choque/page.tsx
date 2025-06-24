@@ -1,13 +1,14 @@
-import { TestimonialBubbles } from "../components/TestimonialBubbles";
-import { Treatment } from "../components/Treatment/Treatment";
-import { AboutDevice } from "../components/AboutDevice";
-import { AppointmentCta } from "../components/AppointmentCta";
-import { Questions } from "../components/Questions";
-import { HeroContact } from "../components/hero-2/HeroContact";
+import { TestimonialBubbles } from "../../components/TestimonialBubbles";
+import { Treatment } from "../../components/Treatment/Treatment";
+import { AboutDevice } from "../../components/AboutDevice";
+import { AppointmentCta } from "../../components/AppointmentCta";
+import { Questions } from "../../components/Questions";
+import { HeroContact } from "../../components/hero-2/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionDisfuncion } from "@/data/questions/questionDisfuncion";
+import { jesusMariaData } from "@/data/sedes/jesus-maria";
 
-export default function DisfuncionJm() {
+export default function DisfuncionJesusMaria() {
     return (
         <>
             {/* Hero Section */}
@@ -18,9 +19,9 @@ export default function DisfuncionJm() {
                 <TestimonialBubbles 
                     titleWithColors="La {cyan}disfunción eréctil{/cyan} no solo afecta tu cuerpo. Afecta cómo te {cyan}ves a ti mismo{/cyan}"
                     messages={[
-                        "“Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.”",
-                        "“No siempre es por estrés o edad. Muchas veces es un problema vascular.”",
-                        "“Las pastillas son temporales. Este tratamiento reactiva el flujo real.“"
+                        "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
+                        "No siempre es por estrés o edad. Muchas veces es un problema vascular.",
+                        "Las pastillas son temporales. Este tratamiento reactiva el flujo real."
                     ]}
                 />
             </section>
@@ -74,8 +75,8 @@ export default function DisfuncionJm() {
                 title="Recupera tu confianza con Ondas de Choque de Alta Frecuencia, un tratamiento no invasivo y clínicamente probado para mejorar la erección de forma natural y duradera."
                 description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
                 titleMobile="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
-                whatsappNumber="51987654321"
-                whatsappMessage="¡Hola! Me interesa el tratamiento para disfunción eréctil con Ondas de Choque. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
+                whatsappNumber={jesusMariaData.landings.ondasChoque.whatsapp}
+                whatsappMessage={jesusMariaData.landings.ondasChoque.message}
             />
             
             {/* Preguntas Section */}
@@ -85,14 +86,10 @@ export default function DisfuncionJm() {
             
             {/* WhatsApp Flotante */}
             <FloatingWhatsApp 
-                phoneNumber="51987654321"
-                message="¡Hola! Me interesa el tratamiento para disfunción eréctil con Ondas de Choque. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
-                position="bottom-right"
-                size="md"
-                showTooltip={true}
+                    phoneNumber={jesusMariaData.landings.ondasChoque.whatsapp}
+                message={jesusMariaData.landings.ondasChoque.message}
                 tooltipText="¿Dudas sobre disfunción eréctil?"
-                backgroundColor="#25D366"
             />
         </>
     )
-}
+} 

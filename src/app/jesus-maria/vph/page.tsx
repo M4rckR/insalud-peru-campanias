@@ -1,13 +1,14 @@
-import { TestimonialBubbles } from "../components/TestimonialBubbles";
-import { Treatment } from "../components/Treatment/Treatment";
-import { AboutDevice } from "../components/AboutDevice";
-import { Questions } from "../components/Questions";
-import { AppointmentCta } from "../components/AppointmentCta";
-import { HeroContact } from "../components/hero-1/HeroContact";
+import { TestimonialBubbles } from "../../components/TestimonialBubbles";
+import { Treatment } from "../../components/Treatment/Treatment";
+import { AboutDevice } from "../../components/AboutDevice";
+import { Questions } from "../../components/Questions";
+import { AppointmentCta } from "../../components/AppointmentCta";
+import { HeroContact } from "../../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
+import { jesusMariaData } from "@/data/sedes/jesus-maria";
 
-export default function VpHJm() {
+export default function VphJesusMaria() {
   return (
     <>
       <HeroContact 
@@ -19,9 +20,9 @@ export default function VpHJm() {
       />
       <TestimonialBubbles
         messages={[
-          "“Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.”",
-          "“No siempre es por estrés o edad. Muchas veces es un problema vascular.”",
-          "“Las pastillas son temporales. Este tratamiento reactiva el flujo real.“",
+          "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
+          "No siempre es por estrés o edad. Muchas veces es un problema vascular.",
+          "Las pastillas son temporales. Este tratamiento reactiva el flujo real.",
         ]}
       />
       <section id="beneficios">
@@ -77,19 +78,15 @@ export default function VpHJm() {
         title="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
         titleMobile="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
-        whatsappNumber="51987654321"
-        whatsappMessage="¡Hola! Me interesa el tratamiento para eliminación de verrugas por VPH. ¿Podrían darme más información?"
+        whatsappNumber={jesusMariaData.landings.vph.whatsapp}
+        whatsappMessage={jesusMariaData.landings.vph.message}
       />
       <Questions questions={questionVph} />
       <FloatingWhatsApp
-        phoneNumber="51987654321"
-        message="¡Hola! Me interesa el tratamiento para eliminación de verrugas por VPH en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
-        position="bottom-right"
-        size="md"
-        showTooltip={true}
+        phoneNumber={jesusMariaData.landings.vph.whatsapp}
+        message={jesusMariaData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
-        backgroundColor="#25D366"
       />
     </>
   );
-}
+} 

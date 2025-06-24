@@ -68,8 +68,8 @@ export const ContactForm = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="space-y-2 bg-white md:bg-transparent px-6 py-8 md:p-0 rounded-lg">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="overflow-x-hidden">
+        <div className="space-y-2 bg-white md:bg-transparent px-6 py-8 md:p-0 rounded-lg overflow-x-hidden">
           <h2 className="text-center text-2xl font-semibold font-in-poppins text-in-cyan-base md:hidden mb-6">
             Agenda tu cita ahora y elimina las verrugas sin dañar tu piel
           </h2>
@@ -107,7 +107,7 @@ export const ContactForm = () => {
                         }}
                     />
                   </FormControl>
-                  <FormMessage className="font-in-nunito"/>
+                  <FormMessage className="font-in-nunito "/>
                 </FormItem>
               )}
             />
@@ -125,7 +125,7 @@ export const ContactForm = () => {
                         defaultValue={field.value}
                       >
                         <SelectTrigger
-                          className={`bg-white font-medium py-5 w-full ${
+                          className={`bg-white font-medium py-5 ${
                             fieldState.error
                               ? "border-red-500 border"
                               : "border-gray-300"
@@ -133,7 +133,7 @@ export const ContactForm = () => {
                         >
                           <SelectValue placeholder="Elige el turno*" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent position="popper" sideOffset={4} className="w-[var(--radix-select-trigger-width)] min-w-0">
                           <SelectItem
                             className="text-in-blue hover:!bg-in-cyan hover:!text-in-blue focus:!bg-in-cyan focus:!text-in-blue data-[highlighted]:!bg-in-cyan data-[highlighted]:!text-in-blue"
                             value="mañana"
