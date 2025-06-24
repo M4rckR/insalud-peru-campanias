@@ -42,7 +42,7 @@ export default function GolfLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <NavigationSection />
+        <NavigationSection sede={golfData.name} />
         {children}
         <Footer
           address={golfData.address}

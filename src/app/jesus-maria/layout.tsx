@@ -42,7 +42,7 @@ export default function JesusMariLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <NavigationSection />
+        <NavigationSection sede={jesusMariaData.name} />
         {children}
         <Footer
           address={jesusMariaData.address}
