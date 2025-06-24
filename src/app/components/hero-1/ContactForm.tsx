@@ -100,6 +100,11 @@ export const ContactForm = () => {
                       className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-5 focus:border-in-orange"
                       {...field}
                       placeholder="Celular*"
+                      maxLength={9}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, '');
+                          field.onChange(value);
+                        }}
                     />
                   </FormControl>
                   <FormMessage className="font-in-nunito"/>
@@ -177,7 +182,7 @@ export const ContactForm = () => {
             <Button
               type="submit"
               disabled={isLoading}
-              className="bg-in-orange text-white py-5 cursor-pointer disabled:opacity-50 mb-2 md:mb-0"
+              className="bg-in-orange hover:bg-in-orange-hover text-white py-5 cursor-pointer disabled:opacity-50 mb-2 md:mb-0"
             >
               <span className="text-white">
                 <div className="flex items-center gap-2">

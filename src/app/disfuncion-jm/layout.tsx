@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import "../styles/globals.css";
+import "@/styles/globals.css";
 import { NavigationSection } from "@/app/components/NavigationSection";
 import { Footer } from "../components/Footer";
 
@@ -10,27 +10,27 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Insalud VPH Jesus Maria",
-  description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
-  keywords: "centro médico quito, hospital quito, servicios médicos ecuador, especialistas médicos, atención médica especializada, urologia, vph, verruga, vih, ondas de choque",
-  authors: [{ name: "Insalud VPH Jesus Maria" }],
-  creator: "Insalud VPH Jesus Maria",
-  publisher: "Insalud VPH Jesus Maria",
+  title: "Insalud Disfunción Eréctil Jesus Maria",
+  description: "Tratamiento avanzado para disfunción eréctil con Ondas de Choque de Alta Frecuencia. Recupera tu confianza de forma natural y duradera.",
+  keywords: "disfunción eréctil, tratamiento, ondas de choque, urología, salud sexual, Jesus Maria, Lima, Perú",
+  authors: [{ name: "Insalud Disfunción Jesus Maria" }],
+  creator: "Insalud Disfunción Jesus Maria",
+  publisher: "Insalud Disfunción Jesus Maria",
   robots: "index, follow",
   openGraph: {
-    title: "Insalud VPH Jesus Maria",
-    description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
+    title: "Insalud Disfunción Eréctil Jesus Maria",
+    description: "Tratamiento avanzado para disfunción eréctil con Ondas de Choque de Alta Frecuencia. Recupera tu confianza de forma natural y duradera.",
     type: "website",
-    locale: "es_EC",
-    siteName: "Insalud VPH Jesus Maria",
+    locale: "es_PE",
+    siteName: "Insalud Disfunción Jesus Maria",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Insalud VPH Jesus Maria",
-    description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
+    title: "Insalud Disfunción Eréctil Jesus Maria",
+    description: "Tratamiento avanzado para disfunción eréctil con Ondas de Choque de Alta Frecuencia. Recupera tu confianza de forma natural y duradera.",
   },
   alternates: {
-    canonical: "https://app.insalud.pe/vph-jm",
+    canonical: "https://app.insalud.pe/disfuncion-jm",
   },
 };
 
@@ -45,10 +45,20 @@ export default function RootLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <NavigationSection />
+        <NavigationSection 
+          links={[
+            { label: "Beneficios", href: "#beneficios", isAnchor: true },
+            { label: "Preguntas Frecuentes", href: "#preguntas", isAnchor: true },
+          ]}
+          socialLinks={{
+            instagram: "https://www.instagram.com/insalud.disfuncion",
+            tiktok: "https://www.tiktok.com/@insaluddisfuncion",
+            facebook: "https://www.facebook.com/insaluddisfuncion"
+          }}
+        />
         {children}
         <Footer
-            address="Calle N37 Naciones Unidas E2-30 - Edificio Metropolitan piso 12 - Consultorio 1201"
+            address="Av. José C. Mariátegui Mz J • Lote 27, San Juan de Miraflores 15801"
             phone="+593 99 424 2175"
             email="admision@insalud.ec"
             socials={{

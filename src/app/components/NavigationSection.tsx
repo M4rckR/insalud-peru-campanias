@@ -10,8 +10,32 @@ import { useRef } from "react";
 gsap.registerPlugin(useGSAP);
 gsap.registerPlugin(ScrollTrigger) 
 
+type NavigationLink = {
+  label: string;
+  href: string;
+  isAnchor?: boolean;
+}
 
-export const NavigationSection = () => {
+type NavigationSectionProps = {
+  links?: NavigationLink[];
+  socialLinks?: {
+    instagram?: string;
+    tiktok?: string;
+    facebook?: string;
+  };
+}
+
+export const NavigationSection = ({ 
+  links = [
+    { label: "Beneficios", href: "#beneficios", isAnchor: true },
+    { label: "Preguntas Frecuentes", href: "#preguntas", isAnchor: true }
+  ],
+  socialLinks = {
+    instagram: "/",
+    tiktok: "/", 
+    facebook: "/"
+  }
+}: NavigationSectionProps) => {
 
   const navigationRef = useRef<HTMLDivElement>(null);
 
@@ -43,6 +67,19 @@ export const NavigationSection = () => {
     });
   });
 
+  const handleAnchorClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    }
+  };
+
   return (
     <div className="bg-in-cyan pb-10 md:pb-16 lg:pb-20">
       <section ref={navigationRef} className="container mx-auto max-w-7xl px-4">
@@ -56,44 +93,55 @@ export const NavigationSection = () => {
           />
           <nav>
             <ul className="flex font-in-nunito items-center gap-6 text-in-blue font-medium text-lg">
-              <li className="hidden md:block font-semibold">
-                <Link href="/">Beneficios</Link>
-              </li>
-              <li className="hidden md:block font-semibold">
-                <Link href="/">Preguntas Frecuentes</Link>
-              </li>
+              {links.map((link, index) => (
+                <li key={index} className="hidden md:block font-semibold">
+                  <Link 
+                    href={link.href}
+                    onClick={(e) => link.isAnchor && handleAnchorClick(e, link.href)}
+                    className="hover:text-in-cyan-base transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
               <nav>
                 <ul className="flex items-center gap-4">
-                  <li>
-                    <Link href="/">
-                      <Image 
-                        src={cdn('/shared/iconos/instagram.svg')} 
-                        alt="Instagram" 
-                        width={26} 
-                        height={26} 
-                      />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/">
-                      <Image 
-                        src={cdn('/shared/iconos/tiktok.svg')} 
-                        alt="TikTok" 
-                        width={26} 
-                        height={26} 
-                      />
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/">
-                      <Image 
-                        src={cdn('/shared/iconos/fb.svg')} 
-                        alt="Facebook" 
-                        width={26} 
-                        height={26} 
-                      />
-                    </Link>
-                  </li>
+                  {socialLinks.instagram && (
+                    <li>
+                      <Link href={socialLinks.instagram}>
+                        <Image 
+                          src={cdn('/shared/iconos/instagram.svg')} 
+                          alt="Instagram" 
+                          width={26} 
+                          height={26} 
+                        />
+                      </Link>
+                    </li>
+                  )}
+                  {socialLinks.tiktok && (
+                    <li>
+                      <Link href={socialLinks.tiktok}>
+                        <Image 
+                          src={cdn('/shared/iconos/tiktok.svg')} 
+                          alt="TikTok" 
+                          width={26} 
+                          height={26} 
+                        />
+                      </Link>
+                    </li>
+                  )}
+                  {socialLinks.facebook && (
+                    <li>
+                      <Link href={socialLinks.facebook}>
+                        <Image 
+                          src={cdn('/shared/iconos/fb.svg')} 
+                          alt="Facebook" 
+                          width={26} 
+                          height={26} 
+                        />
+                      </Link>
+                    </li>
+                  )}
                 </ul>
               </nav>
             </ul>

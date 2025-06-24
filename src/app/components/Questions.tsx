@@ -1,81 +1,85 @@
 'use client'
 import { useState } from 'react';
 import { AccordionItem } from '@/components/ui/AccordionItem';
+import { Question } from '@/types';
 
-export const Questions = () => {
+type QuestionsProps = {
+  questions: Question[];
+  title?: string;
+  titleWithColors?: string;
+}
+
+export const Questions = ({ questions, title, titleWithColors }: QuestionsProps) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleIndex = (index: number) => {
     setOpenIndex(prev => (prev === index ? null : index));
   };
 
+  // Función para renderizar el titulo con colores (similar a otros componentes)
+  const renderTitleWithColors = (text: string) => {
+    const parts = text.split(/(\{cyan\}.*?\{\/cyan\}|\{blue\}.*?\{\/blue\})/g);
+    
+    return parts.map((part, index) => {
+      if (part.includes('{cyan}')) {
+        const cleanText = part.replace(/\{cyan\}|\{\/cyan\}/g, '');
+        return <span key={index} className="text-in-cyan-base">{cleanText}</span>;
+      } else if (part.includes('{blue}')) {
+        const cleanText = part.replace(/\{blue\}|\{\/blue\}/g, '');
+        return <span key={index} className="text-in-blue">{cleanText}</span>;
+      } else {
+        return <span key={index} className="text-in-cyan-base">{part}</span>;
+      }
+    });
+  };
+
   return (
     <section id="preguntas" className="container mx-auto px-4 max-w-7xl pb-32 lg:pb-48">
-      <h2 className="text-center font-in-nunito text-in-cyan-base font-black text-in-cyan-text text-2xl md:text-3xl lg:text-4xl mb-12" data-aos="zoom-in">
-        Preguntas <span className='text-in-blue'>Frecuentes</span>
-      </h2>
+      {titleWithColors ? (
+        <h2 className="text-center font-in-nunito font-black text-2xl md:text-3xl lg:text-4xl mb-12">
+          {renderTitleWithColors(titleWithColors)}
+        </h2>
+      ) : title ? (
+        <h2 className="text-center font-in-nunito text-in-cyan-base font-black text-2xl md:text-3xl lg:text-4xl mb-12">
+          {title}
+        </h2>
+      ) : (
+        <h2 className="text-center font-in-nunito text-in-cyan-base font-black text-in-cyan-text text-2xl md:text-3xl lg:text-4xl mb-12">
+          Preguntas <span className='text-in-blue'>Frecuentes</span>
+        </h2>
+      )}
 
       <div className='flex flex-col md:flex-row gap-6 rounded-lg lg:px-16'>
         <div className='flex flex-col flex-1/2 gap-6'>
-          <div className='accordion-item' data-aos="fade-up" data-aos-duration="800">
-            <AccordionItem
-                  title="¿Funciona para todos?"
-                  isOpen={openIndex === 0}
-                  onToggle={() => toggleIndex(0)}
+          {questions.slice(0, Math.ceil(questions.length / 2)).map((item, index) => (
+            <div key={index} className='accordion-item'>
+              <AccordionItem
+                title={item.question}
+                isOpen={openIndex === index}
+                onToggle={() => toggleIndex(index)}
               >
-                  Sí, la terapia de ondas de choque es efectiva en la gran mayoría de pacientes. Hombres de todas las edades han reportado mejoras en la calidad y duración de sus erecciones desde las primeras sesiones.
+                {item.answer}
               </AccordionItem>
-          </div>
-          <div className='accordion-item' data-aos="fade-up" data-aos-duration="800">
-            <AccordionItem
-                  title="¿El tratamiento duele?"
-                  isOpen={openIndex === 1}
-                  onToggle={() => toggleIndex(1)}
-              >
-                  No, son indoloras y seguras cuando se realiza por profesionales capacitados. Es un procedimiento no invasivo y sin necesidad de cirugía.
-            </AccordionItem>
-          </div>
-
-          <div className='accordion-item' data-aos="fade-up" data-aos-duration="800">
-            <AccordionItem
-              title="¿Cuántas sesiones necesito?"
-              isOpen={openIndex === 2}
-              onToggle={() => toggleIndex(2)}
-            >
-              Lo usual es entre 6 a 12 sesiones, según evaluación médica.
-            </AccordionItem>
-          </div> 
+            </div>
+          ))}
         </div>
-          
-
 
         <div className='flex flex-col flex-1/2 gap-6'>
-
-          
-          <div className='accordion-item' data-aos="fade-up" data-aos-duration="800">
-            <AccordionItem
-              title="¿Cuánto tiempo dura la sesión?"
-              isOpen={openIndex === 3}
-              onToggle={() => toggleIndex(3)}
-            >
-              Cada sesión dura 30 minutos aproximadamente y suelen espaciarse entre una o dos veces por semana.
-            </AccordionItem>
-          </div>
-          
-          <div className='accordion-item' data-aos="fade-up" data-aos-duration="800">
-            <AccordionItem
-              title="¿Necesito realizar algún examen previo?"
-              isOpen={openIndex === 4}
-              onToggle={() => toggleIndex(4)}
-            >
-              <span>
-                Si, se recomienda realizarse una ecografía doppler de pene para obtener un mejor diagnóstico y poder planificar un mejor tratamiento.
-              </span>
-            </AccordionItem>
-          </div>
-          
+          {questions.slice(Math.ceil(questions.length / 2)).map((item, index) => {
+            const actualIndex = Math.ceil(questions.length / 2) + index;
+            return (
+              <div key={actualIndex} className='accordion-item'>
+                <AccordionItem
+                  title={item.question}
+                  isOpen={openIndex === actualIndex}
+                  onToggle={() => toggleIndex(actualIndex)}
+                >
+                  {item.answer}
+                </AccordionItem>
+              </div>
+            );
+          })}
         </div>
-
       </div>
     </section>
   );

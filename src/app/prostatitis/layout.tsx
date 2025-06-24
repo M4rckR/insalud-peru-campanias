@@ -10,27 +10,26 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Insalud VPH Jesus Maria",
-  description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
-  keywords: "centro médico quito, hospital quito, servicios médicos ecuador, especialistas médicos, atención médica especializada, urologia, vph, verruga, vih, ondas de choque",
-  authors: [{ name: "Insalud VPH Jesus Maria" }],
-  creator: "Insalud VPH Jesus Maria",
-  publisher: "Insalud VPH Jesus Maria",
+  title: "Insalud Prostatitis Jesus Maria",
+  description: "Tratamiento avanzado para prostatitis con Ondas de Choque de Alta Frecuencia. Recupera tu bienestar de forma natural y duradera.",
+  keywords: "prostatitis, tratamiento, ondas de choque, urología, salud sexual, Jesus Maria, Lima, Perú",
+  authors: [{ name: "Insalud Prostatitis Jesus Maria" }],
+  creator: "Insalud Prostatitis Jesus Maria",
+  publisher: "Insalud Prostatitis Jesus Maria",
   robots: "index, follow",
   openGraph: {
-    title: "Insalud VPH Jesus Maria",
-    description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
+    title: "Insalud Prostatitis Jesus Maria",
+    description: "Tratamiento avanzado para prostatitis con Ondas de Choque de Alta Frecuencia. Recupera tu bienestar de forma natural y duradera.",
     type: "website",
-    locale: "es_EC",
-    siteName: "Insalud VPH Jesus Maria",
+    locale: "es_PE",
+    siteName: "Insalud Prostatitis Jesus Maria",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Insalud VPH Jesus Maria",
-    description: "Red de centros de salud especializados en brindar soluciones integrales en el ámbito de la salud sexual.",
+    title: "Insalud Prostatitis Jesus Maria",
   },
   alternates: {
-    canonical: "https://app.insalud.pe/vph-jm",
+    canonical: "https://app.insalud.pe/prostatitis",
   },
 };
 
@@ -60,4 +59,4 @@ export default function RootLayout({
       </body>
     </html>
   );
-}
+} 

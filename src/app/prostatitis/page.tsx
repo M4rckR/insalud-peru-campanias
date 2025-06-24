@@ -5,33 +5,33 @@ import { Questions } from "../components/Questions";
 import { AppointmentCta } from "../components/AppointmentCta";
 import { HeroContact } from "../components/hero-1/HeroContact";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
-import { questionVph } from "@/data/questions/questionVph";
+import { questionProstatitis } from "@/data/questions/questionProstatitis";
 
 export default function VpHJm() {
   return (
     <>
-      <HeroContact 
-        imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
-        image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
-        title="¿Tienes verrugas genitales? "
-        subtitle="Podrías tener VPH y no saberlo"
-        description="Agenda tu cita ahora y elimina las verrugas sin dañar tu piel."
+      <HeroContact  
+        title="¿Tienes molestias al orinar o dolor persistente?"
+        subtitle="Podrías tener prostatitis crónica y no saberlo."
+        image="/campanas/prostatitis/assets/images/sections/header/hero-prostatitis.png"
+        imageMobile="/campanas/prostatitis/assets/images/sections/header/hero-prostatitis.png"
+        description="Agenda tu cita ahora y recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque."
       />
       <TestimonialBubbles
         messages={[
-          "“Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.”",
-          "“No siempre es por estrés o edad. Muchas veces es un problema vascular.”",
-          "“Las pastillas son temporales. Este tratamiento reactiva el flujo real.“",
+          "“El dolor pélvico, las molestias al orinar o disfunción eréctil suelen ser señales ignoradas.”",
+          "“Los antibióticos no siempre funcionan y los síntomas pueden durar años.”",
+          "“Afecta hasta al 15% de los hombres en edad adulta.”",
         ]}
       />
       <section id="beneficios">
         <Treatment
-          titleWithColors="¿Por qué tratarse con {cyan}Láser CO2?{/cyan}"
+          titleWithColors="¿Por qué tratarse con {cyan}Ondas de choque? {/cyan}"
           subtitle="Conoce los beneficios que te ofrece este tratamiento."
           cards={[
             {
               title: "Seguro y efectivo",
-              description: "Elimina las verrugas sin dañar la piel.",
+              description: "No invasivo y sin efectos secundarios",
               image:
                 "/campanas/vph-jesus-maria/assets/images/sections/main/icon-seguro.png",
               alt: "Seguro y efectivo",
@@ -54,7 +54,7 @@ export default function VpHJm() {
             {
               title: "Resultados visibles",
               description:
-                "Elimina las verrugas sin dañar tu piel desde la primera sesión.",
+                "Mejora la erección de forma natural y progresiva.",
               image:
                 "/campanas/vph-jesus-maria/assets/images/sections/main/icon-resultados.png",
               alt: "Resultados visibles",
@@ -74,16 +74,16 @@ export default function VpHJm() {
         alt="Equipo médico láser CO2"
       />
       <AppointmentCta 
-        title="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
+        title="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
-        titleMobile="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
+        titleMobile="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque "
         whatsappNumber="51987654321"
-        whatsappMessage="¡Hola! Me interesa el tratamiento para eliminación de verrugas por VPH. ¿Podrían darme más información?"
+        whatsappMessage="¡Hola! Me interesa el tratamiento para prostatitis con Ondas de Choque. ¿Podrían darme más información?"
       />
-      <Questions questions={questionVph} />
+      <Questions questions={questionProstatitis} />
       <FloatingWhatsApp
         phoneNumber="51987654321"
-        message="¡Hola! Me interesa el tratamiento para eliminación de verrugas por VPH en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
+        message="¡Hola! Me interesa el tratamiento para prostatitis con Ondas de Choque. ¿Podrían darme más información?"
         position="bottom-right"
         size="md"
         showTooltip={true}

@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Nunito, Poppins, Roboto } from "next/font/google";
+import "../styles/globals.css";
 
-import "./styles/globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 const nunito = Nunito({

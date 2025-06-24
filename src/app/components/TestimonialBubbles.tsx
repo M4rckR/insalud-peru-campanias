@@ -3,10 +3,11 @@ import Image from "next/image"
 
 type TestimonialBubblesProps = {
     title?: string;
-    titleWithColors?: string; // Nuevo prop para títulos con colores
+    titleWithColors?: string;
+    messages: string[]
 }
 
-export const TestimonialBubbles = ({ title, titleWithColors }: TestimonialBubblesProps) => {
+export const TestimonialBubbles = ({ title, titleWithColors, messages }: TestimonialBubblesProps) => {
   
     // Función para renderizar el titulo con colores
   const renderTitleWithColors = (text: string) => {
@@ -27,6 +28,15 @@ export const TestimonialBubbles = ({ title, titleWithColors }: TestimonialBubble
     });
   };
 
+  // Función para renderizar mensajes con HTML
+  const renderMessage = (message: string) => {
+    return (
+      <span 
+        dangerouslySetInnerHTML={{ __html: message }}
+      />
+    );
+  };
+
   return (
     <div className="pb-8 hidden md:block">
         <div className="bg-in-blue-gradient-section">
@@ -40,13 +50,13 @@ export const TestimonialBubbles = ({ title, titleWithColors }: TestimonialBubble
                 ) : null}
                 <div className="flex flex-col text-in-blue pb-32 font-in-nunito">
                     <p className="self-start bg-in-blue-gradient py-4 px-6 rounded-md text-in-blue mb-8">
-                        “1 de cada 2 personas sexualmente activas tendrá <strong>VPH</strong>  en algún momento.”
+                        {renderMessage(messages[0])}
                     </p>
                     <p className="self-end bg-in-blue-gradient py-4 px-6 rounded-md text-in-blue mb-8 lg:mb-16">
-                        “Muchas veces es silencioso y se manifiesta como <strong>verrugas</strong>.”
+                        {renderMessage(messages[1])}
                     </p>
                     <p className="self-end lg:self-center bg-in-blue-gradient py-4 px-6 rounded-md text-in-blue"> 
-                        “Si no se trata, puede derivar en <strong>cáncer</strong> de cuello uterino, pene o ano.”
+                        {renderMessage(messages[2])}
                     </p>
                 </div>
                 <Image

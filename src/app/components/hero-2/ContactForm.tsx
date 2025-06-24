@@ -89,7 +89,7 @@ export const ContactForm = () => {
                 control={form.control}
                 name="nombres"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="relative">
                     <FormControl>
                       <Input
                         className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-6"
@@ -97,7 +97,7 @@ export const ContactForm = () => {
                         {...field}
                       />
                     </FormControl>
-                    <FormMessage className="text-in-orange text-sm" />
+                    <FormMessage className="text-in-orange font-in-nunito text-sm md:absolute -bottom-6 left-0" />
                   </FormItem>
                 )}
               />
@@ -105,15 +105,20 @@ export const ContactForm = () => {
                 control={form.control}
                 name="telefono"
                 render={({ field }) => (
-                  <FormItem className="mb-2 md:mb-0">
+                  <FormItem className="mb-2 md:mb-0 relative">
                     <FormControl>
                       <Input
                         className="bg-in-cyan md:bg-white font-normal md:font-medium text-in-blue placeholder:text-in-blue placeholder:font-normal placeholder:text-sm md:placeholder:font-medium py-6"
                         placeholder="Teléfono"
+                        maxLength={9}
                         {...field}
+                        onChange={(e) => {
+                          const value = e.target.value.replace(/\D/g, '');
+                          field.onChange(value);
+                        }}
                       />
                     </FormControl>
-                    <FormMessage className="text-in-orange text-sm" />
+                    <FormMessage className="text-in-orange font-in-nunito text-sm md:absolute -bottom-6 left-0" />
                   </FormItem>
                 )}
               />
@@ -122,7 +127,7 @@ export const ContactForm = () => {
                   control={form.control}
                   name="turno"
                   render={({ field, fieldState }) => (
-                    <FormItem>
+                    <FormItem className="relative">
                       <FormControl>
                         <Select
                           onValueChange={field.onChange}
@@ -153,7 +158,7 @@ export const ContactForm = () => {
                           </SelectContent>
                         </Select>
                       </FormControl>
-                      <FormMessage className="font-in-nunito text-in-orange text-sm" />
+                      <FormMessage className="md:absolute -bottom-6 left-0 font-in-nunito text-in-orange text-sm" />
                     </FormItem>
                   )}
                 />
