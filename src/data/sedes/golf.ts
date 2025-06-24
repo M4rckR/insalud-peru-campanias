@@ -13,19 +13,19 @@ export const golfData = {
   landings: {
     vph: {
       gestor: "Julio",
-      email: "contacto.citas@insalud.pe",
+      email: "gestor.citas6@insalud.pe",
       whatsapp: "957016010",
       message: "¡Hola! Vi su landing de tratamiento para eliminación de verrugas por VPH en Golf. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
     },
     ondasChoque: {
       gestor: "Milagros",
-      email: "contacto.citas@insalud.pe", 
+      email: "gestor.citas9@insalud.pe", 
       whatsapp: "992134117", // Aquí va el número de Milagros
       message: "¡Hola! Vi su landing de tratamiento para disfunción eréctil con Ondas de Choque en Golf. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
     },
     prostatitis: {
       gestor: "Milagros",
-      email: "contacto.citas@insalud.pe",
+      email: "gestor.citas9@insalud.pe",
       whatsapp: "992134117", // Aquí va el número de Milagros
       message: "¡Hola! Vi su landing de tratamiento para prostatitis con Ondas de Choque en Golf. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
     }

@@ -25,7 +25,18 @@ import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
-export const ContactForm = () => {
+type ContactFormProps = {
+  gestorData?: {
+    gestor: string;
+    email: string;
+    whatsapp: string;
+    message: string;
+  };
+  tratamiento?: string;
+  sede?: string;
+};
+
+export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<FormLeads>({
@@ -34,6 +45,10 @@ export const ContactForm = () => {
       nombres: "",
       telefono: "",
       turno: "",
+      gestorEmail: gestorData?.email,
+      gestorNombre: gestorData?.gestor,
+      tratamiento: tratamiento,
+      sede: sede,
     },
   });
 
@@ -45,13 +60,19 @@ export const ContactForm = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          gestorEmail: gestorData?.email,
+          gestorNombre: gestorData?.gestor,
+          tratamiento: tratamiento,
+          sede: sede,
+        }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        toast.success("Nos contactaremos contigo pronto");
+        toast.success(`Correo enviado a ${gestorData?.gestor || 'nuestro equipo'} - Nos contactaremos contigo pronto`);
         form.reset();
       } else {
         toast.error(data.mensaje || "Error al enviar el formulario");

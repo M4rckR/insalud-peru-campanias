@@ -16,9 +16,26 @@ type HeroContactProps = {
     title: string;
     subtitle: string;
     description: string;
+    gestorData?: {
+        gestor: string;
+        email: string;
+        whatsapp: string;
+        message: string;
+    };
+    tratamiento?: string;
+    sede?: string;
 }
 
-export const HeroContact = ({ image, imageMobile, title, subtitle, description }: HeroContactProps) => {
+export const HeroContact = ({ 
+    image, 
+    imageMobile, 
+    title, 
+    subtitle, 
+    description, 
+    gestorData, 
+    tratamiento, 
+    sede 
+}: HeroContactProps) => {
 
     const contactFormRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
@@ -55,9 +72,9 @@ export const HeroContact = ({ image, imageMobile, title, subtitle, description }
     })
 
   return (
-    <div className="bg-in-cyan pb-12 md:pb-32">
-        <div className="container max-w-7xl mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-12 items-center gap-8">
+    <div className="bg-in-cyan pb-12 md:pb-32 overflow-x-hidden">
+        <div className="container max-w-7xl mx-auto px-4 overflow-x-hidden">
+            <div className="overflow-x-hidden grid grid-cols-1 md:grid-cols-12 items-center gap-8">
                 <div ref={contactFormRef} className="md:col-span-7">
                     <div className="space-y-4 lg:space-y-8 mb-4 text-left">
                         <h1 className=" text-4xl sm:text-5xl md:text-4xl font-bold md:font-semibold font-in-nunito md:font-in-poppins text-in-cyan-base ">
@@ -75,7 +92,11 @@ export const HeroContact = ({ image, imageMobile, title, subtitle, description }
                         />
                         <p className="hidden md:block font-medium font-in-nunito text-in-blue text-base lg:text-lg">{description}</p>
                     </div>
-                    <ContactForm />
+                    <ContactForm 
+                        gestorData={gestorData}
+                        tratamiento={tratamiento}
+                        sede={sede}
+                    />
                 </div>
                 <div ref={imageRef} className="md:col-span-5 hidden md:block">
                     <Image 

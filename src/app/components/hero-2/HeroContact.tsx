@@ -2,7 +2,18 @@ import { cdn } from "@/utils/cdn"
 import Image from "next/image"
 import { ContactForm } from "./ContactForm"
 
-export const HeroContact = () => {
+type HeroContactProps = {
+  gestorData?: {
+    gestor: string;
+    email: string;
+    whatsapp: string;
+    message: string;
+  };
+  tratamiento?: string;
+  sede?: string;
+};
+
+export const HeroContact = ({ gestorData, tratamiento, sede }: HeroContactProps) => {
   return (
     <div className="bg-in-cyan pb-12 md:pb-24 lg:pb-32">
         <section className="container max-w-6xl mx-auto px-4">
@@ -33,7 +44,11 @@ export const HeroContact = () => {
                 />
             </div>
         </section>
-        <ContactForm />
+        <ContactForm 
+          gestorData={gestorData}
+          tratamiento={tratamiento}
+          sede={sede}
+        />
     </div>
   )
 }

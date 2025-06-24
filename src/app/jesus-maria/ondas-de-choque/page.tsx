@@ -86,7 +86,7 @@ export default function DisfuncionJesusMaria() {
             
             {/* WhatsApp Flotante */}
             <FloatingWhatsApp 
-                    phoneNumber={jesusMariaData.landings.ondasChoque.whatsapp}
+                phoneNumber={jesusMariaData.landings.ondasChoque.whatsapp}
                 message={jesusMariaData.landings.ondasChoque.message}
                 tooltipText="¿Dudas sobre disfunción eréctil?"
             />

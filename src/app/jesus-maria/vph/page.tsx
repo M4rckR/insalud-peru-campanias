@@ -17,6 +17,9 @@ export default function VphJesusMaria() {
         title="¿Tienes verrugas genitales? "
         subtitle="Podrías tener VPH y no saberlo"
         description="Agenda tu cita ahora y elimina las verrugas sin dañar tu piel."
+        gestorData={jesusMariaData.landings.vph}
+        tratamiento="VPH"
+        sede="Jesús María"
       />
       <TestimonialBubbles
         messages={[

@@ -9,5 +9,10 @@ export const formLeadsSchema = z.object({
         .max(9, { message: "Debe tener 9 dígitos" })
         .regex(/^9\d{8}$/, { message: "Debe iniciar con 9 (celular peruano)" }),
     turno: z.string().min(1, { message: "El turno es requerido" }),
+    // Campos opcionales para el gestor
+    gestorEmail: z.string().optional(),
+    gestorNombre: z.string().optional(),
+    tratamiento: z.string().optional(),
+    sede: z.string().optional(),
 })
 

@@ -13,21 +13,27 @@ export const jesusMariaData = {
   landings: {
     vph: {
       gestor: "Misael",
-      email: "contacto.citas@insalud.pe",
-      whatsapp: "969447773", // Aquí va el número de Misael
+      email: "gestor.citas5@insalud.pe",
+      whatsapp: "969447773", // Número de Misael
       message: "¡Hola! Vi su landing de tratamiento para eliminación de verrugas por VPH en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
     },
     ondasChoque: {
       gestor: "Milagros", 
-      email: "contacto.citas@insalud.pe",
-      whatsapp: "992134117", // Aquí va el número de Milagros
+      email: "gestor.citas9@insalud.pe",
+      whatsapp: "992134117", // Número de Milagros
       message: "¡Hola! Vi su landing de tratamiento para disfunción eréctil con Ondas de Choque en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
     },
     prostatitis: {
       gestor: "Milagros",
-      email: "contacto.citas@insalud.pe", 
-      whatsapp: "992134117", // Aquí va el número de Milagros
+      email: "gestor.citas9@insalud.pe", 
+      whatsapp: "992134117", // Número de Milagros
       message: "¡Hola! Vi su landing de tratamiento para prostatitis con Ondas de Choque en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
     }
   },
+  whatsapp: "51969447773", // Número por defecto
+  whatsappMessages: {
+    vph: "¡Hola! Vi su landing de tratamiento para eliminación de verrugas por VPH en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?",
+    disfuncion: "¡Hola! Vi su landing de tratamiento para disfunción eréctil con Ondas de Choque en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?",
+    prostatitis: "¡Hola! Vi su landing de tratamiento para prostatitis con Ondas de Choque en Jesús María. ¿Podrían darme más información sobre el procedimiento y agendar una cita?"
+  }
 } 
