@@ -210,3 +210,9 @@
     transform: translateX(-10%);
   }
 }
+
+/* Degradado Ruleta win */
+
+.bg-in-blue-gradient-ruleta {
+  background: linear-gradient(180deg, #C4F6FF 0%, #FFF 111.34%);
+}

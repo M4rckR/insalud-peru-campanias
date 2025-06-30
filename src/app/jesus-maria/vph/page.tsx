@@ -8,6 +8,7 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
+import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
 
 export default function VphJesusMaria() {
   return (
@@ -21,6 +22,12 @@ export default function VphJesusMaria() {
         gestorData={jesusMariaData.landings.vph}
         tratamiento="VPH"
         sede="Jesús María"
+      />
+       <SpinWheelTrigger
+        autoShowDelay={4}
+        spinDuration={4}
+        winningAngle={45}
+        showCloseButton={false}
       />
       <TestimonialBubbles
         messages={[
