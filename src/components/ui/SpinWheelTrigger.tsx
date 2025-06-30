@@ -17,7 +17,9 @@ export const SpinWheelTrigger = ({
   indicatorSvgPath = "/shared/ruleta/indicador-ruleta.svg",
   spinDuration = 4,
   winningAngle = 0,
-  showCloseButton = true
+  showCloseButton = true,
+  firstSpinAngle,
+  secondSpinAngle
 }: SpinWheelTriggerProps) => {
   const { isOpen, hasUserSpun, handleWin, closeWheel } = useSpinWheel({
     autoShowDelay,
@@ -31,12 +33,14 @@ export const SpinWheelTrigger = ({
     <SpinWheel
       isOpen={isOpen}
       onComplete={handleWin}
-      onClose={showCloseButton ? closeWheel : undefined}
+      onClose={closeWheel}
       wheelSvgPath={wheelSvgPath}
       indicatorSvgPath={indicatorSvgPath}
       spinDuration={spinDuration}
       winningAngle={winningAngle}
       showCloseButton={showCloseButton}
+      firstSpinAngle={firstSpinAngle}
+      secondSpinAngle={secondSpinAngle}
     />
   )
 }

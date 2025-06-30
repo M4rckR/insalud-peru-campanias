@@ -8,7 +8,7 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-// import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
+import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
 
 export default function VphJesusMaria() {
   return (
@@ -18,17 +18,18 @@ export default function VphJesusMaria() {
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
         title="¿Tienes verrugas genitales? "
         subtitle="Podrías tener VPH y no saberlo"
-        description="Agenda tu cita ahora y elimina las verrugas sin dañar tu piel."
+        description="Agenda tu cita y elimina verrugas sin dañar tu piel. ¡Reclama tu atención gratuita!"
         gestorData={jesusMariaData.landings.vph}
         tratamiento="VPH"
         sede="Jesús María"
       />
-       {/* <SpinWheelTrigger
-        autoShowDelay={4}
-        spinDuration={4}
-        winningAngle={45}
+       <SpinWheelTrigger
+        autoShowDelay={1}
+        spinDuration={5}
+        firstSpinAngle={315}
+        secondSpinAngle={225}
         showCloseButton={false}
-      /> */}
+      />
       <TestimonialBubbles
         messages={[
           "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",

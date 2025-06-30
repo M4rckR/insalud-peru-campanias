@@ -10,7 +10,6 @@ import Image from 'next/image'
 import { SpinWheelProps } from '@/types'
 import Confetti from 'react-confetti'
 
-
 export const SpinWheel = ({ 
   isOpen, 
   onComplete,
@@ -19,11 +18,14 @@ export const SpinWheel = ({
   indicatorSvgPath = cdn("/shared/ruleta/indicador-ruleta.svg"),
   spinDuration = 4,
   winningAngle = 0,
-  showCloseButton = true
+  showCloseButton = true,
+  firstSpinAngle,
+  secondSpinAngle
 }: SpinWheelProps) => {
   const [isSpinning, setIsSpinning] = useState(false)
-  const [hasSpun, setHasSpun] = useState(false)
   const [showResult, setShowResult] = useState(false)
+  const [spinCount, setSpinCount] = useState(0) // Contador de giros
+  const [isWinner, setIsWinner] = useState(false) // Si ganó o no
   
   const overlayRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
@@ -60,16 +62,34 @@ export const SpinWheel = ({
   }, [isOpen])
 
   const handleSpin = () => {
-    if (isSpinning || hasSpun) return
+    if (isSpinning) return
 
     setIsSpinning(true)
+    setSpinCount(prev => prev + 1)
     
     // Detener animación del indicador
     gsap.set(indicatorRef.current, { scale: 1 })
     
-    // ✅ SOLUCIÓN: Siempre parar en la misma posición visual
-    const baseRotations = 1665 // Exactamente 4 vueltas completas (360 * 4)
-    const finalRotation = baseRotations + winningAngle // Siempre para en el mismo lugar
+    // ✅ LÓGICA DE 2 GIROS: Primer giro pierde, segundo giro gana
+    const currentSpin = spinCount + 1 // Este será el número de giro actual
+    const baseRotations = 1665 // Vueltas completas que dará
+
+    let finalRotation
+
+    // 🎯 OBTENER ROTACIÓN ACTUAL para acumular
+    const currentRotation = gsap.getProperty(wheelRef.current, "rotation") as number || 0
+
+    if (currentSpin === 1) {
+      // PRIMER GIRO: Usar firstSpinAngle si está disponible, sino usar la lógica original
+      const firstAngle = firstSpinAngle !== undefined ? firstSpinAngle : (winningAngle + 90)
+      finalRotation = currentRotation + baseRotations + firstAngle
+      setIsWinner(false)
+    } else {
+      // SEGUNDO GIRO: Usar secondSpinAngle si está disponible, sino usar winningAngle
+      const secondAngle = secondSpinAngle !== undefined ? secondSpinAngle : winningAngle
+      finalRotation = currentRotation + baseRotations + secondAngle
+      setIsWinner(true)
+    }
     
     // ✅ EFECTO PÉNDULO REALISTA
     const overshoot = 25 // Grados extra que se pasa
@@ -79,7 +99,6 @@ export const SpinWheel = ({
     const tl = gsap.timeline({
       onComplete: () => {
         setIsSpinning(false)
-        setHasSpun(true)
         
         // Animación del indicador al parar
         gsap.to(indicatorRef.current, {
@@ -90,33 +109,28 @@ export const SpinWheel = ({
           repeat: 1,
           onComplete: () => {
             setTimeout(() => {
-              setShowResult(true)
+              // ✅ USAR currentSpin en lugar de spinCount para evitar problemas de timing
               
-              // Celebración
-              gsap.fromTo(sparklesRef.current, 
-                { scale: 0 },
-                { 
-                  scale: 1, 
-                  duration: 1, 
-                  ease: "back.out(1.7)",
-                  onComplete: () => {
-                    // ✅ ANIMACIÓN MODAL DESDE ABAJO CON TRANSPARENCIA
-                    gsap.fromTo(resultModalRef.current,
-                      { 
-                        y: "100%", // Desde abajo (oculto)
-                        opacity: 0 // Empieza transparente
-                      },
-                      { 
-                        y: "0%", // Hacia su posición normal
-                        opacity: 1, // Se vuelve completamente opaco
-                        duration: 0.6,
-                        ease: "power3.out"
-                        // ✅ Ya no hay timeout automático - solo se cierra al hacer click
-                      }
-                    )
-                  }
+              if (currentSpin === 1) {
+                // PRIMER GIRO COMPLETADO: No mostrar modal, solo resetear para mostrar botón
+                setShowResult(false)
+                setIsSpinning(false)
+              } else if (currentSpin === 2) {
+                // SEGUNDO GIRO COMPLETADO: Mostrar modal con resultado final
+                setShowResult(true)
+                
+                if (isWinner) {
+                  // GANÓ: Celebración completa
+                  gsap.fromTo(sparklesRef.current, 
+                    { scale: 0 },
+                    { 
+                      scale: 1, 
+                      duration: 1, 
+                      ease: "back.out(1.7)"
+                    }
+                  )
                 }
-              )
+              }
             }, 500)
           }
         })
@@ -146,28 +160,15 @@ export const SpinWheel = ({
   }
 
   const handleClose = () => {
-    // ✅ ANIMACIÓN DE CIERRE: Modal se va hacia abajo
-    const tl = gsap.timeline({ 
-      onComplete: () => {
-        // Llamar tanto onClose como onComplete cuando termine la animación
-        onClose?.()
-        onComplete()
-      }
-    })
-    
-    // Si hay modal de resultado, animarlo hacia abajo con transparencia
-    if (showResult && resultModalRef.current) {
-      tl.to(resultModalRef.current, { 
-        y: "100%", 
-        opacity: 0, // Se vuelve transparente mientras baja
-        duration: 0.4, 
-        ease: "power3.in" 
-      })
+    // Cerrar INMEDIATAMENTE la ruleta usando onClose
+    if (onClose) {
+      onClose()
     }
     
-    // Luego cerrar el modal principal
-    tl.to(modalRef.current, { opacity: 0, scale: 0.8, y: 50, duration: 0.3 }, "-=0.2")
-      .to(overlayRef.current, { opacity: 0, duration: 0.2 }, "-=0.1")
+    // También ejecutar onComplete para registrar que completó la ruleta
+    if (onComplete) {
+      onComplete()
+    }
   }
 
   if (!isOpen) return null
@@ -181,7 +182,6 @@ export const SpinWheel = ({
         ref={modalRef}
         className="relative rounded-3xl max-w-lg w-full px-4"
       >
-        
 
         {/* Botón cerrar - Solo después de ganar */}
         {showResult && showCloseButton && onClose && (
@@ -240,48 +240,74 @@ export const SpinWheel = ({
         {showResult && (
           <div 
             ref={resultModalRef}
-            className="fixed inset-x-0 bottom-0 z-[10000] transform translate-y-full opacity-0"
+            className="fixed inset-x-0 bottom-16 z-[10000] animate-slide-up"
           >
-            <div className="bg-in-blue-gradient-ruleta mx-4 mb-4 rounded-2xl shadow-2xl border border-gray-200 overflow-hidden py-12 space-y-4">
-                <Confetti className='w-full px-4 rounded-3xl' tweenDuration={10} />
-                <Image src={cdn("/shared/ruleta/gift-ruleta.png")} alt="Ruleta win" width={100} height={88} className='mx-auto w-24' />
+                          <div className="bg-in-blue-gradient-ruleta mx-4 mb-4 rounded-2xl shadow-2xl border border-gray-200 overflow-hidden py-12 space-y-4">
+                 {/* Solo mostrar confetti cuando gana */}
+                 {isWinner && <Confetti className='w-full px-4 rounded-3xl' tweenDuration={10} />}
+                 
+                 <Image 
+                   src={cdn(isWinner ? "/shared/ruleta/gift-ruleta.png" : "/shared/ruleta/gift-ruleta.png")} 
+                   alt="Ruleta result" 
+                   width={100} 
+                   height={88} 
+                   className='mx-auto w-24' 
+                 />
+                 
               {/* Contenido principal */}
-                <h2 className="text-2xl md:text-4xl text-center font-black text-in-cyan-base font-in-nunito">
-                  Ganaste una consulta gratis
-                </h2>
+                 <h2 className="text-2xl md:text-4xl text-center font-black text-in-cyan-base font-in-nunito">
+                   {isWinner ? "¡Ganaste una consulta gratis!" : "¡Casi lo logras!"}
+                 </h2>
+                 
+                 {!isWinner && (
+                   <p className="text-center text-white text-lg font-in-poppins px-4">
+                     {spinCount === 1 ? "No te desanimes, ¡inténtalo una vez más!" : "¡Sigue intentando en tu próxima visita!"}
+                   </p>
+                 )}
 
-                {/* Botón de acción */}
+                 {/* Botón de acción */}
             </div>
             <div className='w-full flex justify-center items-center'>
                 <Button
-                  onClick={handleClose}
+                  onClick={isWinner ? handleClose : () => {
+                    setShowResult(false)
+                    setIsSpinning(false)
+                  }}
                   className="py-6 bg-gradient-to-r from-in-orange to-in-orange-hover hover:from-in-orange-hover hover:to-in-orange text-white font-bold text-xl px-10 rounded-3xl font-in-poppins transform hover:scale-105 transition-all duration-300 cursor-pointer"
                 >
-                  Reclamar ahora
+                  {isWinner ? "Reclamar ahora" : (spinCount === 2 ? "Entendido" : "Intentar de nuevo")}
                 </Button>
             </div>
           </div>
         )}
 
-        {/* Botón girar */}
-        {!hasSpun && (
-            <div className='flex justify-center items-center'>
-                <Button
-                    onClick={handleSpin}
-                    disabled={isSpinning}
-                    className="py-7 px-16 bg-gradient-to-r from-in-orange to-in-orange-hover hover:from-in-orange-hover hover:to-in-orange text-white font-bold text-xl rounded-3xl font-in-poppins disabled:opacity-70 transform hover:scale-105 transition-all duration-300 cursor-pointer"
-                >
-                    {isSpinning ? (
-                    <div className="flex items-center justify-center gap-3">
-                        <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
-                        Girando...
-                    </div>
-                    ) : (
-                    "Girar"
-                    )}
-                </Button>
-            </div>
-        )}
+        {/* Botón girar - Layout estable sin saltos */}
+        <div className='flex justify-center items-center h-20'>
+          {(() => {
+            // Puede girar si es el primer intento O si es el segundo intento después de perder
+            const canMakeFirstSpin = spinCount === 0
+            const canMakeSecondSpin = spinCount === 1 && !isWinner
+            const canSpin = canMakeFirstSpin || canMakeSecondSpin
+            const shouldShow = !showResult && canSpin
+            
+            return (
+              <Button
+                onClick={handleSpin}
+                disabled={isSpinning}
+                className={`py-7 px-16 bg-gradient-to-r from-in-orange to-in-orange-hover hover:from-in-orange-hover hover:to-in-orange text-white font-bold text-xl rounded-3xl font-in-poppins disabled:opacity-70 transform hover:scale-105 transition-opacity duration-500 ease-in-out cursor-pointer ${shouldShow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+              >
+                {isSpinning ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                    Girando...
+                  </div>
+                ) : (
+                  spinCount === 0 ? "Girar" : "Intentar otra vez"
+                )}
+              </Button>
+            )
+          })()}
+        </div>
         <p className='text-[#908F8F] text-center text-xs py-4'>Solo con fines ilustrativos. Todos pueden obtener el mejor resultado en esta interfaz. Solo nuevos pacientes de Insalud que compren procedimiento de Cauterización.</p>
       </div>
     </div>

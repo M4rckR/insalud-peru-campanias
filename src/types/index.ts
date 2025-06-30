@@ -87,6 +87,10 @@ export type SpinWheelProps = {
   spinDuration?: number
   winningAngle?: number
   showCloseButton?: boolean
+  /** Ángulo específico para el primer giro (oportunidad) - Opcional */
+  firstSpinAngle?: number
+  /** Ángulo específico para el segundo giro (premio) - Opcional */
+  secondSpinAngle?: number
 }
 
 export type SpinWheelTriggerProps = {
@@ -104,4 +108,8 @@ export type SpinWheelTriggerProps = {
   winningAngle?: number
   /** Si mostrar o no el botón de cerrar */
   showCloseButton?: boolean
+  /** Ángulo específico para el primer giro (oportunidad) - Opcional */
+  firstSpinAngle?: number
+  /** Ángulo específico para el segundo giro (premio) - Opcional */
+  secondSpinAngle?: number
 }

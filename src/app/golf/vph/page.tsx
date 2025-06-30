@@ -17,7 +17,7 @@ export default function VphGolf() {
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
         title="¿Tienes verrugas genitales? "
         subtitle="Podrías tener VPH y no saberlo"
-        description="Agenda tu cita ahora y elimina las verrugas sin dañar tu piel."
+        description="Agenda tu cita y elimina verrugas sin dañar tu piel. ¡Reclama tu atención gratuita!"
       />
       <TestimonialBubbles
         messages={[
