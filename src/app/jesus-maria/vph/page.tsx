@@ -8,7 +8,7 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
+// import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
 
 export default function VphJesusMaria() {
   return (
@@ -23,12 +23,12 @@ export default function VphJesusMaria() {
         tratamiento="VPH"
         sede="Jesús María"
       />
-       <SpinWheelTrigger
+       {/* <SpinWheelTrigger
         autoShowDelay={4}
         spinDuration={4}
         winningAngle={45}
         showCloseButton={false}
-      />
+      /> */}
       <TestimonialBubbles
         messages={[
           "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
