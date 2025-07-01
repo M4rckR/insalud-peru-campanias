@@ -8,11 +8,17 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
     const [isOpen, setIsOpen] = useState(false);
     const router = useRouter();
 
-    // Corroborar si el usuario ya ha ganado
+    // Generar clave única para localStorage basada en sede y tratamiento
+    const getStorageKey = useCallback(() => {
+        const { sede = 'default', tratamiento = 'default' } = options;
+        return `insalud_spin_completed_${sede.toLowerCase().replace(/\s+/g, '_')}_${tratamiento.toLowerCase().replace(/\s+/g, '_')}`;
+    }, [options]);
+
+    // Corroborar si el usuario ya ha ganado en esta combinación específica
     const hasUserSpun = useCallback(() => {
         if(typeof window === "undefined") return false;
-        return localStorage.getItem('insalud_spin_completed') === 'true';
-    }, [])
+        return localStorage.getItem(getStorageKey()) === 'true';
+    }, [getStorageKey])
 
     // Abrir la ruleta
     useEffect(() => {
@@ -27,7 +33,7 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
 
 
     const handleWin = useCallback(() => {
-        localStorage.setItem('insalud_spin_completed', 'true');
+        localStorage.setItem(getStorageKey(), 'true');
 
         // Callback personalizado si existe
         options.onWin?.()
@@ -43,7 +49,7 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
             }
         }, 20000000)
 
-    }, [options, router])
+    }, [getStorageKey, options, router])
     
     const closeWheel = useCallback(() => {
         setIsOpen(false);

@@ -19,11 +19,15 @@ export const SpinWheelTrigger = ({
   winningAngle = 0,
   showCloseButton = true,
   firstSpinAngle,
-  secondSpinAngle
+  secondSpinAngle,
+  sede,
+  tratamiento
 }: SpinWheelTriggerProps) => {
   const { isOpen, hasUserSpun, handleWin, closeWheel } = useSpinWheel({
     autoShowDelay,
-    redirectAfterWin
+    redirectAfterWin,
+    sede,
+    tratamiento
   })
 
   // No mostrar nada si ya giró

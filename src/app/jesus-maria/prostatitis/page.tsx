@@ -8,16 +8,30 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
+import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
+import { TitleProvider } from '@/contexts/TitleContext'
 
 export default function ProstatitisJesusMaria() {
   return (
-    <>
+    <TitleProvider sede="Jesús María" tratamiento="Prostatitis">
       <HeroContact  
         title="¿Tienes molestias al orinar o dolor persistente?"
         subtitle="Podrías tener prostatitis crónica y no saberlo."
         image="/campanas/prostatitis/assets/images/sections/header/hero-prostatitis.png"
         imageMobile="/campanas/prostatitis/assets/images/sections/header/hero-prostatitis.png"
         description="Agenda tu cita ahora y recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque."
+        gestorData={jesusMariaData.landings.prostatitis}
+        tratamiento="Prostatitis"
+        sede="Jesús María"
+      />
+       <SpinWheelTrigger
+        autoShowDelay={1}
+        spinDuration={5}
+        firstSpinAngle={315}
+        secondSpinAngle={225}
+        showCloseButton={false}
+        sede="Jesús María"
+        tratamiento="Prostatitis"
       />
       <TestimonialBubbles
         messages={[
@@ -89,6 +103,6 @@ export default function ProstatitisJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-    </>
+    </TitleProvider>
   );
 } 

@@ -9,6 +9,7 @@ import { cdn } from '@/utils/cdn'
 import Image from 'next/image'
 import { SpinWheelProps } from '@/types'
 import Confetti from 'react-confetti'
+import { useTitleContext } from '@/contexts/TitleContext'
 
 export const SpinWheel = ({ 
   isOpen, 
@@ -22,6 +23,7 @@ export const SpinWheel = ({
   firstSpinAngle,
   secondSpinAngle
 }: SpinWheelProps) => {
+  const { claimPrize } = useTitleContext();
   const [isSpinning, setIsSpinning] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [spinCount, setSpinCount] = useState(0) // Contador de giros
@@ -160,6 +162,11 @@ export const SpinWheel = ({
   }
 
   const handleClose = () => {
+    // Activar el cambio de título cuando se reclama el premio
+    if (isWinner) {
+      claimPrize()
+    }
+    
     // Cerrar INMEDIATAMENTE la ruleta usando onClose
     if (onClose) {
       onClose()
@@ -178,6 +185,27 @@ export const SpinWheel = ({
       ref={overlayRef}
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
     >
+              { showResult && isWinner && (
+                   <Confetti 
+                     width={window.innerWidth}
+                     height={window.innerHeight}
+                     numberOfPieces={400}
+                     recycle={false}
+                     gravity={0.3}
+                     wind={0.05}
+                     initialVelocityX={20}
+                     initialVelocityY={30}
+                     tweenDuration={3000}
+                     run={true}
+                     confettiSource={{
+                       x: window.innerWidth / 2,
+                       y: window.innerHeight / 2,
+                       w: 10,
+                       h: 10
+                     }}
+                     className="absolute inset-0 z-50 pointer-events-none"
+                   />
+                 )}
       <div
         ref={modalRef}
         className="relative rounded-3xl max-w-lg w-full px-4"
@@ -195,7 +223,8 @@ export const SpinWheel = ({
 
 
         {/* Ruleta Container */}
-        <div className="relative flex justify-center items-center mb-8">
+        <div className={`relative flex justify-center items-center mb-8 transition-all duration-1000 ease-out ${showResult ? 'opacity-0 -translate-y-20 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}>
+
           {/* Sparkles celebración */}
           <div 
             ref={sparklesRef}
@@ -236,16 +265,38 @@ export const SpinWheel = ({
           </div>
         </div>
 
+        
+
         {/* Modal de Resultado - Animado desde abajo */}
         {showResult && (
           <div 
             ref={resultModalRef}
-            className="fixed inset-x-0 bottom-16 z-[10000] animate-slide-up"
+            className="fixed left-0 right-0 bottom-32 z-30 animate-slide-up"
           >
                           <div className="bg-in-blue-gradient-ruleta mx-4 mb-4 rounded-2xl shadow-2xl border border-gray-200 overflow-hidden py-12 space-y-4">
                  {/* Solo mostrar confetti cuando gana */}
-                 {isWinner && <Confetti className='w-full px-4 rounded-3xl' tweenDuration={10} />}
-                 
+                 {/* {isWinner && (
+                   <Confetti 
+                     width={window.innerWidth}
+                     height={window.innerHeight}
+                     numberOfPieces={400}
+                     recycle={true}
+                     gravity={0.3}
+                     wind={0.05}
+                     initialVelocityX={20}
+                     initialVelocityY={30}
+                     tweenDuration={8000}
+                     run={true}
+                     confettiSource={{
+                       x: window.innerWidth / 4,
+                       y: -100,
+                       w: 1200,
+                       h: 100
+                     }}
+                     className="fixed inset-0 z-[9998] pointer-events-none"
+                   />
+                 )}
+                  */}
                  <Image 
                    src={cdn(isWinner ? "/shared/ruleta/gift-ruleta.png" : "/shared/ruleta/gift-ruleta.png")} 
                    alt="Ruleta result" 
@@ -282,7 +333,7 @@ export const SpinWheel = ({
         )}
 
         {/* Botón girar - Layout estable sin saltos */}
-        <div className='flex justify-center items-center h-20'>
+        <div className={`flex justify-center items-center h-20 transition-all duration-1000 ease-out ${showResult ? 'opacity-0 -translate-y-10' : 'opacity-100 translate-y-0'}`}>
           {(() => {
             // Puede girar si es el primer intento O si es el segundo intento después de perder
             const canMakeFirstSpin = spinCount === 0

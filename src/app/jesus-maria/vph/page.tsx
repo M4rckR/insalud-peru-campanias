@@ -9,10 +9,11 @@ import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
 import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
+import { TitleProvider } from '@/contexts/TitleContext'
 
 export default function VphJesusMaria() {
   return (
-    <>
+    <TitleProvider sede="Jesús María" tratamiento="VPH">
       <HeroContact 
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
@@ -29,6 +30,8 @@ export default function VphJesusMaria() {
         firstSpinAngle={315}
         secondSpinAngle={225}
         showCloseButton={false}
+        sede="Jesús María"
+        tratamiento="VPH"
       />
       <TestimonialBubbles
         messages={[
@@ -105,6 +108,6 @@ export default function VphJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-    </>
+    </TitleProvider>
   );
 } 
