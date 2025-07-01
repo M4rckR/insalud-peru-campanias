@@ -11,6 +11,27 @@ import { SpinWheelProps } from '@/types'
 import Confetti from 'react-confetti'
 import { useTitleContext } from '@/contexts/TitleContext'
 
+// COMPONENTE VISUAL DE LA RULETA DE PREMIOS
+// -----------------------------------------
+// Este componente muestra la ruleta, maneja la animación, el resultado y la integración
+// con el contexto de título (TitleContext) y el trigger (SpinWheelTrigger).
+// Está preparado para funcionar de forma independiente por sede/tratamiento.
+
+/**
+ * SpinWheel
+ *
+ * Componente visual de la ruleta de premios.
+ * - Muestra la animación de giro y el resultado (ganador/perdedor)
+ * - Integra con el contexto global para cambiar el título al ganar
+ * - Llama a onComplete/onClose según corresponda
+ *
+ * Props principales:
+ * - isOpen: boolean (¿mostrar la ruleta?)
+ * - onComplete: función a ejecutar al finalizar
+ * - onClose: función a ejecutar al cerrar
+ *
+ * El estado de "ganador" se maneja internamente y se comunica con el contexto global.
+ */
 export const SpinWheel = ({ 
   isOpen, 
   onComplete,
@@ -23,12 +44,13 @@ export const SpinWheel = ({
   firstSpinAngle,
   secondSpinAngle
 }: SpinWheelProps) => {
-  const { claimPrize } = useTitleContext();
+  // Estado local para animaciones y lógica de la ruleta
   const [isSpinning, setIsSpinning] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [spinCount, setSpinCount] = useState(0) // Contador de giros
   const [isWinner, setIsWinner] = useState(false) // Si ganó o no
   
+  // Refs para animaciones GSAP
   const overlayRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const wheelRef = useRef<HTMLDivElement>(null)
@@ -36,6 +58,10 @@ export const SpinWheel = ({
   const sparklesRef = useRef<HTMLDivElement>(null)
   const resultModalRef = useRef<HTMLDivElement>(null)
 
+  // Contexto global para cambiar el título al ganar
+  const { claimPrize } = useTitleContext();
+
+  // Animación de entrada y del indicador
   useGSAP(() => {
     if (!isOpen) return
 
@@ -63,6 +89,7 @@ export const SpinWheel = ({
     })
   }, [isOpen])
 
+  // Lógica principal del giro de la ruleta
   const handleSpin = () => {
     if (isSpinning) return
 
@@ -161,18 +188,14 @@ export const SpinWheel = ({
     })
   }
 
+  // Cierra la ruleta y marca como ganador en el contexto global
   const handleClose = () => {
-    // Activar el cambio de título cuando se reclama el premio
     if (isWinner) {
       claimPrize()
     }
-    
-    // Cerrar INMEDIATAMENTE la ruleta usando onClose
     if (onClose) {
       onClose()
     }
-    
-    // También ejecutar onComplete para registrar que completó la ruleta
     if (onComplete) {
       onComplete()
     }
