@@ -8,12 +8,22 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { golfData } from "@/data/sedes/golf";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
-import { TitleProvider } from '@/contexts/TitleContext'
+import { PageWrapper } from '@/components/ui/PageWrapper'
+import { messagesVph } from "@/data/messages/messagesVph";
 
 export default function VphGolf() {
   return (
-    <TitleProvider sede="Golf" tratamiento="VPH">
+    <PageWrapper 
+      sede="Golf" 
+      tratamiento="VPH"
+      spinWheelProps={{
+        autoShowDelay: 1,
+        spinDuration: 5,
+        firstSpinAngle: 315,
+        secondSpinAngle: 225,
+        showCloseButton: false
+      }}
+    >
       <HeroContact 
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
@@ -24,21 +34,8 @@ export default function VphGolf() {
         tratamiento="VPH"
         sede="Golf"
       />
-       <SpinWheelTrigger
-        autoShowDelay={1}
-        spinDuration={5}
-        firstSpinAngle={315}
-        secondSpinAngle={225}
-        showCloseButton={false}
-        sede="Golf"
-        tratamiento="VPH"
-      />
       <TestimonialBubbles
-        messages={[
-          "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
-          "No siempre es por estrés o edad. Muchas veces es un problema vascular.",
-          "Las pastillas son temporales. Este tratamiento reactiva el flujo real.",
-        ]}
+        messages={messagesVph}
       />
       <section id="beneficios">
         <Treatment
@@ -108,6 +105,6 @@ export default function VphGolf() {
           email={golfData.email}
           socials={golfData.socials}
         />
-    </TitleProvider>
+    </PageWrapper>
   );
 } 

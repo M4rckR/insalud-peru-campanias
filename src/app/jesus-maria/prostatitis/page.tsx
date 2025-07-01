@@ -8,12 +8,22 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
-import { TitleProvider } from '@/contexts/TitleContext'
+import { PageWrapper } from '@/components/ui/PageWrapper'
+import { messagesProstatitis } from "@/data/messages/messagesProstatitis";
 
 export default function ProstatitisJesusMaria() {
   return (
-    <TitleProvider sede="Jesús María" tratamiento="Prostatitis">
+    <PageWrapper 
+      sede="Jesús María" 
+      tratamiento="Prostatitis"
+      spinWheelProps={{
+        autoShowDelay: 1,
+        spinDuration: 5,
+        firstSpinAngle: 315,
+        secondSpinAngle: 225,
+        showCloseButton: false
+      }}
+    >
       <HeroContact  
         title="¿Tienes molestias al orinar o dolor persistente?"
         subtitle="Podrías tener prostatitis crónica y no saberlo."
@@ -24,21 +34,8 @@ export default function ProstatitisJesusMaria() {
         tratamiento="Prostatitis"
         sede="Jesús María"
       />
-       <SpinWheelTrigger
-        autoShowDelay={1}
-        spinDuration={5}
-        firstSpinAngle={315}
-        secondSpinAngle={225}
-        showCloseButton={false}
-        sede="Jesús María"
-        tratamiento="Prostatitis"
-      />
       <TestimonialBubbles
-        messages={[
-          "El dolor pélvico, las molestias al orinar o disfunción eréctil suelen ser señales ignoradas.",
-          "Los antibióticos no siempre funcionan y los síntomas pueden durar años.",
-          "Afecta hasta al 15% de los hombres en edad adulta.",
-        ]}
+        messages={messagesProstatitis}
       />
       <section id="beneficios">
         <Treatment
@@ -97,12 +94,12 @@ export default function ProstatitisJesusMaria() {
         message={jesusMariaData.landings.prostatitis.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
-                    <Footer
+            <Footer
           address={jesusMariaData.address}
           phone={jesusMariaData.landings.prostatitis.whatsapp}
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-    </TitleProvider>
+    </PageWrapper>
   );
 } 

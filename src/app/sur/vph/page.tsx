@@ -8,46 +8,43 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { surData } from "@/data/sedes/sur";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
-import { TitleProvider } from '@/contexts/TitleContext'
+import { PageWrapper } from '@/components/ui/PageWrapper'
+import { messagesVph } from "@/data/messages/messagesVph";
 
 export default function VphSur() {
   return (
-    <TitleProvider sede="Sur" tratamiento="VPH">
-      <HeroContact 
-        imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
-        image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
-        title="¿Tienes verrugas genitales? "
-        subtitle="Podrías tener VPH y no saberlo"
-        description="Agenda tu cita y elimina verrugas sin dañar tu piel. ¡Reclama tu atención gratuita!"
+    <PageWrapper 
+      sede="Sur" 
+      tratamiento="VPH"
+      spinWheelProps={{
+        autoShowDelay: 1,
+        spinDuration: 5,
+        firstSpinAngle: 315,
+        secondSpinAngle: 225,
+        showCloseButton: false
+      }}
+    >
+      <HeroContact  
+        title="¿Tienes verrugas?"
+        subtitle="Podrías tener VPH"
+        image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-vph.png"
+        imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/hero-vph.png"
+        description="Agenda tu cita ahora y elimina las verrugas con nuestro tratamiento avanzado con Cauterización."
         gestorData={surData.landings.vph}
         tratamiento="VPH"
         sede="Sur"
       />
-       <SpinWheelTrigger
-        autoShowDelay={1}
-        spinDuration={5}
-        firstSpinAngle={315}
-        secondSpinAngle={225}
-        showCloseButton={false}
-        sede="Sur"
-        tratamiento="VPH"
-      />
       <TestimonialBubbles
-        messages={[
-          "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
-          "No siempre es por estrés o edad. Muchas veces es un problema vascular.",
-          "Las pastillas son temporales. Este tratamiento reactiva el flujo real.",
-        ]}
+        messages={messagesVph}
       />
       <section id="beneficios">
         <Treatment
-          titleWithColors="¿Por qué tratarse con {cyan}Láser CO2?{/cyan}"
+          titleWithColors="¿Por qué tratarse con {cyan}Cauterización? {/cyan}"
           subtitle="Conoce los beneficios que te ofrece este tratamiento."
           cards={[
             {
               title: "Seguro y efectivo",
-              description: "Elimina las verrugas sin dañar la piel.",
+              description: "Procedimiento ambulatorio con alta efectividad",
               image:
                 "/campanas/vph-jesus-maria/assets/images/sections/main/icon-seguro.png",
               alt: "Seguro y efectivo",
@@ -55,14 +52,14 @@ export default function VphSur() {
             {
               title: "Sin dolor",
               description:
-                "Tecnología de última generación que minimiza molestias.",
+                "Anestesia local para mayor comodidad durante el procedimiento.",
               image:
                 "/campanas/vph-jesus-maria/assets/images/sections/main/icon-sin-dolor.png",
               alt: "Sin dolor",
             },
             {
               title: "Rápido retorno",
-              description: "Vuelve a tu rutina al instante.",
+              description: "Vuelve a tu rutina en pocos días.",
               image:
                 "/campanas/vph-jesus-maria/assets/images/sections/main/icon-rapido.png",
               alt: "Rápido retorno",
@@ -70,7 +67,7 @@ export default function VphSur() {
             {
               title: "Resultados visibles",
               description:
-                "Elimina las verrugas sin dañar tu piel desde la primera sesión.",
+                "Eliminación inmediata de las verrugas visibles.",
               image:
                 "/campanas/vph-jesus-maria/assets/images/sections/main/icon-resultados.png",
               alt: "Resultados visibles",
@@ -79,20 +76,15 @@ export default function VphSur() {
         />
       </section>
       <AboutDevice
-        titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
-        multipleImages={true}
-        srcDesktop={
-          "/campanas/vph-jesus-maria/assets/images/sections/main/equipo-vph.png"
-        }
-        srcMobile={
-          "/campanas/vph-jesus-maria/assets/images/sections/main/equipo-vph-mobile.png"
-        }
-        alt="Equipo médico láser CO2"
+           titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
+          multipleImages={false}
+          srcDesktop={"/campanas/vph-jesus-maria/assets/images/sections/main/vph-device.png"}
+          alt="Dispositivo de cauterización VPH"
       />
       <AppointmentCta 
-        title="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
+        title="Elimina las verrugas de forma segura y efectiva con nuestro tratamiento de Cauterización"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
-        titleMobile="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
+        titleMobile="Elimina las verrugas de forma segura y efectiva"
         whatsappNumber={surData.landings.vph.whatsapp}
         whatsappMessage={surData.landings.vph.message}
       />
@@ -102,12 +94,12 @@ export default function VphSur() {
         message={surData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
-      <Footer
+            <Footer
           address={surData.address}
           phone={surData.landings.vph.whatsapp}
           email={surData.email}
           socials={surData.socials}
         />
-    </TitleProvider>
+    </PageWrapper>
   );
 } 

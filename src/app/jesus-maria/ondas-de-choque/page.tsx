@@ -8,34 +8,30 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionDisfuncion } from "@/data/questions/questionDisfuncion";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
-import { TitleProvider } from '@/contexts/TitleContext'
+import { PageWrapper } from '@/components/ui/PageWrapper'
+import { messagesOndasChoque } from "@/data/messages/messagesOndasChoque";
 
 export default function DisfuncionJesusMaria() {
     return (
-        <TitleProvider sede="Jesús María" tratamiento="Ondas de Choque">
+        <PageWrapper 
+            sede="Jesús María" 
+            tratamiento="Ondas de Choque"
+            spinWheelProps={{
+                autoShowDelay: 1,
+                spinDuration: 5,
+                firstSpinAngle: 315,
+                secondSpinAngle: 225,
+                showCloseButton: false
+            }}
+        >
             {/* Hero Section */}
             <HeroContact />
-            
-            <SpinWheelTrigger
-                autoShowDelay={1}
-                spinDuration={5}
-                firstSpinAngle={315}
-                secondSpinAngle={225}
-                showCloseButton={false}
-                sede="Jesús María"
-                tratamiento="Ondas de Choque"
-            />
             
             {/* Testimonios Section */}
             <section id="testimonios">
                 <TestimonialBubbles 
                     titleWithColors="La {cyan}disfunción eréctil{/cyan} no solo afecta tu cuerpo. Afecta cómo te {cyan}ves a ti mismo{/cyan}"
-                    messages={[
-                        "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
-                        "No siempre es por estrés o edad. Muchas veces es un problema vascular.",
-                        "Las pastillas son temporales. Este tratamiento reactiva el flujo real."
-                    ]}
+                    messages={messagesOndasChoque}
                 />
             </section>
             
@@ -109,6 +105,6 @@ export default function DisfuncionJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-        </TitleProvider>
+        </PageWrapper>
     )
 } 

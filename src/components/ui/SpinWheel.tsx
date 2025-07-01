@@ -9,7 +9,7 @@ import { cdn } from '@/utils/cdn'
 import Image from 'next/image'
 import { SpinWheelProps } from '@/types'
 import Confetti from 'react-confetti'
-import { useTitleContext } from '@/contexts/TitleContext'
+
 
 // COMPONENTE VISUAL DE LA RULETA DE PREMIOS
 // -----------------------------------------
@@ -58,8 +58,8 @@ export const SpinWheel = ({
   const sparklesRef = useRef<HTMLDivElement>(null)
   const resultModalRef = useRef<HTMLDivElement>(null)
 
-  // Contexto global para cambiar el título al ganar
-  const { claimPrize } = useTitleContext();
+  // Función para reclamar premio - viene como prop desde el componente padre
+  const claimPrize = onComplete;
 
   // Animación de entrada y del indicador
   useGSAP(() => {
@@ -190,7 +190,7 @@ export const SpinWheel = ({
 
   // Cierra la ruleta y marca como ganador en el contexto global
   const handleClose = () => {
-    if (isWinner) {
+    if (isWinner && claimPrize) {
       claimPrize()
     }
     if (onClose) {

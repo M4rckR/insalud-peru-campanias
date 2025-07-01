@@ -1,3 +1,5 @@
+"use client"
+
 import { cdn } from "@/utils/cdn"
 import Image from "next/image"
 import { ContactForm } from "./ContactForm"
@@ -15,14 +17,14 @@ type HeroContactProps = {
 };
 
 export const HeroContact = ({ gestorData, tratamiento, sede }: HeroContactProps) => {
-  const { hasClaimedPrize } = useTitleContext();
+  const { justClaimedPrize } = useTitleContext();
   
   // Títulos dinámicos basados en si se reclamó el premio
-  const displayTitle = hasClaimedPrize 
+  const displayTitle = justClaimedPrize 
     ? "¡Felicidades! 🎉" 
     : "¿Sientes que ya no tienes las erecciones de antes?";
   
-  const displaySubtitle = hasClaimedPrize 
+  const displaySubtitle = justClaimedPrize 
     ? "Has ganado una consulta gratuita" 
     : "No es tu culpa. Y sí tiene solución.";
   return (

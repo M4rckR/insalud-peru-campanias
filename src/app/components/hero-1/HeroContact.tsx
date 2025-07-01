@@ -38,16 +38,16 @@ export const HeroContact = ({
     sede 
 }: HeroContactProps) => {
 
-    const { hasClaimedPrize } = useTitleContext();
+    const { justClaimedPrize } = useTitleContext();
     const contactFormRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
 
     // Títulos dinámicos basados en si se reclamó el premio
-    const displayTitle = hasClaimedPrize 
+    const displayTitle = justClaimedPrize 
         ? "¡Felicidades! 🎉" 
         : title;
     
-    const displaySubtitle = hasClaimedPrize 
+    const displaySubtitle = justClaimedPrize 
         ? "Has ganado una consulta gratuita" 
         : subtitle;
 

@@ -37,6 +37,8 @@ import React, { createContext, useContext, useState, ReactNode, useEffect, useCa
 interface TitleContextType {
   /** ¿Se ha reclamado el premio en esta combinación sede + tratamiento? */
   hasClaimedPrize: boolean // ¿Ya reclamó el premio en esta página?
+  /** ¿Se ha reclamado el premio en esta combinación sede + tratamiento justo después de ganar? */
+  justClaimedPrize: boolean // ¿Se ha reclamado el premio justo después de ganar?
   /** Función para marcar premio como reclamado */
   claimPrize: (sede?: string, tratamiento?: string) => void // Marca como reclamado
   /** Función para resetear el premio reclamado */
@@ -57,6 +59,7 @@ const TitleContext = createContext<TitleContextType | undefined>(undefined)
 // Provider global para el contexto de título
 export function TitleProvider({ children, sede, tratamiento }: TitleProviderProps) {
   const [hasClaimedPrize, setHasClaimedPrize] = useState(false)
+  const [justClaimedPrize, setJustClaimedPrize] = useState(false)
 
   /**
    * 🔑 Genera clave única para localStorage de premios reclamados
@@ -86,6 +89,7 @@ export function TitleProvider({ children, sede, tratamiento }: TitleProviderProp
       const key = getStorageKey();
       const claimed = localStorage.getItem(key) === 'true';
       setHasClaimedPrize(claimed);
+      setJustClaimedPrize(false); // Solo es true justo después de ganar
     }
   }, [sede, tratamiento, getStorageKey]);
 
@@ -99,6 +103,7 @@ export function TitleProvider({ children, sede, tratamiento }: TitleProviderProp
     const key = getStorageKey(sedeParam, tratamientoParam);
     localStorage.setItem(key, 'true');
     setHasClaimedPrize(true);
+    setJustClaimedPrize(true); // Solo true inmediatamente después de ganar
   }
 
   /**
@@ -111,10 +116,11 @@ export function TitleProvider({ children, sede, tratamiento }: TitleProviderProp
     const key = getStorageKey(sedeParam, tratamientoParam);
     localStorage.removeItem(key);
     setHasClaimedPrize(false);
+    setJustClaimedPrize(false);
   }
 
   return (
-    <TitleContext.Provider value={{ hasClaimedPrize, claimPrize, resetPrize }}>
+    <TitleContext.Provider value={{ hasClaimedPrize, justClaimedPrize, claimPrize, resetPrize }}>
       {children}
     </TitleContext.Provider>
   )

@@ -8,8 +8,9 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
+import { SpinWheelTriggerClient } from '@/components/ui/SpinWheelTriggerClient'
 import { TitleProvider } from '@/contexts/TitleContext'
+import { messagesVph } from "@/data/messages/messagesVph";
 
 export default function VphJesusMaria() {
   return (
@@ -24,21 +25,17 @@ export default function VphJesusMaria() {
         tratamiento="VPH"
         sede="Jesús María"
       />
-       <SpinWheelTrigger
-        autoShowDelay={1}
-        spinDuration={5}
-        firstSpinAngle={315}
-        secondSpinAngle={225}
-        showCloseButton={false}
-        sede="Jesús María"
-        tratamiento="VPH"
-      />
+                   <SpinWheelTriggerClient
+                autoShowDelay={1}
+                spinDuration={5}
+                firstSpinAngle={315}
+                secondSpinAngle={225}
+                showCloseButton={false}
+                sede="Jesús María"
+                tratamiento="VPH"
+            />
       <TestimonialBubbles
-        messages={[
-          "Puede aparecer desde los 30s y empeorar con el tiempo si no se trata.",
-          "No siempre es por estrés o edad. Muchas veces es un problema vascular.",
-          "Las pastillas son temporales. Este tratamiento reactiva el flujo real.",
-        ]}
+        messages={messagesVph}
       />
       <section id="beneficios">
         <Treatment

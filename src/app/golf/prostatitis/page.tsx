@@ -8,12 +8,22 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
 import { golfData } from "@/data/sedes/golf";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
-import { TitleProvider } from '@/contexts/TitleContext'
+import { PageWrapper } from '@/components/ui/PageWrapper'
+import { messagesProstatitis } from "@/data/messages/messagesProstatitis";
 
 export default function ProstatitisGolf() {
   return (
-    <TitleProvider sede="Golf" tratamiento="Prostatitis">
+    <PageWrapper 
+      sede="Golf" 
+      tratamiento="Prostatitis"
+      spinWheelProps={{
+        autoShowDelay: 1,
+        spinDuration: 5,
+        firstSpinAngle: 315,
+        secondSpinAngle: 225,
+        showCloseButton: false
+      }}
+    >
       <HeroContact  
         title="¿Tienes molestias al orinar o dolor persistente?"
         subtitle="Podrías tener prostatitis crónica y no saberlo."
@@ -24,21 +34,8 @@ export default function ProstatitisGolf() {
         tratamiento="Prostatitis"
         sede="Golf"
       />
-       <SpinWheelTrigger
-        autoShowDelay={1}
-        spinDuration={5}
-        firstSpinAngle={315}
-        secondSpinAngle={225}
-        showCloseButton={false}
-        sede="Golf"
-        tratamiento="Prostatitis"
-      />
       <TestimonialBubbles
-        messages={[
-          "El dolor pélvico, las molestias al orinar o disfunción eréctil suelen ser señales ignoradas.",
-          "Los antibióticos no siempre funcionan y los síntomas pueden durar años.",
-          "Afecta hasta al 15% de los hombres en edad adulta.",
-        ]}
+        messages={messagesProstatitis}
       />
       <section id="beneficios">
         <Treatment
@@ -103,6 +100,6 @@ export default function ProstatitisGolf() {
           email={golfData.email}
           socials={golfData.socials}
         />
-    </TitleProvider>
+    </PageWrapper>
   );
 } 

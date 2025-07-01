@@ -4,6 +4,7 @@ import React from 'react'
 import { useSpinWheel } from '@/hooks/useSpinWheel'
 import { SpinWheel } from './SpinWheel'
 import { SpinWheelTriggerProps } from '@/types'
+import { useTitleContext } from '@/contexts/TitleContext'
 
 // COMPONENTE TRIGGER DE RULETA
 // ----------------------------
@@ -46,13 +47,19 @@ export const SpinWheelTrigger = ({
     tratamiento
   })
 
+  // Contexto para reclamar premio
+  const { claimPrize } = useTitleContext();
+
   // Si ya participó, no mostrar la ruleta
   if (hasUserSpun) return null
 
   return (
     <SpinWheel
       isOpen={isOpen}
-      onComplete={handleWin}
+      onComplete={() => {
+        handleWin();
+        claimPrize();
+      }}
       onClose={closeWheel}
       wheelSvgPath={wheelSvgPath}
       indicatorSvgPath={indicatorSvgPath}
