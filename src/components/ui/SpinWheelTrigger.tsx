@@ -4,6 +4,7 @@ import React from 'react'
 import { useSpinWheel } from '@/hooks/useSpinWheel'
 import { SpinWheel } from './SpinWheel'
 import { SpinWheelTriggerProps } from '@/types'
+import { cdn } from '@/utils/cdn'
 
 
 /**
@@ -13,8 +14,8 @@ import { SpinWheelTriggerProps } from '@/types'
 export const SpinWheelTrigger = ({
   autoShowDelay = 4,
   redirectAfterWin,
-  wheelSvgPath =    "/shared/ruleta/ruleta.svg",
-  indicatorSvgPath = "/shared/ruleta/indicador-ruleta.svg",
+  wheelSvgPath = cdn("/shared/ruleta/ruleta.svg"),
+  indicatorSvgPath = cdn("/shared/ruleta/indicador-ruleta.svg"),
   spinDuration = 4,
   winningAngle = 0,
   showCloseButton = true,
