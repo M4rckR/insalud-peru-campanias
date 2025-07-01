@@ -76,6 +76,10 @@ export type useSpinWheelOptions = {
   autoShowDelay?: number;
   redirectAfterWin?: string;
   onWin?: () => void;
+  /** Sede para generar clave única de localStorage */
+  sede?: string;
+  /** Tratamiento para generar clave única de localStorage */
+  tratamiento?: string;
 }
 
 export type SpinWheelProps = {
@@ -112,4 +116,8 @@ export type SpinWheelTriggerProps = {
   firstSpinAngle?: number
   /** Ángulo específico para el segundo giro (premio) - Opcional */
   secondSpinAngle?: number
+  /** Sede para generar clave única de localStorage */
+  sede?: string
+  /** Tratamiento para generar clave única de localStorage */
+  tratamiento?: string
 }

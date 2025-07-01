@@ -6,6 +6,7 @@ import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
 import gsap from "gsap";
 import { ContactForm } from "./ContactForm";
+import { useTitleContext } from "@/contexts/TitleContext";
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(useGSAP);
@@ -37,8 +38,18 @@ export const HeroContact = ({
     sede 
 }: HeroContactProps) => {
 
+    const { hasClaimedPrize } = useTitleContext();
     const contactFormRef = useRef<HTMLDivElement>(null);
     const imageRef = useRef<HTMLDivElement>(null);
+
+    // Títulos dinámicos basados en si se reclamó el premio
+    const displayTitle = hasClaimedPrize 
+        ? "¡Felicidades! 🎉" 
+        : title;
+    
+    const displaySubtitle = hasClaimedPrize 
+        ? "Has ganado una consulta gratuita" 
+        : subtitle;
 
     useGSAP(() => {
 
@@ -78,8 +89,8 @@ export const HeroContact = ({
                 <div ref={contactFormRef} className="md:col-span-7">
                     <div className="space-y-4 lg:space-y-8 mb-4 text-left">
                         <h1 className=" text-4xl sm:text-5xl md:text-4xl font-bold md:font-semibold font-in-nunito md:font-in-poppins text-in-cyan-base ">
-                            {title}
-                            <span className="hidden md:block text-2xl pt-1 lg:text-4xl font-semibold text-in-blue">{subtitle}</span> 
+                            {displayTitle}
+                            <span className="hidden md:block text-2xl pt-1 lg:text-4xl font-semibold text-in-blue">{displaySubtitle}</span> 
                         </h1>
                         <Image 
                             src={cdn(imageMobile)} 

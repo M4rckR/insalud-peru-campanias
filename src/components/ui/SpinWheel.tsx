@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState, useEffect, useCallback } from 'react'
+import React, { useRef, useState, useCallback } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Sparkles } from 'lucide-react'
@@ -8,32 +8,47 @@ import { Button } from './button'
 import { cdn } from '@/utils/cdn'
 import Image from 'next/image'
 import { SpinWheelProps } from '@/types'
-import confetti from 'canvas-confetti'
+import Confetti from 'react-confetti'
+import { useTitleContext } from '@/contexts/TitleContext'
 
-// 🎨 Constantes de configuración optimizadas
-const CONFETTI_CONFIG = {
-  COLORS: ['#00BEB4', '#FFB531', '#004569', '#FFC0FF', '#EDFBFB'] as string[],
-  Z_INDEX: '999999',
-  DURATION: 4000,
-  DELAY_SECOND_BURST: 200
-} as const
-
+// Configuraciones constantes
 const SPIN_CONFIG = {
-  BASE_ROTATIONS: 1665,
-  OVERSHOOT: 25,
-  PENDULUM_BACK: 8,
-  PENDULUM_DURATION: 0.8,
-  SETTLE_DURATION: 0.6
-} as const
+  OVERSHOOT: 30,
+  PENDULUM_BACK: 15,
+  PENDULUM_DURATION: 0.3,
+  SETTLE_DURATION: 0.2
+}
 
 const ANIMATION_CONFIG = {
-  ENTRANCE_DURATION: 0.8,
+  ENTRANCE_DURATION: 0.6,
   INDICATOR_DURATION: 1.5,
-  SPARKLES_DURATION: 1,
-  RESULT_DELAY: 500
-} as const
+  RESULT_DELAY: 1000
+}
 
-export const SpinWheel = ({   
+
+
+// COMPONENTE VISUAL DE LA RULETA DE PREMIOS
+// -----------------------------------------
+// Este componente muestra la ruleta, maneja la animación, el resultado y la integración
+// con el contexto de título (TitleContext) y el trigger (SpinWheelTrigger).
+// Está preparado para funcionar de forma independiente por sede/tratamiento.
+
+/**
+ * SpinWheel
+ *
+ * Componente visual de la ruleta de premios.
+ * - Muestra la animación de giro y el resultado (ganador/perdedor)
+ * - Integra con el contexto global para cambiar el título al ganar
+ * - Llama a onComplete/onClose según corresponda
+ *
+ * Props principales:
+ * - isOpen: boolean (¿mostrar la ruleta?)
+ * - onComplete: función a ejecutar al finalizar
+ * - onClose: función a ejecutar al cerrar
+ *
+ * El estado de "ganador" se maneja internamente y se comunica con el contexto global.
+ */
+export const SpinWheel = ({ 
   isOpen, 
   onComplete,
   onClose,
@@ -45,13 +60,13 @@ export const SpinWheel = ({
   firstSpinAngle,
   secondSpinAngle
 }: SpinWheelProps) => {
-  // 📊 Estados
+  // Estado local para animaciones y lógica de la ruleta
   const [isSpinning, setIsSpinning] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [spinCount, setSpinCount] = useState(0)
   const [isWinner, setIsWinner] = useState(false)
   
-  // 📎 Referencias
+  // Refs para animaciones GSAP
   const overlayRef = useRef<HTMLDivElement>(null)
   const modalRef = useRef<HTMLDivElement>(null)
   const wheelRef = useRef<HTMLDivElement>(null)
@@ -59,96 +74,27 @@ export const SpinWheel = ({
   const sparklesRef = useRef<HTMLDivElement>(null)
   const resultModalRef = useRef<HTMLDivElement>(null)
 
-  // 🎊 Funciones de confeti optimizadas
-  const createConfettiCanvas = useCallback(() => {
-    const canvas = document.createElement('canvas')
-    const styles = {
-      position: 'fixed' as const,
-      top: '0',
-      left: '0',
-      width: '100vw',
-      height: '100vh',
-      zIndex: CONFETTI_CONFIG.Z_INDEX,
-      pointerEvents: 'none' as const
-    }
-    
-    Object.assign(canvas.style, styles)
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
-    
-    document.body.appendChild(canvas)
-    return canvas
-  }, [])
+  // Contexto global para cambiar el título al ganar
+  const { claimPrize } = useTitleContext();
 
-  const launchConfetti = useCallback(() => {
-    const canvas = createConfettiCanvas()
-    const myConfetti = confetti.create(canvas, { resize: true, useWorker: false })
-
-    // 🎊 UNA SOLA EXPLOSIÓN ÉPICA
-    myConfetti({
-      particleCount: 250,           // Más partículas (era 150)
-      spread: 90,                   // Explosión más amplia
-      origin: { y: 0.5, x: 0.5 },  // Centro de la pantalla
-      colors: CONFETTI_CONFIG.COLORS,
-      startVelocity: 35,            // Más velocidad
-      gravity: 0.7,
-      drift: 0,
-      ticks: 250,                   // Más duración de las partículas
-      scalar: 1.4                   // Piezas más grandes
-    })
-
-    // Limpieza automática
-    const cleanup = setTimeout(() => {
-      if (canvas?.parentNode) {
-        document.body.removeChild(canvas)
-      }
-    }, CONFETTI_CONFIG.DURATION)
-
-    return () => {
-      clearTimeout(cleanup)
-      if (canvas?.parentNode) {
-        document.body.removeChild(canvas)
-      }
-    }
-  }, [createConfettiCanvas])
-
-  // 🎯 Lógica de giro optimizada
-  const calculateRotation = useCallback((currentSpin: number) => {
-    const currentRotation = gsap.getProperty(wheelRef.current, "rotation") as number || 0
-    
-    if (currentSpin === 1) {
-      const firstAngle = firstSpinAngle ?? (winningAngle + 90)
-      return currentRotation + SPIN_CONFIG.BASE_ROTATIONS + firstAngle
-    } else {
-      const secondAngle = secondSpinAngle ?? winningAngle
-      return currentRotation + SPIN_CONFIG.BASE_ROTATIONS + secondAngle
-    }
+  // Función para calcular la rotación final
+  const calculateRotation = useCallback((spin: number) => {
+    if (spin === 1) return firstSpinAngle || 315
+    if (spin === 2) return secondSpinAngle || 225
+    return winningAngle
   }, [firstSpinAngle, secondSpinAngle, winningAngle])
 
-  const animateSpinResult = useCallback((currentSpin: number) => {
-    const actions = {
-      1: () => {
-        setShowResult(false)
-        setIsSpinning(false)
-      },
-      2: () => {
-        setShowResult(true)
-        if (isWinner) {
-          gsap.fromTo(sparklesRef.current, 
-            { scale: 0 },
-            { 
-              scale: 1, 
-              duration: ANIMATION_CONFIG.SPARKLES_DURATION, 
-              ease: "back.out(1.7)"
-            }
-          )
-        }
-      }
-    }
+  // Función para animar el resultado del giro
+  const animateSpinResult = useCallback((spin: number) => {
+    setShowResult(true)
     
-    actions[currentSpin as keyof typeof actions]?.()
-  }, [isWinner])
+    // Si es el segundo giro, determinar si ganó
+    if (spin === 2) {
+      setIsWinner(true)
+    }
+  }, [])
 
+  // Lógica principal del giro de la ruleta
   const handleSpin = useCallback(() => {
     if (isSpinning) return
 
@@ -203,17 +149,18 @@ export const SpinWheel = ({
     })
   }, [isSpinning, spinCount, calculateRotation, animateSpinResult, spinDuration])
 
+  // Cierra la ruleta y marca como ganador en el contexto global
   const handleClose = useCallback(() => {
-    onClose?.()
-    onComplete?.()
-  }, [onClose, onComplete])
-
-  // 🎊 Efecto para lanzar confeti
-  useEffect(() => {
-    if (showResult && isWinner) {
-      return launchConfetti()
+    if (isWinner) {
+      claimPrize()
     }
-  }, [showResult, isWinner, launchConfetti])
+    if (onClose) {
+      onClose()
+    }
+    if (onComplete) {
+      onComplete()
+    }
+  }, [isWinner, claimPrize, onClose, onComplete])
 
   // 🎬 Animaciones de entrada
   useGSAP(() => {
@@ -245,15 +192,6 @@ export const SpinWheel = ({
   }, [isOpen])
 
   // 🎮 Lógica de botones
-  const canMakeFirstSpin = spinCount === 0
-  const canMakeSecondSpin = spinCount === 1 && !isWinner
-  const canSpin = canMakeFirstSpin || canMakeSecondSpin
-  const shouldShowSpinButton = !showResult && canSpin
-
-  const getButtonText = () => {
-    if (isSpinning) return "Girando..."
-    return spinCount === 0 ? "Girar" : "Intentar otra vez"
-  }
 
   const getResultText = () => {
     if (isWinner) return "¡Ganaste una consulta gratis!"
@@ -279,9 +217,34 @@ export const SpinWheel = ({
       ref={overlayRef}
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
     >
-      <div ref={modalRef} className="relative rounded-3xl max-w-lg w-full px-4">
-        
-        {/* Botón cerrar */}
+      {/* Confetti para ganadores */}
+      {showResult && isWinner && (
+        <Confetti 
+          width={window.innerWidth}
+          height={window.innerHeight}
+          numberOfPieces={400}
+          recycle={false}
+          gravity={0.3}
+          wind={0.05}
+          initialVelocityX={20}
+          initialVelocityY={30}
+          tweenDuration={3000}
+          run={true}
+          confettiSource={{
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2,
+            w: 10,
+            h: 10
+          }}
+          className="absolute inset-0 z-50 pointer-events-none"
+        />
+      )}
+
+      <div
+        ref={modalRef}
+        className="relative rounded-3xl max-w-lg w-full px-4"
+      >
+        {/* Botón cerrar - Solo después de ganar */}
         {showResult && showCloseButton && onClose && (
           <button
             onClick={handleClose}
@@ -292,10 +255,9 @@ export const SpinWheel = ({
           </button>
         )}
 
-        {/* Contenedor de la ruleta */}
-        <div className="relative flex justify-center items-center mb-8">
-          
-          {/* Efectos de celebración */}
+        {/* Ruleta Container */}
+        <div className={`relative flex justify-center items-center mb-8 transition-all duration-1000 ease-out ${showResult ? 'opacity-0 -translate-y-20 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}>
+          {/* Sparkles celebración */}
           <div 
             ref={sparklesRef}
             className={`absolute inset-0 pointer-events-none z-30 transition-opacity duration-300 ${
@@ -337,14 +299,13 @@ export const SpinWheel = ({
           </div>
         </div>
 
-        {/* Modal de resultado */}
+        {/* Modal de Resultado - Animado desde abajo */}
         {showResult && (
           <div 
             ref={resultModalRef}
-            className="fixed inset-x-0 bottom-16 z-30 animate-slide-up"
+            className="fixed left-0 right-0 bottom-32 z-30 animate-slide-up"
           >
             <div className="bg-in-blue-gradient-ruleta mx-4 mb-4 rounded-2xl shadow-2xl border border-gray-200 overflow-hidden py-12 space-y-4">
-              
               <Image 
                 src={cdn("/shared/ruleta/gift-ruleta.png")} 
                 alt="Premio de ruleta" 
@@ -362,7 +323,6 @@ export const SpinWheel = ({
                   {getSubText()}
                 </p>
               )}
-
             </div>
             
             <div className="w-full flex justify-center items-center">
@@ -379,24 +339,32 @@ export const SpinWheel = ({
           </div>
         )}
 
-        {/* Botón de girar */}
-        <div className="flex justify-center items-center h-20">
-          <Button
-            onClick={handleSpin}
-            disabled={isSpinning}
-            className={`py-7 px-16 bg-gradient-to-r from-in-orange to-in-orange-hover hover:from-in-orange-hover hover:to-in-orange text-white font-bold text-xl rounded-3xl font-in-poppins disabled:opacity-70 transform hover:scale-105 transition-all duration-300 ${
-              shouldShowSpinButton ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-            }`}
-          >
-            {isSpinning ? (
-              <div className="flex items-center justify-center gap-3">
-                <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
-                {getButtonText()}
-              </div>
-            ) : (
-              getButtonText()
-            )}
-          </Button>
+        {/* Botón girar - Layout estable sin saltos */}
+        <div className={`flex justify-center items-center h-20 transition-all duration-1000 ease-out ${showResult ? 'opacity-0 -translate-y-10' : 'opacity-100 translate-y-0'}`}>
+          {(() => {
+            // Puede girar si es el primer intento O si es el segundo intento después de perder
+            const canMakeFirstSpin = spinCount === 0
+            const canMakeSecondSpin = spinCount === 1 && !isWinner
+            const canSpin = canMakeFirstSpin || canMakeSecondSpin
+            const shouldShow = !showResult && canSpin
+            
+            return (
+              <Button
+                onClick={handleSpin}
+                disabled={isSpinning}
+                className={`py-7 px-16 bg-gradient-to-r from-in-orange to-in-orange-hover hover:from-in-orange-hover hover:to-in-orange text-white font-bold text-xl rounded-3xl font-in-poppins disabled:opacity-70 transform hover:scale-105 transition-opacity duration-500 ease-in-out cursor-pointer ${shouldShow ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+              >
+                {isSpinning ? (
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-6 h-6 border-3 border-white border-t-transparent rounded-full animate-spin" />
+                    Girando...
+                  </div>
+                ) : (
+                  spinCount === 0 ? "Girar" : "Intentar otra vez"
+                )}
+              </Button>
+            )
+          })()}
         </div>
         
         <p className="text-[#908F8F] text-center text-xs py-4">

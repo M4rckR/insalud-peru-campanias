@@ -8,16 +8,30 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { surData } from "@/data/sedes/sur";
 import { Footer } from "@/app/components/Footer";
+import { SpinWheelTrigger } from '@/components/ui/SpinWheelTrigger'
+import { TitleProvider } from '@/contexts/TitleContext'
 
 export default function VphSur() {
   return (
-    <>
+    <TitleProvider sede="Sur" tratamiento="VPH">
       <HeroContact 
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
         title="¿Tienes verrugas genitales? "
         subtitle="Podrías tener VPH y no saberlo"
         description="Agenda tu cita y elimina verrugas sin dañar tu piel. ¡Reclama tu atención gratuita!"
+        gestorData={surData.landings.vph}
+        tratamiento="VPH"
+        sede="Sur"
+      />
+       <SpinWheelTrigger
+        autoShowDelay={1}
+        spinDuration={5}
+        firstSpinAngle={315}
+        secondSpinAngle={225}
+        showCloseButton={false}
+        sede="Sur"
+        tratamiento="VPH"
       />
       <TestimonialBubbles
         messages={[
@@ -94,6 +108,6 @@ export default function VphSur() {
           email={surData.email}
           socials={surData.socials}
         />
-    </>
+    </TitleProvider>
   );
 } 
