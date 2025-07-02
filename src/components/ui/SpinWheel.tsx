@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { Sparkles } from 'lucide-react'
@@ -44,11 +44,19 @@ export const SpinWheel = ({
   firstSpinAngle,
   secondSpinAngle
 }: SpinWheelProps) => {
+  // 🎯 SOLUCION HIDRATACION: Solo mostrar después de hidratar
+  const [isHydrated, setIsHydrated] = useState(false)
+  
   // Estado local para animaciones y lógica de la ruleta
   const [isSpinning, setIsSpinning] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [spinCount, setSpinCount] = useState(0) // Contador de giros
   const [isWinner, setIsWinner] = useState(false) // Si ganó o no
+  
+  // Efecto para marcar como hidratado
+  useEffect(() => {
+    setIsHydrated(true)
+  }, [])
   
   // Refs para animaciones GSAP
   const overlayRef = useRef<HTMLDivElement>(null)
@@ -63,7 +71,12 @@ export const SpinWheel = ({
 
   // Animación de entrada y del indicador
   useGSAP(() => {
-    if (!isOpen) return
+    if (!isOpen || !isHydrated) return
+
+    // 🎯 VALIDACIONES NULL-SAFE para evitar errores GSAP
+    if (!overlayRef.current || !modalRef.current || !indicatorRef.current) {
+      return
+    }
 
     // Animación de entrada
     gsap.set([overlayRef.current, modalRef.current], { opacity: 0 })
@@ -87,11 +100,16 @@ export const SpinWheel = ({
       yoyo: true,
       repeat: -1
     })
-  }, [isOpen])
+  }, [isOpen, isHydrated])
 
   // Lógica principal del giro de la ruleta
   const handleSpin = () => {
     if (isSpinning) return
+    
+    // 🎯 VALIDACIONES NULL-SAFE para evitar errores GSAP
+    if (!wheelRef.current || !indicatorRef.current) {
+      return
+    }
 
     setIsSpinning(true)
     setSpinCount(prev => prev + 1)
@@ -130,39 +148,41 @@ export const SpinWheel = ({
         setIsSpinning(false)
         
         // Animación del indicador al parar
-        gsap.to(indicatorRef.current, {
-          scale: 1.4,
-          duration: 0.3,
-          ease: "power2.out",
-          yoyo: true,
-          repeat: 1,
-          onComplete: () => {
-            setTimeout(() => {
-              // ✅ USAR currentSpin en lugar de spinCount para evitar problemas de timing
-              
-              if (currentSpin === 1) {
-                // PRIMER GIRO COMPLETADO: No mostrar modal, solo resetear para mostrar botón
-                setShowResult(false)
-                setIsSpinning(false)
-              } else if (currentSpin === 2) {
-                // SEGUNDO GIRO COMPLETADO: Mostrar modal con resultado final
-                setShowResult(true)
+        if (indicatorRef.current) {
+          gsap.to(indicatorRef.current, {
+            scale: 1.4,
+            duration: 0.3,
+            ease: "power2.out",
+            yoyo: true,
+            repeat: 1,
+            onComplete: () => {
+              setTimeout(() => {
+                // ✅ USAR currentSpin en lugar de spinCount para evitar problemas de timing
                 
-                if (isWinner) {
-                  // GANÓ: Celebración completa
-                  gsap.fromTo(sparklesRef.current, 
-                    { scale: 0 },
-                    { 
-                      scale: 1, 
-                      duration: 1, 
-                      ease: "back.out(1.7)"
-                    }
-                  )
+                if (currentSpin === 1) {
+                  // PRIMER GIRO COMPLETADO: No mostrar modal, solo resetear para mostrar botón
+                  setShowResult(false)
+                  setIsSpinning(false)
+                } else if (currentSpin === 2) {
+                  // SEGUNDO GIRO COMPLETADO: Mostrar modal con resultado final
+                  setShowResult(true)
+                  
+                  if (isWinner && sparklesRef.current) {
+                    // GANÓ: Celebración completa
+                    gsap.fromTo(sparklesRef.current, 
+                      { scale: 0 },
+                      { 
+                        scale: 1, 
+                        duration: 1, 
+                        ease: "back.out(1.7)"
+                      }
+                    )
+                  }
                 }
-              }
-            }, 500)
-          }
-        })
+              }, 500)
+            }
+          })
+        }
       }
     })
 
@@ -201,14 +221,14 @@ export const SpinWheel = ({
     }
   }
 
-  if (!isOpen) return null
+  if (!isOpen || !isHydrated) return null
 
   return (
     <div 
       ref={overlayRef}
       className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm"
     >
-              { showResult && isWinner && (
+              { showResult && isWinner && typeof window !== 'undefined' && (
                    <Confetti 
                      width={window.innerWidth}
                      height={window.innerHeight}
@@ -231,7 +251,7 @@ export const SpinWheel = ({
                  )}
       <div
         ref={modalRef}
-        className="relative rounded-3xl max-w-lg w-full px-4"
+        className="relative rounded-3xl md:max-w-lg w-full max-w-[90%] px-4 md:px-0"
       >
 
         {/* Botón cerrar - Solo después de ganar */}

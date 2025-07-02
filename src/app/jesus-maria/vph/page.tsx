@@ -8,13 +8,22 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { SpinWheelTriggerClient } from '@/components/ui/SpinWheelTriggerClient'
-import { TitleProvider } from '@/contexts/TitleContext'
+import { PageWrapper } from '@/components/ui/PageWrapper'
 import { messagesVph } from "@/data/messages/messagesVph";
 
 export default function VphJesusMaria() {
   return (
-    <TitleProvider sede="Jesús María" tratamiento="VPH">
+    <PageWrapper 
+      sede="Jesús María" 
+      tratamiento="VPH"
+      spinWheelProps={{
+        autoShowDelay: 1,
+        spinDuration: 5,
+        firstSpinAngle: 315,
+        secondSpinAngle: 225,
+        showCloseButton: false
+      }}
+    >
       <HeroContact 
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
@@ -25,15 +34,6 @@ export default function VphJesusMaria() {
         tratamiento="VPH"
         sede="Jesús María"
       />
-                   <SpinWheelTriggerClient
-                autoShowDelay={1}
-                spinDuration={5}
-                firstSpinAngle={315}
-                secondSpinAngle={225}
-                showCloseButton={false}
-                sede="Jesús María"
-                tratamiento="VPH"
-            />
       <TestimonialBubbles
         messages={messagesVph}
       />
@@ -105,6 +105,6 @@ export default function VphJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-    </TitleProvider>
+    </PageWrapper>
   );
 } 

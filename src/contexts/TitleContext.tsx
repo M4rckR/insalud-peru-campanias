@@ -60,6 +60,7 @@ const TitleContext = createContext<TitleContextType | undefined>(undefined)
 export function TitleProvider({ children, sede, tratamiento }: TitleProviderProps) {
   const [hasClaimedPrize, setHasClaimedPrize] = useState(false)
   const [justClaimedPrize, setJustClaimedPrize] = useState(false)
+  const [isHydrated, setIsHydrated] = useState(false)
 
   /**
    * 🔑 Genera clave única para localStorage de premios reclamados
@@ -79,19 +80,26 @@ export function TitleProvider({ children, sede, tratamiento }: TitleProviderProp
   }, [sede, tratamiento])
 
   /**
+   * 🔍 Efecto de hidratación - se ejecuta solo en el cliente
+   */
+  useEffect(() => {
+    setIsHydrated(true);
+  }, []);
+
+  /**
    * 🔍 Verifica al montar el componente si ya se reclamó el premio
    * 
    * Esto permite que los títulos cambien automáticamente si el usuario
    * ya reclamó el premio en una sesión anterior
    */
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (isHydrated && typeof window !== 'undefined') {
       const key = getStorageKey();
       const claimed = localStorage.getItem(key) === 'true';
       setHasClaimedPrize(claimed);
       setJustClaimedPrize(false); // Solo es true justo después de ganar
     }
-  }, [sede, tratamiento, getStorageKey]);
+  }, [sede, tratamiento, getStorageKey, isHydrated]);
 
   /**
    * 🏆 Marca el premio como reclamado para una combinación específica

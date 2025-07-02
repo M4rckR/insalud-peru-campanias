@@ -35,7 +35,13 @@ import { useCallback, useEffect, useState } from "react";
  */
 export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isHydrated, setIsHydrated] = useState(false);
     const router = useRouter();
+
+    // Efecto de hidratación
+    useEffect(() => {
+        setIsHydrated(true);
+    }, []);
 
     /**
      * 🔑 Genera clave única para localStorage basada en sede y tratamiento
@@ -59,9 +65,9 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
      * @returns true si ya ganó en esta sede + tratamiento, false en caso contrario
      */
     const hasUserSpun = useCallback(() => {
-        if(typeof window === "undefined") return false;
+        if(!isHydrated || typeof window === "undefined") return false;
         return localStorage.getItem(getStorageKey()) === 'true';
-    }, [getStorageKey])
+    }, [getStorageKey, isHydrated])
 
     /**
      * ⏰ Efecto para mostrar automáticamente la ruleta después del delay configurado
@@ -71,14 +77,14 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
      * - Se limpia el timer si el componente se desmonta
      */
     useEffect(() => {
-        if(hasUserSpun()) return;
+        if(!isHydrated || hasUserSpun()) return;
 
         const timer = setTimeout(() => {
             setIsOpen(true);
         }, (options.autoShowDelay || 4) * 1000);
 
         return () => clearTimeout(timer);
-    }, [hasUserSpun, options.autoShowDelay])
+    }, [hasUserSpun, options.autoShowDelay, isHydrated])
 
     /**
      * 🏆 Maneja cuando el usuario gana en la ruleta
@@ -92,6 +98,8 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
      * IMPORTANTE: Solo afecta a la combinación actual (sede + tratamiento)
      */
     const handleWin = useCallback(() => {
+        if (!isHydrated || typeof window === "undefined") return;
+        
         localStorage.setItem(getStorageKey(), 'true');
 
         // Callback personalizado si existe
@@ -108,7 +116,7 @@ export const useSpinWheel = (options: useSpinWheelOptions = {}) => {
             }
         }, 20000000)
 
-    }, [getStorageKey, options, router])
+    }, [getStorageKey, options, router, isHydrated])
     
     /**
      * ❌ Cierra la ruleta manualmente

@@ -1,7 +1,10 @@
 import { z } from "zod";
 
 export const formLeadsSchema = z.object({
-    nombres: z.string().min(1, { message: "El nombre es requerido" }),
+    nombres: z.string()
+        .min(1, { message: "El nombre es requerido" })
+        .regex(/^\S.*\S$|^\S$/, { message: "Ingrese un nombre válido" })
+        .regex(/^[^\s]*(\s[^\s]+)*$/, { message: "Ingrese un nombre válido" }),
     telefono: z.string()
         .min(1, { message: "El teléfono es requerido" })
         .regex(/^\d+$/, { message: "Solo se permiten números" })
