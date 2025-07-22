@@ -27,8 +27,8 @@ export default function VphSur() {
       <HeroContact  
         title="¿Tienes verrugas?"
         subtitle="Podrías tener VPH"
-        image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-vph.png"
-        imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/hero-vph.png"
+        image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
+        imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
         description="Agenda tu cita ahora y elimina las verrugas con nuestro tratamiento avanzado con Cauterización."
         gestorData={surData.landings.vph}
         tratamiento="VPH"
