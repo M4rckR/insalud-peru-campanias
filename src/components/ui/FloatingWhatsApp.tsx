@@ -25,6 +25,15 @@ export const FloatingWhatsApp = ({
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
   const handleClick = () => {
+    // Notificacion a google tag manager
+    if(typeof window !== "undefined") {
+      window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: "whatsapp_floating_click",
+            phoneNumber: phoneNumber,
+            message: message,
+        });
+    }
     window.open(whatsappUrl, "_blank");
   };
 
