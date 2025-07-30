@@ -3,6 +3,7 @@ import { Nunito, Poppins, Roboto } from "next/font/google";
 import "../styles/globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
+import GTMPageviewTracker from "@/app/GTMPageviewTracker";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -63,6 +64,7 @@ export default function RootLayout({
         className={`${nunito.variable} ${poppins.variable} ${roboto.variable} antialiased`}
         suppressHydrationWarning
       >
+      <GTMPageviewTracker />
       <noscript>
         <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PR66DQ7B"
