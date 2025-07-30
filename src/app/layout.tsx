@@ -63,6 +63,22 @@ export default function RootLayout({
         className={`${nunito.variable} ${poppins.variable} ${roboto.variable} antialiased`}
         suppressHydrationWarning
       >
+      <noscript>
+        <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PR66DQ7B"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+        ></iframe>
+      </noscript>
+      <noscript>
+        <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-PR66DQ7B"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+        ></iframe>
+      </noscript>
         {children}
         <Toaster position="bottom-right" />
       </body>
