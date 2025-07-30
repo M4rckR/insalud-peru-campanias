@@ -23,7 +23,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                   <h2 className="md:hidden font-in-nunito text-xl md:text-2xl lg:text-3xl font-bold">{titleMobile}</h2>
                   <p className="font-in-poppins">{description}</p>
               </div>
-              <a className="btn-wsp-quito flex items-center justify-center bg-white gap-2 py-3 px-6 shadow-2xl rounded-4xl animate-[var(--animate-heartbeat)]" href={whatsappUrl} target="_blank">
+              <a id="cta-appointment-wsp" className="btn-wsp-quito flex items-center justify-center bg-white gap-2 py-3 px-6 shadow-2xl rounded-4xl animate-[var(--animate-heartbeat)]" href={whatsappUrl} target="_blank">
                   <FaWhatsapp className="text-in-cyan-text text-2xl text-in-cyan-base" />
                   <p className="text-in-cyan-text font-in-poppins font-medium text-in-cyan-base">Agenda tu cita ahora</p>
               </a>
