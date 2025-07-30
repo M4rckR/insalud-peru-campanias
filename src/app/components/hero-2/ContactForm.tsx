@@ -72,6 +72,13 @@ export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps)
       const data = await response.json();
 
       if (response.ok) {
+        // Notificacion a google tag manager
+        if(typeof window !== "undefined") {
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: "form_submission",
+          });
+        }
         toast.success(`Correo enviado a ${gestorData?.gestor || 'nuestro equipo'} - Nos contactaremos contigo pronto`);
         form.reset();
       } else {
