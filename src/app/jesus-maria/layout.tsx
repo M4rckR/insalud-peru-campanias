@@ -42,7 +42,7 @@ export default function JesusMariLayout({
         suppressHydrationWarning
       >
         <NavigationSection sede={jesusMariaData.name} 
-          srcLogo={'/shared/logos/insalud-jesus-maria.svg'}
+          srcLogo={'/shared/logos/u-insalud-jesus-maria.svg'}
         />
         {children}
 
