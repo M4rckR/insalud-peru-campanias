@@ -29,8 +29,8 @@ import { useTitleContext } from '@/contexts/TitleContext'
 export const SpinWheelTrigger = ({
   autoShowDelay = 4,
   redirectAfterWin,
-  wheelSvgPath =    "/shared/ruleta/ruleta.svg",
-  indicatorSvgPath = "/shared/ruleta/indicador-ruleta.svg",
+  wheelSvgPath =    "/shared/ruleta/u-ruleta.svg",
+  indicatorSvgPath = "/shared/ruleta/u-indicador-ruleta.svg",
   spinDuration = 4,
   winningAngle = 0,
   showCloseButton = true,

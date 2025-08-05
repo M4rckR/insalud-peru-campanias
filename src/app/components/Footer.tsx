@@ -21,7 +21,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                 <section className="flex flex-col gap-2 md:gap-0 justify-center md:flex-1/3"> 
                     <Image 
                         className="w-48 mx-auto pb-4 md:pb-6 md:mx-0" 
-                        src={cdn('/shared/logos/logo-insalud.svg')} 
+                        src={cdn('/shared/logos/u-logo-insalud.svg')} 
                         alt="logo insalud" 
                         width={192}
                         height={50}
@@ -44,7 +44,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                     <div className="flex justify-center md:justify-start gap-4">
                         <a href={socials.instagram} target="_blank" rel="noopener noreferrer" aria-label="Seguir en Instagram">
                             <Image 
-                                src={cdn('/shared/iconos/instagram.svg')} 
+                                src={cdn('/shared/iconos/u-instagram.svg')} 
                                 className="w-7 sm:w-6 cursor-pointer hover:scale-110 transition-all duration-150" 
                                 alt="logo instagram" 
                                 width={28}
@@ -54,7 +54,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                         <a href={socials.tiktok} target="_blank" rel="noopener noreferrer" aria-label="Seguir en TikTok">
                             <Image 
                                 className="w-7 sm:w-6 cursor-pointer hover:scale-110 transition-all duration-150" 
-                                src={cdn('/shared/iconos/tiktok.svg')} 
+                                src={cdn('/shared/iconos/u-tiktok.svg')} 
                                 alt="logo tiktok" 
                                 width={28}
                                 height={28}
@@ -65,7 +65,7 @@ export const Footer = ({ address, phone, email, socials }: footerProps) => {
                                 className="w-7 sm:w-6 cursor-pointer hover:scale-110 transition-all duration-150" 
                                 width={28}
                                 height={28}
-                                src={cdn('/shared/iconos/fb.svg')} 
+                                src={cdn('/shared/iconos/u-fb.svg')} 
                                 alt="logo facebook" 
                             />
                         </a>

@@ -39,7 +39,7 @@ export const AboutDevice = ({
     <div className="relative overflow-hidden mb-12 md:mb-32">
       <Image
         src={cdn(
-          "/campanas/vph-jesus-maria/assets/images/sections/main/wave-cyan-top.svg"
+          "/campanas/vph-jesus-maria/assets/images/sections/main/u-wave-cyan-top.svg"
         )}
         alt="Wave Cyan Top"
         width={1000}

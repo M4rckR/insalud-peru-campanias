@@ -42,7 +42,7 @@ export default function SurLayout({
       >
         <NavigationSection 
           sede={surData.name} 
-          srcLogo={'/shared/logos/insalud-sede-sur.svg'} 
+          srcLogo={'/shared/logos/u-insalud-sede-sur.svg'} 
         />
         {children}
 

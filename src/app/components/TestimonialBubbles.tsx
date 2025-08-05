@@ -58,7 +58,7 @@ export const TestimonialBubbles = ({ title, titleWithColors, messages }: Testimo
                     </p>
                 </div>
                 <Image
-                    src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/mujer-bubles.svg")} 
+                    src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/u-mujer-bubles.svg")} 
                     alt="Mujer con dudas" 
                     className="hidden md:block absolute bottom-12 lg:bottom-0 left-52 bg-transparent lg:right-12 lg:left-auto bubble-mujer" 
                     width={110} 
@@ -66,7 +66,7 @@ export const TestimonialBubbles = ({ title, titleWithColors, messages }: Testimo
                     unoptimized
                 />
                 <Image
-                    src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/hombre-bubles.svg")} 
+                    src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/u-hombre-bubles.svg")} 
                     alt="Mujer con dudas" 
                     className="absolute bottom-20 bg-transparent left-12 bubble-hombre" 
                     width={110} 
@@ -77,7 +77,7 @@ export const TestimonialBubbles = ({ title, titleWithColors, messages }: Testimo
         </div>
 
         <Image 
-            src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/wave-cyan.svg")}  alt="Bubble 1" 
+            src={cdn("/campanas/vph-jesus-maria/assets/images/sections/header/u-wave-cyan.svg")}  alt="Bubble 1" 
             className="w-full h-full object-cover" 
             width={100} 
             height={100} 

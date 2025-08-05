@@ -37,7 +37,7 @@ export const NavigationSection = ({
     tiktok: "/", 
     facebook: "/"
   },
-  srcLogo = '/shared/logos/logo-insalud.svg',
+  srcLogo = '/shared/logos/u-logo-insalud.svg',
   sede = "Jesus Maria"
 }: NavigationSectionProps) => {
 
@@ -117,7 +117,7 @@ export const NavigationSection = ({
                       <li>
                         <Link href={socialLinks.instagram} aria-label="Visitar nuestra página de Instagram">
                           <Image 
-                            src={cdn('/shared/iconos/instagram.svg')} 
+                            src={cdn('/shared/iconos/u-instagram.svg')} 
                             alt="Instagram" 
                             width={26} 
                             height={26} 
@@ -129,7 +129,7 @@ export const NavigationSection = ({
                       <li>
                         <Link href={socialLinks.tiktok} aria-label="Visitar nuestra página de TikTok">
                           <Image 
-                            src={cdn('/shared/iconos/tiktok.svg')} 
+                            src={cdn('/shared/iconos/u-tiktok.svg')} 
                             alt="TikTok" 
                             width={26} 
                             height={26} 
@@ -141,7 +141,7 @@ export const NavigationSection = ({
                       <li>
                         <Link href={socialLinks.facebook} aria-label="Visitar nuestra página de Facebook">
                           <Image 
-                            src={cdn('/shared/iconos/fb.svg')} 
+                            src={cdn('/shared/iconos/u-fb.svg')} 
                             alt="Facebook" 
                             width={26} 
                             height={26} 

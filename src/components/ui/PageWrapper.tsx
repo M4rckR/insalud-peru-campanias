@@ -362,8 +362,8 @@ function PageWrapperContent({
             closeWheel();
             setShowRuleta(false);
           }}
-          wheelSvgPath="/shared/ruleta/ruleta.svg"
-          indicatorSvgPath="/shared/ruleta/indicador-ruleta.svg"
+          wheelSvgPath="/shared/ruleta/u-ruleta.svg"
+          indicatorSvgPath="/shared/ruleta/u-indicador-ruleta.svg"
           spinDuration={spinWheelProps.spinDuration || 5}
           firstSpinAngle={spinWheelProps.firstSpinAngle || 315}
           secondSpinAngle={spinWheelProps.secondSpinAngle || 225}

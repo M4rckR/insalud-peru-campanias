@@ -41,7 +41,7 @@ export default function GolfLayout({
         className={`antialiased`}
         suppressHydrationWarning
       >
-        <NavigationSection sede={golfData.name} srcLogo={'/shared/logos/insalud-sede-golf.svg'} />
+        <NavigationSection sede={golfData.name} srcLogo={'/shared/logos/u-insalud-sede-golf.svg'} />
         {children}
 
       </body>
