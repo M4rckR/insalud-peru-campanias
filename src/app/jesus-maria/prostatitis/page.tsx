@@ -27,8 +27,8 @@ export default function ProstatitisJesusMaria() {
       <HeroContact  
         title="¿Tienes molestias al orinar o dolor persistente?"
         subtitle="Podrías tener prostatitis crónica y no saberlo."
-        image="/campanas/prostatitis/assets/images/sections/header/hero-prostatitis.png"
-        imageMobile="/campanas/prostatitis/assets/images/sections/header/hero-prostatitis.png"
+        image="/campanas/prostatitis/assets/images/sections/header/u-hero-prostatitis.png"
+        imageMobile="/campanas/prostatitis/assets/images/sections/header/u-hero-prostatitis.png"
         description="Agenda tu cita ahora y recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque."
         gestorData={jesusMariaData.landings.prostatitis}
         tratamiento="Prostatitis"
@@ -78,7 +78,7 @@ export default function ProstatitisJesusMaria() {
       <AboutDevice
            titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
           multipleImages={false}
-          srcDesktop={"/campanas/disfuncion/assets/images/sections/main/disfuncion-device.png"}
+          srcDesktop={"/campanas/disfuncion/assets/images/sections/main/u-disfuncion-device.png"}
           alt="Dispositivo de disfunción eréctil"
       />
       <AppointmentCta 

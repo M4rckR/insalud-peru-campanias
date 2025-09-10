@@ -84,7 +84,7 @@ export default function OndasGolfPage() {
           titleWithColors="Equipos{blue} que estimulan la {/blue}circulación sanguínea {blue} y promueve erecciones más firmes y duraderas.{/blue}"
           multipleImages={false}
           srcDesktop={
-            "/campanas/disfuncion/assets/images/sections/main/disfuncion-device.png"
+            "/campanas/disfuncion/assets/images/sections/main/u-disfuncion-device.png"
           }
           alt="Dispositivo de disfunción eréctil"
         />
