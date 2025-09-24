@@ -1,4 +1,4 @@
-import { formLeadsSchema } from "@/schemas";
+import { formLeadsSchema, leadsSchema } from "@/schemas";
 import { z } from "zod";
 
 // ============================================================================
@@ -121,3 +121,5 @@ export type SpinWheelTriggerProps = {
   /** Tratamiento para generar clave única de localStorage */
   tratamiento?: string
 }
+
+export type LeadType = z.infer<typeof leadsSchema>;

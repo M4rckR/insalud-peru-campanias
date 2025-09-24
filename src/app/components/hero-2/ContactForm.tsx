@@ -24,6 +24,7 @@ import { Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { saveLead } from "@/services/SaveLeads";
 
 type ContactFormProps = {
   gestorData?: {
@@ -81,6 +82,24 @@ export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps)
         }
         toast.success(`Correo enviado a ${gestorData?.gestor || 'nuestro equipo'} - Nos contactaremos contigo pronto`);
         form.reset();
+
+        // Save lead to external service
+        try {
+          await saveLead({
+            id_lead_source: 15,
+            name: values.nombres,
+            email: 'Sin email',
+            phone: `51${values.telefono}`,
+            reason: tratamiento || '',
+            sede: sede || '',
+            date: new Date().toISOString(),
+            url: typeof window !== 'undefined' ? window.location.pathname : '',
+            id_announcement: '',
+          });
+        } catch (saveError) {
+          console.error('Error saving lead to external service:', saveError);
+          // Don't show error to user as the main submission succeeded
+        }
       } else {
         toast.error(data.mensaje || "Error al enviar el formulario");
       }

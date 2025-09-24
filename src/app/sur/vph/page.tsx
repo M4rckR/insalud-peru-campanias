@@ -10,6 +10,7 @@ import { surData } from "@/data/sedes/sur";
 import { Footer } from "@/app/components/Footer";
 import { PageWrapper } from '@/components/ui/PageWrapper'
 import { messagesVph } from "@/data/messages/messagesVph";
+import { surVphBenefits } from "@/data/surVphBenefits";
 
 export default function VphSur() {
   return (
@@ -24,7 +25,8 @@ export default function VphSur() {
         showCloseButton: false
       }}
     >
-      <HeroContact  
+      {/* Hero Section */}
+      <HeroContact
         title="¿Tienes verrugas?"
         subtitle="Podrías tener VPH"
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
@@ -34,67 +36,43 @@ export default function VphSur() {
         tratamiento="VPH"
         sede="Sur"
       />
+      {/* Testimonios Section */}
       <TestimonialBubbles
         messages={messagesVph}
       />
+      {/* Beneficios Section */}
       <section id="beneficios">
         <Treatment
           titleWithColors="¿Por qué tratarse con {cyan}Cauterización? {/cyan}"
           subtitle="Conoce los beneficios que te ofrece este tratamiento."
-          cards={[
-            {
-              title: "Seguro y efectivo",
-              description: "Procedimiento ambulatorio con alta efectividad",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-seguro.png",
-              alt: "Seguro y efectivo",
-            },
-            {
-              title: "Sin dolor",
-              description:
-                "Anestesia local para mayor comodidad durante el procedimiento.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-sin-dolor.png",
-              alt: "Sin dolor",
-            },
-            {
-              title: "Rápido retorno",
-              description: "Vuelve a tu rutina en pocos días.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-rapido.png",
-              alt: "Rápido retorno",
-            },
-            {
-              title: "Resultados visibles",
-              description:
-                "Eliminación inmediata de las verrugas visibles.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-resultados.png",
-              alt: "Resultados visibles",
-            },
-          ]}
+          cards={surVphBenefits}
         />
       </section>
+      {/* Tecnología Section */}
       <AboutDevice
            titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
           multipleImages={false}
           srcDesktop={"/campanas/vph-jesus-maria/assets/images/sections/main/vph-device.png"}
           alt="Dispositivo de cauterización VPH"
       />
-      <AppointmentCta 
+      {/* Call to Action */}
+      <AppointmentCta
         title="Elimina las verrugas de forma segura y efectiva con nuestro tratamiento de Cauterización"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
         titleMobile="Elimina las verrugas de forma segura y efectiva"
         whatsappNumber={surData.landings.vph.whatsapp}
         whatsappMessage={surData.landings.vph.message}
       />
+      {/* Preguntas Section */}
       <Questions questions={questionVph} />
+      {/* WhatsApp Flotante */}
       <FloatingWhatsApp
         phoneNumber={surData.landings.vph.whatsapp}
         message={surData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
-            <Footer
+      {/* Footer */}
+      <Footer
           address={surData.address}
           phone={surData.landings.vph.whatsapp}
           email={surData.email}

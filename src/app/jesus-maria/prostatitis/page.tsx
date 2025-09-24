@@ -10,6 +10,7 @@ import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
 import { PageWrapper } from '@/components/ui/PageWrapper'
 import { messagesProstatitis } from "@/data/messages/messagesProstatitis";
+import { treatmentBenefits } from "@/data/treatmentBenefits";
 
 export default function ProstatitisJesusMaria() {
   return (
@@ -24,7 +25,8 @@ export default function ProstatitisJesusMaria() {
         showCloseButton: false
       }}
     >
-      <HeroContact  
+      {/* Hero Section */}
+      <HeroContact
         title="¿Tienes molestias al orinar o dolor persistente?"
         subtitle="Podrías tener prostatitis crónica y no saberlo."
         image="/campanas/prostatitis/assets/images/sections/header/u-hero-prostatitis.png"
@@ -34,67 +36,43 @@ export default function ProstatitisJesusMaria() {
         tratamiento="Prostatitis"
         sede="Jesús María"
       />
+      {/* Testimonios Section */}
       <TestimonialBubbles
         messages={messagesProstatitis}
       />
+      {/* Beneficios Section */}
       <section id="beneficios">
         <Treatment
           titleWithColors="¿Por qué tratarse con {cyan}Ondas de choque? {/cyan}"
           subtitle="Conoce los beneficios que te ofrece este tratamiento."
-          cards={[
-            {
-              title: "Seguro y efectivo",
-              description: "No invasivo y sin efectos secundarios",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-seguro.png",
-              alt: "Seguro y efectivo",
-            },
-            {
-              title: "Sin dolor",
-              description:
-                "Tecnología de última generación que minimiza molestias.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-sin-dolor.png",
-              alt: "Sin dolor",
-            },
-            {
-              title: "Rápido retorno",
-              description: "Vuelve a tu rutina al instante.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-rapido.png",
-              alt: "Rápido retorno",
-            },
-            {
-              title: "Resultados visibles",
-              description:
-                "Mejora la erección de forma natural y progresiva.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-resultados.png",
-              alt: "Resultados visibles",
-            },
-          ]}
+          cards={treatmentBenefits}
         />
       </section>
+      {/* Tecnología Section */}
       <AboutDevice
            titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
           multipleImages={false}
           srcDesktop={"/campanas/disfuncion/assets/images/sections/main/u-disfuncion-device.png"}
           alt="Dispositivo de disfunción eréctil"
       />
-      <AppointmentCta 
+      {/* Call to Action */}
+      <AppointmentCta
         title="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
         titleMobile="Recupera tu calidad de vida con nuestro tratamiento avanzado con Ondas de Choque "
         whatsappNumber={jesusMariaData.landings.prostatitis.whatsapp}
         whatsappMessage={jesusMariaData.landings.prostatitis.message}
       />
+      {/* Preguntas Section */}
       <Questions questions={questionProstatitis} />
+      {/* WhatsApp Flotante */}
       <FloatingWhatsApp
         phoneNumber={jesusMariaData.landings.prostatitis.whatsapp}
         message={jesusMariaData.landings.prostatitis.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
-            <Footer
+      {/* Footer */}
+      <Footer
           address={jesusMariaData.address}
           phone={jesusMariaData.landings.prostatitis.whatsapp}
           email={jesusMariaData.email}

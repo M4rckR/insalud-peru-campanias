@@ -10,6 +10,7 @@ import { golfData } from "@/data/sedes/golf";
 import { Footer } from "@/app/components/Footer";
 import { PageWrapper } from '@/components/ui/PageWrapper'
 import { messagesVph } from "@/data/messages/messagesVph";
+import { vphBenefits } from "@/data/vphBenefits";
 
 export default function VphGolf() {
   return (
@@ -24,7 +25,8 @@ export default function VphGolf() {
         showCloseButton: false
       }}
     >
-      <HeroContact 
+      {/* Hero Section */}
+      <HeroContact
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
         image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
         title="¿Tienes verrugas genitales? "
@@ -34,47 +36,19 @@ export default function VphGolf() {
         tratamiento="VPH"
         sede="Golf"
       />
+      {/* Testimonios Section */}
       <TestimonialBubbles
         messages={messagesVph}
       />
+      {/* Beneficios Section */}
       <section id="beneficios">
         <Treatment
           titleWithColors="¿Por qué tratarse con {cyan}Láser CO2?{/cyan}"
           subtitle="Conoce los beneficios que te ofrece este tratamiento."
-          cards={[
-            {
-              title: "Seguro y efectivo",
-              description: "Elimina las verrugas sin dañar la piel.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-seguro.png",
-              alt: "Seguro y efectivo",
-            },
-            {
-              title: "Sin dolor",
-              description:
-                "Tecnología de última generación que minimiza molestias.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-sin-dolor.png",
-              alt: "Sin dolor",
-            },
-            {
-              title: "Rápido retorno",
-              description: "Vuelve a tu rutina al instante.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-rapido.png",
-              alt: "Rápido retorno",
-            },
-            {
-              title: "Resultados visibles",
-              description:
-                "Elimina las verrugas sin dañar tu piel desde la primera sesión.",
-              image:
-                "/campanas/vph-jesus-maria/assets/images/sections/main/icon-resultados.png",
-              alt: "Resultados visibles",
-            },
-          ]}
+          cards={vphBenefits}
         />
       </section>
+      {/* Tecnología Section */}
       <AboutDevice
         titleWithColors="Equipos {blue}profesionales de primer nivel y{/blue} Médicos especialistas {blue}certificados{/blue}"
         multipleImages={true}
@@ -86,19 +60,23 @@ export default function VphGolf() {
         }
         alt="Equipo médico láser CO2"
       />
-      <AppointmentCta 
+      {/* Call to Action */}
+      <AppointmentCta
         title="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
         description="Nuestro equipo de especialistas está listo para ayudarte a dar el primer paso hacia tu bienestar."
         titleMobile="Recupera tu confianza con un tratamiento clínico eficaz y personalizado"
         whatsappNumber={golfData.landings.vph.whatsapp}
         whatsappMessage={golfData.landings.vph.message}
       />
+      {/* Preguntas Section */}
       <Questions questions={questionVph} />
+      {/* WhatsApp Flotante */}
       <FloatingWhatsApp
         phoneNumber={golfData.landings.vph.whatsapp}
         message={golfData.landings.vph.message}
         tooltipText="¡Conversemos por WhatsApp!"
       />
+      {/* Footer */}
       <Footer
           address={golfData.address}
           phone={golfData.landings.vph.whatsapp}

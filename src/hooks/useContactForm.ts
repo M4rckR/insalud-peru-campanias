@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { FormLeads } from "@/types";
 import { formLeadsSchema } from "@/schemas";
 import { GestorData } from "@/types";
+import { saveLead } from "@/services/SaveLeads";
 
 interface UseContactFormProps {
   gestorData?: GestorData;
@@ -52,6 +53,25 @@ export const useContactForm = ({ gestorData, tratamiento, sede }: UseContactForm
       if (response.ok) {
         toast.success(`Correo enviado a ${gestorData?.gestor || 'nuestro equipo'} - Nos contactaremos contigo pronto`);
         form.reset();
+
+        // Save lead to external service
+        console.log("Intentando guardar lead...");
+        try {
+          await saveLead({
+            id_lead_source: 1,
+            name: values.nombres,
+            email: 'Sin email',
+            phone: `51${values.telefono}`,
+            reason: tratamiento || '',
+            sede: sede || '',
+            date: new Date().toISOString(),
+            url: `https://app.insalud.pe${typeof window !== 'undefined' ? window.location.pathname : ''}`,
+            id_announcement: '',
+          });
+        } catch (saveError) {
+          console.error('Error saving lead to external service:', saveError);
+          // Don't show error to user as the main submission succeeded
+        }
       } else {
         toast.error(data.mensaje || "Error al enviar el formulario");
       }

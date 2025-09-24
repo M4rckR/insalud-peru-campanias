@@ -26,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { cdn } from "@/utils/cdn";
 import { useState } from "react";
+import { saveLead } from "@/services/SaveLeads";
 
 type ContactFormProps = {
   gestorData?: {
@@ -83,6 +84,24 @@ export const ContactForm = ({ gestorData, tratamiento, sede }: ContactFormProps)
         }
         toast.success(`Tus datos fueron enviados correctamente. Nos contactaremos contigo pronto 😊`);
         form.reset();
+
+        // Save lead to external service
+        try {
+          await saveLead({
+            id_lead_source: 1, // Assuming a default value
+            name: values.nombres,
+            email: gestorData?.email || '',
+            phone: `51${values.telefono}`,
+            reason: tratamiento || '',
+            sede: sede || '',
+            date: new Date().toISOString(),
+            url: `https://app.insalud.pe${typeof window !== 'undefined' ? window.location.pathname : ''}`,
+            id_announcement: '', // Optional
+          });
+        } catch (saveError) {
+          console.error('Error saving lead to external service:', saveError);
+          // Don't show error to user as the main submission succeeded
+        }
       } else {
         toast.error(data.mensaje || "Error al enviar el formulario");
       }
