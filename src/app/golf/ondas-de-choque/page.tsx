@@ -8,23 +8,25 @@ import { Treatment } from "@/app/components/Treatment/Treatment";
 import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionDisfuncion } from "@/data/questions/questionDisfuncion";
 import { golfData } from "@/data/sedes/golf";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesOndasChoque } from "@/data/messages/messagesOndasChoque";
 import { treatmentBenefits } from "@/data/treatmentBenefits";
 
 export default function OndasGolfPage() {
   return (
-    <PageWrapper 
-      sede="Golf" 
-      tratamiento="Ondas de Choque"
-      spinWheelProps={{
-        autoShowDelay: 1,
-        spinDuration: 5,
-        firstSpinAngle: 315,
-        secondSpinAngle: 225,
-        showCloseButton: false
-      }}
-    >
+    //<PageWrapper 
+      //sede="Golf" 
+      //tratamiento="Ondas de Choque"
+      //spinWheelProps={{
+        //autoShowDelay: 1,
+        //spinDuration: 5,
+        //firstSpinAngle: 315,
+        //secondSpinAngle: 225,
+        //showCloseButton: false
+      //}}
+    //>
+    <TitleProvider sede="Golf" tratamiento="Ondas de Choque">
       {/* Hero Section */}
       <HeroContact 
         gestorData={golfData.landings.ondasChoque}
@@ -88,6 +90,6 @@ export default function OndasGolfPage() {
           email={golfData.email}
           socials={golfData.socials}
       />
-    </PageWrapper>
+    </TitleProvider>
   );
 }

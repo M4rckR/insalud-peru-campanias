@@ -8,23 +8,26 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesVph } from "@/data/messages/messagesVph";
 import { vphBenefits } from "@/data/vphBenefits";
 
 export default function VphJesusMaria() {
   return (
-    <PageWrapper 
-      sede="Jesús María" 
-      tratamiento="VPH"
-      spinWheelProps={{
-        autoShowDelay: 1,
-        spinDuration: 5,
-        firstSpinAngle: 315,
-        secondSpinAngle: 225,
-        showCloseButton: false
-      }}
-    >
+    // WRAPPER COMENTADO TEMPORALMENTE - Solo usamos TitleProvider sin la ruleta
+    // <PageWrapper 
+    //   sede="Jesús María" 
+    //   tratamiento="VPH"
+    //   spinWheelProps={{
+    //     autoShowDelay: 1,
+    //     spinDuration: 5,
+    //     firstSpinAngle: 315,
+    //     secondSpinAngle: 225,
+    //     showCloseButton: false
+    //   }}
+    // >
+    <TitleProvider sede="Jesús María" tratamiento="VPH">
       {/* Hero Section */}
       <HeroContact
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
@@ -83,6 +86,6 @@ export default function VphJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-    </PageWrapper>
+    </TitleProvider>
   );
 } 

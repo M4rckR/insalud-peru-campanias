@@ -8,23 +8,25 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionDisfuncion } from "@/data/questions/questionDisfuncion";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesOndasChoque } from "@/data/messages/messagesOndasChoque";
 import { treatmentBenefits } from "@/data/treatmentBenefits";
 
 export default function DisfuncionJesusMaria() {
     return (
-        <PageWrapper 
-            sede="Jesús María" 
-            tratamiento="Ondas de Choque"
-            spinWheelProps={{
-                autoShowDelay: 1,
-                spinDuration: 5,
-                firstSpinAngle: 315,
-                secondSpinAngle: 225,
-                showCloseButton: false
-            }}
-        >
+        //<PageWrapper 
+          //  sede="Jesús María" 
+            //tratamiento="Ondas de Choque"
+            //spinWheelProps={{
+               // autoShowDelay: 1,
+                //spinDuration: 5,
+                //firstSpinAngle: 315,
+                //secondSpinAngle: 225,
+                //showCloseButton: false
+            //}}
+        //>
+        <TitleProvider sede="Jesús María" tratamiento="Ondas de Choque">
             {/* Hero Section */}
             <HeroContact />
             
@@ -81,6 +83,6 @@ export default function DisfuncionJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-        </PageWrapper>
+    </TitleProvider>
     )
 } 

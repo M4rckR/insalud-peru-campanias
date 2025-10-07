@@ -8,23 +8,25 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { surData } from "@/data/sedes/sur";
 import { Footer } from "@/app/components/Footer";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesVph } from "@/data/messages/messagesVph";
 import { surVphBenefits } from "@/data/surVphBenefits";
 
 export default function VphSur() {
   return (
-    <PageWrapper 
-      sede="Sur" 
-      tratamiento="VPH"
-      spinWheelProps={{
-        autoShowDelay: 1,
-        spinDuration: 5,
-        firstSpinAngle: 315,
-        secondSpinAngle: 225,
-        showCloseButton: false
-      }}
-    >
+    //<PageWrapper 
+      //sede="Sur" 
+      //tratamiento="VPH"
+      //spinWheelProps={{
+        //autoShowDelay: 1,
+        //spinDuration: 5,
+        //firstSpinAngle: 315,
+        //secondSpinAngle: 225,
+        //showCloseButton: false
+      //}}
+    //>
+    <TitleProvider sede="Sur" tratamiento="VPH">
       {/* Hero Section */}
       <HeroContact
         title="¿Tienes verrugas?"
@@ -78,6 +80,6 @@ export default function VphSur() {
           email={surData.email}
           socials={surData.socials}
         />
-    </PageWrapper>
+        </TitleProvider>
   );
 } 

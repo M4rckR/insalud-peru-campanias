@@ -8,23 +8,25 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionVph } from "@/data/questions/questionVph";
 import { golfData } from "@/data/sedes/golf";
 import { Footer } from "@/app/components/Footer";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesVph } from "@/data/messages/messagesVph";
 import { vphBenefits } from "@/data/vphBenefits";
 
 export default function VphGolf() {
   return (
-    <PageWrapper 
-      sede="Golf" 
-      tratamiento="VPH"
-      spinWheelProps={{
-        autoShowDelay: 1,
-        spinDuration: 5,
-        firstSpinAngle: 315,
-        secondSpinAngle: 225,
-        showCloseButton: false
-      }}
-    >
+    //<PageWrapper 
+      //sede="Golf" 
+      //tratamiento="VPH"
+      //spinWheelProps={{
+        //autoShowDelay: 1,
+        //spinDuration: 5,
+        //firstSpinAngle: 315,
+        //secondSpinAngle: 225,
+        //showCloseButton: false
+      //}}
+    //>
+    <TitleProvider sede ="Golf" tratamiento="VPH">
       {/* Hero Section */}
       <HeroContact
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
@@ -83,6 +85,6 @@ export default function VphGolf() {
           email={golfData.email}
           socials={golfData.socials}
         />
-    </PageWrapper>
+        </TitleProvider>
   );
 } 

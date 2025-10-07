@@ -8,23 +8,25 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
 import { jesusMariaData } from "@/data/sedes/jesus-maria";
 import { Footer } from "@/app/components/Footer";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesProstatitis } from "@/data/messages/messagesProstatitis";
 import { treatmentBenefits } from "@/data/treatmentBenefits";
 
 export default function ProstatitisJesusMaria() {
   return (
-    <PageWrapper 
-      sede="Jesús María" 
-      tratamiento="Prostatitis"
-      spinWheelProps={{
-        autoShowDelay: 1,
-        spinDuration: 5,
-        firstSpinAngle: 315,
-        secondSpinAngle: 225,
-        showCloseButton: false
-      }}
-    >
+    //<PageWrapper 
+      //sede="Jesús María" 
+      //tratamiento="Prostatitis"
+      //spinWheelProps={{
+        //autoShowDelay: 1,
+        //spinDuration: 5,
+        //firstSpinAngle: 315,
+        //secondSpinAngle: 225,
+        //showCloseButton: false
+      //}}
+    //>
+    <TitleProvider sede="Jesús María" tratamiento="Prostatitis">
       {/* Hero Section */}
       <HeroContact
         title="¿Tienes molestias al orinar o dolor persistente?"
@@ -78,6 +80,6 @@ export default function ProstatitisJesusMaria() {
           email={jesusMariaData.email}
           socials={jesusMariaData.socials}
         />
-    </PageWrapper>
+    </TitleProvider>
   );
 } 

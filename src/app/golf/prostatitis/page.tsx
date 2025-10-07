@@ -8,23 +8,25 @@ import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 import { questionProstatitis } from "@/data/questions/questionProstatitis";
 import { golfData } from "@/data/sedes/golf";
 import { Footer } from "@/app/components/Footer";
-import { PageWrapper } from '@/components/ui/PageWrapper'
+//import { PageWrapper } from '@/components/ui/PageWrapper'
+import { TitleProvider } from '@/contexts/TitleContext'
 import { messagesProstatitis } from "@/data/messages/messagesProstatitis";
 import { treatmentBenefits } from "@/data/treatmentBenefits";
 
 export default function ProstatitisGolf() {
   return (
-    <PageWrapper 
-      sede="Golf" 
-      tratamiento="Prostatitis"
-      spinWheelProps={{
-        autoShowDelay: 1,
-        spinDuration: 5,
-        firstSpinAngle: 315,
-        secondSpinAngle: 225,
-        showCloseButton: false
-      }}
-    >
+    //<PageWrapper 
+      //sede="Golf" 
+      //tratamiento="Prostatitis"
+      //spinWheelProps={{
+        //autoShowDelay: 1,
+        //spinDuration: 5,
+        //firstSpinAngle: 315,
+        //secondSpinAngle: 225,
+        //showCloseButton: false
+      //}}
+    //>
+    <TitleProvider sede="Golf" tratamiento="Prostatitis">
       {/* Hero Section */}
       <HeroContact
         title="¿Tienes molestias al orinar o dolor persistente?"
@@ -78,6 +80,6 @@ export default function ProstatitisGolf() {
           email={golfData.email}
           socials={golfData.socials}
         />
-    </PageWrapper>
+        </TitleProvider>
   );
 } 
