@@ -33,7 +33,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                 width={10} 
                 height={10} 
                 className="absolute w-14 md:w-28 left-0 top-2 md:-top-12 animate-[var(--animate-pulse)]" 
-                src={cdn('/shared/otros/plus-cyan.png')} 
+                src={cdn('/shared/otros/u-plus-cyan.png')} 
                 alt="plus icon" 
                 unoptimized
             />
@@ -41,7 +41,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                 width={10} 
                 height={10} 
                 className="absolute w-14 md:w-22 right-4 -bottom-2 animate-[var(--animate-pulse)]" 
-                src={cdn('/shared/otros/plus-cyan.png')} 
+                src={cdn('/shared/otros/u-plus-cyan.png')} 
                 alt="plus icon" 
                 unoptimized
              />
@@ -49,7 +49,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                 width={10} 
                 height={10} 
                 className="absolute hidden xl:block md:w-10 left-0 lg:-left-8 top-1/2 -translate-y-1/2 animate-[var(--animate-pulse)]" 
-                src={cdn('/shared/otros/plus-cyan.png')} 
+                src={cdn('/shared/otros/u-plus-cyan.png')} 
                 alt="plus icon" 
                 unoptimized
             />
@@ -57,7 +57,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                 width={10} 
                 height={10} 
                 className="absolute w-10 left-1/6  -bottom-6  animate-[var(--animate-pulse)]" 
-                src={cdn('/shared/otros/plus-cyan.png')} 
+                src={cdn('/shared/otros/u-plus-cyan.png')} 
                 alt="plus icon" 
                 unoptimized
             />
@@ -65,7 +65,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                 width={10} 
                 height={10} 
                 className="absolute w-6 left-5/6 -top-4 animate-[var(--animate-pulse)]" 
-                src={cdn('/shared/otros/plus-cyan.png')} 
+                src={cdn('/shared/otros/u-plus-cyan.png')} 
                 alt="plus icon" 
                 unoptimized
               />
@@ -73,7 +73,7 @@ export const AppointmentCta = ({ title, titleMobile, description, whatsappNumber
                 width={10} 
                 height={10} 
                 className="absolute hidden xl:block w-10 -right-8 animate-[var(--animate-pulse)]" 
-                src={cdn('/shared/otros/plus-cyan.png')} 
+                src={cdn('/shared/otros/u-plus-cyan.png')} 
                 alt="plus icon" 
                 unoptimized
             />
