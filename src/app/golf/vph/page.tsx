@@ -28,7 +28,7 @@ export default function VphGolf() {
       {/* Hero Section */}
       <HeroContact
         imageMobile="/campanas/vph-jesus-maria/assets/images/sections/header/grafico-vph-mobile.png"
-        image="/campanas/vph-jesus-maria/assets/images/sections/header/hero-image.png"
+        image="/campanas/vph-jesus-maria/assets/images/sections/header/u-hero-image.png"
         title="¿Tienes verrugas genitales? "
         subtitle="Podrías tener VPH y no saberlo"
         description="Agenda tu cita y elimina verrugas sin dañar tu piel. ¡Reclama tu atención gratuita!"
